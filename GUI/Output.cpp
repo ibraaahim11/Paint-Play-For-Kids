@@ -1,6 +1,5 @@
 #include "Output.h"
 
-
 Output::Output()
 {
 	//Initialize user interface parameters
@@ -242,7 +241,7 @@ void Output::DrawTriangle(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo,
 
 //Seif
 
-void Output::DrawCircle(Point P1, int radius, GfxInfo CircleGfxInfo, bool selected) const
+void Output::DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected) const
 {
 	color DrawingClr;
 	if (selected)
@@ -259,6 +258,10 @@ void Output::DrawCircle(Point P1, int radius, GfxInfo CircleGfxInfo, bool select
 	}
 	else
 		style = FRAME;
+
+	double dx = P2.x - P1.x;
+	double dy = P2.y - P1.y;
+	double radius = sqrt(dx * dx + dy * dy);
 
 	pWind->DrawCircle(P1.x, P1.y, radius, style);
 }
@@ -291,19 +294,14 @@ void Output::DrawSquare(Point P1, Point P2, GfxInfo SquareGfxInfo, bool selected
 		halfSide = abs(P1.y - P2.y);
 	}
 
-
-
 	// Calculate square vertices
 	int vertices_x[4];
 	int vertices_y[4];  // Array to hold the integer coordinates of vertices
-
 
 	vertices_x[0] = P1.x - halfSide;
 	vertices_x[1] = P1.x + halfSide;
 	vertices_x[2] = P1.x + halfSide;
 	vertices_x[3] = P1.x - halfSide;
-
-
 
 	vertices_y[0] = P1.y - halfSide;
 	vertices_y[1] = P1.y - halfSide;
@@ -312,7 +310,6 @@ void Output::DrawSquare(Point P1, Point P2, GfxInfo SquareGfxInfo, bool selected
 
 	pWind->DrawPolygon(vertices_x, vertices_y, 4, style); // Drawing a square with 4 vertices
 }
-
 
 void Output::DrawHex(Point p1, Point p2, GfxInfo HexGfxInfo, bool Selected) const   //OMAR
 {
@@ -331,7 +328,6 @@ void Output::DrawHex(Point p1, Point p2, GfxInfo HexGfxInfo, bool Selected) cons
 	}
 	else
 		style = FRAME;
-
 
 	int Vertices_x[6];
 	int Vertices_y[6];
@@ -364,8 +360,6 @@ void Output::DrawHex(Point p1, Point p2, GfxInfo HexGfxInfo, bool Selected) cons
 	Vertices_y[4] = p1.y - halfdiagonal * sqrt(3) / 2;
 	Vertices_y[5] = p1.y - halfdiagonal * sqrt(3) / 2;
 
-
-
 	pWind->DrawPolygon(Vertices_x, Vertices_y, 6, style);
 }
 
@@ -374,4 +368,3 @@ Output::~Output()
 {
 	delete pWind;
 }
-

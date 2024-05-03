@@ -25,8 +25,8 @@ public:
 	// -- Figures Drawing functions
 	void DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) const;  //Draw a rectangle//youssef
 	void DrawTriangle(Point P1, Point P2, Point P3, GfxInfo TriangleGfxInfo, bool selected) const; // Draw a tTiangle //Seif
-	void DrawCircle(Point P1, int radius, GfxInfo CircleGfxInfo, bool selected) const; // Draw a Circle // Seif
-	void DrawSquare(Point P1, Point P2, GfxInfo SquareGfxInfo, bool selected) const;  //Draw a square 
+	void DrawCircle(Point P1, Point P2, GfxInfo CircleGfxInfo, bool selected) const; // Draw a Circle // Seif
+	void DrawSquare(Point P1, Point P2, GfxInfo SquareGfxInfo, bool selected) const;  //Draw a square
 	void DrawHex(Point P1, Point P2, GfxInfo RectGfxInfo, bool Selected = false) const; // Draw Hexagon
 	///Make similar functions for drawing all other figure types.
 

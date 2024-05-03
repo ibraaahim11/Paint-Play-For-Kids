@@ -25,7 +25,9 @@ enum ActionType //The actions supported (you can add more if needed)
 };
 
 struct Point	//To be used for figures points
-{ int x,y; };
+{
+	int x, y;
+};
 
 struct GfxInfo	//Graphical info of each figure (you may add more members)
 {
@@ -33,7 +35,6 @@ struct GfxInfo	//Graphical info of each figure (you may add more members)
 	color FillClr;	//Fill color of the figure
 	bool isFilled;	//Figure Filled or not
 	int BorderWdth;	//Width of figure borders
-
 };
 
 #endif
