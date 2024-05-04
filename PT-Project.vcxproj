@@ -130,7 +130,10 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actions\Pick&amp;hide.cpp" />
     <ClCompile Include="Actions\SaveAction.cpp" />
+    <ClCompile Include="Actions\Switchtodraw.cpp" />
+    <ClCompile Include="Actions\Switchtoplay.cpp" />
     <ClCompile Include="AddCircleAction.cpp" />
     <ClCompile Include="AddHexagonAction.cpp" />
     <ClCompile Include="AddSquareAction.cpp" />
@@ -185,7 +188,10 @@
     <ClCompile Include="SelectAction.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actions\Pick&amp;hide.h" />
     <ClInclude Include="Actions\SaveAction.h" />
+    <ClInclude Include="Actions\Switchtodraw.h" />
+    <ClInclude Include="Actions\Switchtoplay.h" />
     <ClInclude Include="AddCircleAction.h" />
     <ClInclude Include="AddHexagonAction.h" />
     <ClInclude Include="AddSquareAction.h" />

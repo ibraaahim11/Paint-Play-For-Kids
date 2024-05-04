@@ -5,6 +5,7 @@
 #include "AddHexagonAction.h"
 #include "AddCircleAction.h"
 #include "Actions\SaveAction.h"
+#include "Actions\Switchtoplay.h"
 #include <fstream>
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -73,6 +74,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 	case STATUS:	//a click on the status bar ==> no action
 		return;
+
+	case TO_PLAY :
+		pAct = new Switchtoplay(this);
+	
 	}
 
 	//Execute the created action
