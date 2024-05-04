@@ -9,6 +9,7 @@ class CCircle : public CFigure
 private:
 	Point Center;
 	Point Radius;
+	int CirID; //omar
 public:
 	CCircle(Point, Point, GfxInfo FigureGfxInfo);
 	virtual void Draw(Output* pOut) const;

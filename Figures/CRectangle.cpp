@@ -4,6 +4,7 @@ CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(Figur
 {
 	Corner1 = P1;
 	Corner2 = P2;
+	RectID = ID;
 }
 
 void CRectangle::Draw(Output* pOut) const
@@ -13,7 +14,7 @@ void CRectangle::Draw(Output* pOut) const
 }
 void CRectangle::Save(ofstream& OutFile) // omar
 {
-	OutFile << "RECTANGLE " << "  " << ID++ << "  " << Corner1.x << "  " << Corner1.y << "  " << Corner2.x << "  " << Corner2.y;
+	OutFile << "RECTANGLE " << "  " << RectID << "  " << Corner1.x << "  " << Corner1.y << "  " << Corner2.x << "  " << Corner2.y;
 	string DrawColor, FillColor;
 	if (FigGfxInfo.DrawClr == BLACK)
 		DrawColor = "BLACK";
@@ -29,25 +30,27 @@ void CRectangle::Save(ofstream& OutFile) // omar
 		DrawColor = "BLUE";
 
 
-	if (FigGfxInfo.FillClr == BLACK)
-		FillColor = "BLACK";
+	if (!FigGfxInfo.isFilled)
+		FillColor = "NO COLOR";
+	else {
+		if (FigGfxInfo.FillClr == BLACK)
+			FillColor = "BLACK";
 
-	else if (FigGfxInfo.FillClr == YELLOW)
-		FillColor = "YELLOW";
+		else if (FigGfxInfo.FillClr == YELLOW)
+			FillColor = "YELLOW";
 
-	else if (FigGfxInfo.FillClr == RED)
-		FillColor = "RED";
+		else if (FigGfxInfo.FillClr == RED)
+			FillColor = "RED";
 
-	else if (FigGfxInfo.FillClr == ORANGE)
-		FillColor = "ORANGE";
+		else if (FigGfxInfo.FillClr == ORANGE)
+			FillColor = "ORANGE";
 
-	else if (FigGfxInfo.FillClr == GREEN)
-		FillColor = "GREEN";
+		else if (FigGfxInfo.FillClr == GREEN)
+			FillColor = "GREEN";
 
-	else if (FigGfxInfo.FillClr == BLUE)
-		FillColor = "BLUE";
-	else
-		FillColor = "NO_COLOR";
+		else if (FigGfxInfo.FillClr == BLUE)
+			FillColor = "BLUE";
+	}
 
 	OutFile << "  " << DrawColor << "  " << FillColor << endl;
 }

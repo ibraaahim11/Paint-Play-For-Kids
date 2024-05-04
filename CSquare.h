@@ -9,6 +9,7 @@ class CSquare : public CFigure
 private:
 	Point Center;
 	Point Radius;
+	int SquareID;
 public:
 	CSquare(Point, Point, GfxInfo FigureGfxInfo);
 	virtual void Draw(Output* pOut) const;

@@ -83,54 +83,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = NULL;
 	}
 }
-void ApplicationManager::SaveAll(string FileName) //omar
+void ApplicationManager::SaveAll(ofstream& OpenFile) //omar
 {
-	color DrawClr, FillClr;
-
-	DrawClr = pOut->getCrntDrawColor();
-	FillClr = pOut->getCrntFillColor();
-
-	string DrawColor, FillColor;
-
-	if (DrawClr == BLACK)
-		DrawColor = "BLACK";
-	if (DrawClr == YELLOW)
-		DrawColor = "YELLOW";
-	if (DrawClr == RED)
-		DrawColor = "RED";
-	if (DrawClr == ORANGE)
-		DrawColor = "ORANGE";
-	if (DrawClr == GREEN)
-		DrawColor = "GREEN";
-	if (DrawClr == BLUE)
-		DrawColor = "BLUE";
-
-
-	if (FillClr == BLACK)
-		FillColor = "BLACK";
-
-	else if (FillClr == YELLOW)
-		FillColor = "YELLOW";
-
-	else if (FillClr == RED)
-		FillColor = "RED";
-
-	else if (FillClr == ORANGE)
-		FillColor = "ORANGE";
-
-	else if (FillClr == GREEN)
-		FillColor = "GREEN";
-
-	else if (FillClr == BLUE)
-		FillColor = "BLUE";
-	else
-		FillColor = "NO_COLOR";
-
-
-	ofstream OpenFile(FileName);
-	OpenFile << DrawColor << "   " << FillColor << endl << FigCount << endl;
-
-
 	for (int i = 0; i < FigCount; i++)
 	{
 		FigList[i]->Save(OpenFile);
@@ -156,6 +110,10 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 	//Remember that ApplicationManager only calls functions do NOT implement it.
 
 	return NULL;
+}
+int ApplicationManager::GetFigCount() //omar
+{
+	return FigCount;
 }
 //==================================================================================//
 //							Interface Management Functions							//
