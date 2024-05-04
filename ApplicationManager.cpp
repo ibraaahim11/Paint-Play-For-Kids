@@ -4,7 +4,8 @@
 #include "AddTriangleAction.h"
 #include "AddHexagonAction.h"
 #include "AddCircleAction.h"
-
+#include "Actions\SaveAction.h"
+#include <fstream>
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -58,6 +59,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new AddCircleAction(this);
 
 		break;
+	case SAVE:
+		pAct = new SaveAction(this);
 
 	case EXIT:
 		///create ExitAction here
@@ -74,6 +77,59 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct->Execute();//Execute
 		delete pAct;	//You may need to change this line depending to your implementation
 		pAct = NULL;
+	}
+}
+void ApplicationManager::SaveAll(string FileName) //omar
+{
+	color DrawClr, FillClr;
+
+	DrawClr = pOut->getCrntDrawColor();
+	FillClr = pOut->getCrntFillColor();
+
+	string DrawColor, FillColor;
+
+	if (DrawClr == BLACK)
+		DrawColor = "BLACK";
+	if (DrawClr == YELLOW)
+		DrawColor = "YELLOW";
+	if (DrawClr == RED)
+		DrawColor = "RED";
+	if (DrawClr == ORANGE)
+		DrawColor = "ORANGE";
+	if (DrawClr == GREEN)
+		DrawColor = "GREEN";
+	if (DrawClr == BLUE)
+		DrawColor = "BLUE";
+
+
+	if (FillClr == BLACK)
+		FillColor = "BLACK";
+
+	else if (FillClr == YELLOW)
+		FillColor = "YELLOW";
+
+	else if (FillClr == RED)
+		FillColor = "RED";
+
+	else if (FillClr == ORANGE)
+		FillColor = "ORANGE";
+
+	else if (FillClr == GREEN)
+		FillColor = "GREEN";
+
+	else if (FillClr == BLUE)
+		FillColor = "BLUE";
+	else
+		FillColor = "NO_COLOR";
+
+
+	ofstream OpenFile(FileName);
+	OpenFile << DrawColor << "   " << FillColor << endl << FigCount << endl;
+
+
+	for (int i = 0; i < FigCount; i++)
+	{
+		FigList[i]->Save(OpenFile);
 	}
 }
 //==================================================================================//
