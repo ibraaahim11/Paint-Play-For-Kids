@@ -166,6 +166,11 @@ void ApplicationManager::UpdateInterface() const
 {
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+
+
+	// Drawing bars again to avoid shapes from overlapping.
+	pOut->CreateDrawToolBar();
+	pOut->CreateStatusBar();
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
