@@ -45,7 +45,7 @@ void AddTriangleAction::Execute()
 	//This action needs to read some parameters first
 	ReadActionParameters();
 
-	//Create a Squar with the parameters read from the user
+	//Create a Triangle with the parameters read from the user
 	CTriangle* R = new CTriangle(P1, P2, P3, TriangleGfxInfo);
 
 	//Add the Triangle to the list of figures
