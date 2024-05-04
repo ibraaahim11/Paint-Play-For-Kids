@@ -10,9 +10,7 @@ private:
 	Point Vertix1;
 	Point Vertix2;
 	Point Vertix3;
-
-	static int SelectedNum;
-
+	int TriID;
 public:
 	CTriangle(Point, Point, Point, GfxInfo FigureGfxInfo);
 	virtual bool isPointinside(int x, int y);

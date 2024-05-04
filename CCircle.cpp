@@ -5,7 +5,7 @@ CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxIn
 {
 	Center = P1;
 	Radius = P2;
-
+	CirID = ID;
 }
 
 void CCircle::Draw(Output* pOut) const
@@ -31,7 +31,7 @@ bool CCircle::isPointinside(int x, int y)
 }
 void CCircle::Save(ofstream& OutFile)
 {
-	OutFile << "CIRCLE " << "  " << ID++ << "  " << Center.x << "  " << Center.y << "  " << Radius.x;
+	OutFile << "CIRCLE " << "  " << CirID << "  " << Center.x << "  " << Center.y << "  " << Radius.x;
 	OutFile << "  " << Radius.y;
 	string DrawColor, FillColor;
 	if (FigGfxInfo.DrawClr == BLACK)
@@ -48,25 +48,27 @@ void CCircle::Save(ofstream& OutFile)
 		DrawColor = "BLUE";
 
 
-	if (FigGfxInfo.FillClr == BLACK)
-		FillColor = "BLACK";
+	if (!FigGfxInfo.isFilled)
+		FillColor = "NO COLOR";
+	else {
+		if (FigGfxInfo.FillClr == BLACK)
+			FillColor = "BLACK";
 
-	else if (FigGfxInfo.FillClr == YELLOW)
-		FillColor = "YELLOW";
+		else if (FigGfxInfo.FillClr == YELLOW)
+			FillColor = "YELLOW";
 
-	else if (FigGfxInfo.FillClr == RED)
-		FillColor = "RED";
+		else if (FigGfxInfo.FillClr == RED)
+			FillColor = "RED";
 
-	else if (FigGfxInfo.FillClr == ORANGE)
-		FillColor = "ORANGE";
+		else if (FigGfxInfo.FillClr == ORANGE)
+			FillColor = "ORANGE";
 
-	else if (FigGfxInfo.FillClr == GREEN)
-		FillColor = "GREEN";
+		else if (FigGfxInfo.FillClr == GREEN)
+			FillColor = "GREEN";
 
-	else if (FigGfxInfo.FillClr == BLUE)
-		FillColor = "BLUE";
-	else
-		FillColor = "NO_COLOR";
+		else if (FigGfxInfo.FillClr == BLUE)
+			FillColor = "BLUE";
+	}
 
 	OutFile << "  " << DrawColor << "  " << FillColor << endl;
 }

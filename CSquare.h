@@ -13,8 +13,9 @@ private:
 	// Corners of the square (useful for isPointinside function)
 	Point Corner1;
 	Point Corner2;
-	static int SelectedNum;
 
+
+	int SquareID;
 public:
 	CSquare(Point, Point, GfxInfo FigureGfxInfo);
 	virtual bool isPointinside(int x, int y);

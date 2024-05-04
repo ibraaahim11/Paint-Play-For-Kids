@@ -8,8 +8,9 @@ class CRectangle : public CFigure
 private:
 	Point Corner1;
 	Point Corner2;
+	int RectID;
 
-	static int SelectedNum;
+
 public:
 	CRectangle(Point, Point, GfxInfo FigureGfxInfo);
 	virtual bool isPointinside(int x, int y);

@@ -13,8 +13,8 @@ private:
 	int Vertices_x[6];
 	int Vertices_y[6];
 
-	static int SelectedNum;
 
+	int HexID;
 public:
 	CHexagon(Point, Point, GfxInfo FigureGfxInfo);
 	void Calculate_Vertices();

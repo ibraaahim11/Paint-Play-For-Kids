@@ -10,9 +10,7 @@ class CCircle : public CFigure
 private:
 	Point Center;
 	Point Radius;
-
-	static int SelectedNum;
-
+	int CirID; //omar
 public:
 	CCircle(Point, Point, GfxInfo FigureGfxInfo);
 	virtual bool isPointinside(int x, int y);
