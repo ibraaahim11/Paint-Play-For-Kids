@@ -5,6 +5,7 @@
 #include "AddHexagonAction.h"
 #include "AddCircleAction.h"
 #include "Actions\SaveAction.h"
+#include "Actions\LoadAction.h"
 #include <fstream>
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -65,7 +66,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case SAVE:
 		pAct = new SaveAction(this);
+		
+		break;
+	case LOAD:
+		pAct = new LoadAction(this); 
 
+		break;
 	case EXIT:
 		///create ExitAction here
 

@@ -26,7 +26,7 @@ void SaveAction::Execute()
 
 	DrawClr = pOut->getCrntDrawColor();
 	FillClr = pOut->getCrntFillColor();
-
+	
 	string DrawColor, FillColor;
 
 	if (DrawClr == BLACK)

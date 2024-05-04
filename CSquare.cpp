@@ -15,8 +15,8 @@ void CSquare::Draw(Output* pOut) const
 void CSquare::Save(ofstream& OutFile)
 {
 	
-	OutFile << "SQUARE " << "  " << SquareID << "  " << Center.x << "  " << Center.y << "  " << Radius.x;
-	OutFile << "  " << Radius.y;
+	OutFile << "S1" << " " << SquareID << " " << Center.x << " " << Center.y << " " << Radius.x;
+	OutFile << " " << Radius.y;
 	string DrawColor, FillColor;
 	if (FigGfxInfo.DrawClr == BLACK)
 		DrawColor = "BLACK";
@@ -54,5 +54,45 @@ void CSquare::Save(ofstream& OutFile)
 			FillColor = "BLUE";
 	}
 
-	OutFile << "  " << DrawColor << "  " << FillColor << endl;
+	OutFile << " " << DrawColor << " " << FillColor << endl;
+}
+void CSquare::Load(ifstream& Infile)
+{
+	string FigureType, DrawColor, FillColor;
+	Infile >> FigureType >> SquareID >> Center.x >> Center.y >> Radius.x >> Radius.y
+		>> DrawColor >> FillColor;
+
+	if (DrawColor == "GREEN")
+		FigGfxInfo.DrawClr = GREEN;
+	else if (DrawColor == "BLACK")
+		FigGfxInfo.DrawClr = BLACK;
+	else if (DrawColor == "BLACK")
+		FigGfxInfo.DrawClr = BLACK;
+	else if (DrawColor == "RED")
+		FigGfxInfo.DrawClr = RED;
+	else if (DrawColor == "ORANGE")
+		FigGfxInfo.DrawClr = ORANGE;
+	else if (DrawColor == "BLUE")
+		FigGfxInfo.DrawClr = BLUE;
+
+	if (FillColor == "NO COLOR")
+		FigGfxInfo.isFilled = false;
+	else
+	{
+		FigGfxInfo.isFilled = true;
+
+		if (FillColor == "GREEN")
+			FigGfxInfo.FillClr = GREEN;
+		else if (FillColor == "BLACK")
+			FigGfxInfo.FillClr = BLACK;
+		else if (FillColor == "BLACK")
+			FigGfxInfo.FillClr = BLACK;
+		else if (FillColor == "RED")
+			FigGfxInfo.FillClr = RED;
+		else if (FillColor == "ORANGE")
+			FigGfxInfo.FillClr = ORANGE;
+		else if (FillColor == "BLUE")
+			FigGfxInfo.FillClr = BLUE;
+	}
+
 }
