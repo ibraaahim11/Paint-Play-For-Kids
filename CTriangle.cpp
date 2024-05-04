@@ -1,7 +1,7 @@
 #include "CTriangle.h"
 #include <fstream>
 
-int CTriangle::SelectedNum = 0;
+
 
 CTriangle::CTriangle(Point P1, Point P2, Point P3, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo, 'T')
 {

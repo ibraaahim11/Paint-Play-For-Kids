@@ -3,7 +3,7 @@
 #include <fstream>
 
 
-int CHexagon::SelectedNum = 0;
+
 
 
 CHexagon::CHexagon(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo, 'H')

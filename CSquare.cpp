@@ -1,13 +1,13 @@
 #include "CSquare.h"
 #include <fstream>
 
-int CSquare::SelectedNum = 0;
+
 
 CSquare::CSquare(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo, 'S')
 {
 	Center = P1;
 	Radius = P2;
-	SquareID = ID;
+	SquareID = ID;\
 
 
 	// Initalizing Corner 1 and Corner 2
@@ -22,8 +22,6 @@ CSquare::CSquare(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxIn
 		halfSide = abs(Center.y - Radius.y);
 	}
 
-}
-
 	Corner1.x = Center.x - halfSide;
 	Corner2.x = Center.x + halfSide;
 
@@ -31,6 +29,7 @@ CSquare::CSquare(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxIn
 	Corner2.y = Center.y + halfSide;
 
 }
+
 
 void CSquare::Draw(Output* pOut) const
 {
