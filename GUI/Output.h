@@ -3,6 +3,7 @@
 #include "Input.h"
 #include <cmath> // Include the <cmath> header for trigonometric functions
 
+
 // Define PI constant
 const double PI = 3.14159265358979323846; // youssef
 
@@ -10,6 +11,7 @@ class Output	//The application manager should have a pointer to this class
 {
 private:
 	window* pWind;	//Pointer to the Graphics Window
+
 public:
 	Output();
 
