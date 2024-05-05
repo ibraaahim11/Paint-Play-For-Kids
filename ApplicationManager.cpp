@@ -9,6 +9,7 @@
 #include "DeleteAction.h"
 #include "Actions\SaveAction.h"
 #include "Actions\LoadAction.h"
+#include "Actions\CopyAction.h"
 #include <fstream>
 //Constructor
 ApplicationManager::ApplicationManager()

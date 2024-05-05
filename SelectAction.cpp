@@ -104,7 +104,7 @@ void SelectAction::Execute()
 		pManager->GetSelectedFig()->PrintInfo(pOut);
 	}
 
-	// More than one figure clicked -> Display number of each shape clickd
+	// More than one figure clicked -> Display number of each shape clicked
 	else
 	{
 		string msg = "Selected: ";
