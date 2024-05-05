@@ -22,14 +22,14 @@ void LoadAction::ReadActionParameters()
 }
 void LoadAction::Execute()
 {
-	Output* pOut = pManager->GetOutput();
-	int Count;
-	string CrntDrawClr, CrntFillClr, FigType, DrawClr, FillClr;
+	Output* pOut = pManager->GetOutput(); // to display a message on status bar
+	int Count; // count of current figures
+	string CrntDrawClr, CrntFillClr, FigType, DrawClr, FillClr; //storing the colors as strings
 
 	ReadActionParameters();
 
 	ifstream InFile(FileName);
-	if (InFile.is_open())
+	if (InFile.is_open()) // check if file is on your desktop
 	{
 		InFile >> CrntDrawClr >> CrntFillClr >> Count;
 		for (int i = 0; i < Count; i++)
@@ -67,6 +67,7 @@ void LoadAction::Execute()
 			}
 
 		}
+		InFile.close(); //close file
 	}
 	else
 		pOut->PrintMessage("ERROR! File not found");

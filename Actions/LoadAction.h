@@ -1,5 +1,5 @@
 #include "Action.h"
-
+#include "..\Figures\CFigure.h"
 
 class LoadAction : public Action
 {

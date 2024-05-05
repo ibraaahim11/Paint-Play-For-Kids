@@ -102,6 +102,8 @@ void CRectangle::Save(ofstream& OutFile) // omar
 void CRectangle::Load(ifstream& Infile)
 {
 	string DrawColor, FillColor;
+	if (IsSelected())
+		SetSelected(false);
 	Infile >> RectID >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y
 		>> DrawColor >> FillColor;
 
