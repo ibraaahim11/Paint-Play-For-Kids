@@ -36,12 +36,13 @@ public:
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig);          //Adds a new figure to the FigList
 	CFigure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
-	CFigure* GetFigure(int index) const; //Search for a figure using its index
+	CFigure*& GetFigure_index(int index); //Search for a figure using its index
 	void SetSelectedFig(CFigure* c);	// Sets the selected figure
-	CFigure* GetSelectedFig() const;	// Gets selected fig
-	CFigure* GetClipboard() const;      // Gets clipboard
-	void SetClipboard(CFigure* CF); //Sets the clipboard 
+	CFigure*& GetSelectedFig();	// Gets selected fig
+	CFigure*& GetClipboard();	// Gets clipboard
+
 	int	GetFigCount() const; // Return figure count
+	void SetFigCount(int); // Sets figure count
 
 	// -- Interface Management Functions
 	Input* GetInput() const; //Return pointer to the input

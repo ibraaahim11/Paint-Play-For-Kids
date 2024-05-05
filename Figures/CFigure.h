@@ -12,7 +12,9 @@ class CFigure
 protected:
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
-	static int ID;		//Each figure has an ID
+	static int TotalNum;		// Total number of figures
+	int ID; // Each figure has an ID
+
 	color CrntDrawClr; //to get color of figure before selected
 	const char Type; // Each figure has a char Type which represents which figure it is
 	// R, S, C, T, H.
@@ -30,6 +32,7 @@ public:
 
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
+	static void SetTotalNum(int num);
 
 	virtual void PrintInfo(Output* pOut) const = 0; // Virtual function to print information of figure.
 
@@ -40,8 +43,6 @@ public:
 	virtual bool isPointinside(int x, int y) = 0;
 	virtual void Save(ofstream& OutFile) = 0;	//Save the figure parameters to the file
 	virtual void Load(ifstream& Infile) = 0;	//Load the figure parameters to the file
-
-	//virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
 };
 
 #endif

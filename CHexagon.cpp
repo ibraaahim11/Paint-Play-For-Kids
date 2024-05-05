@@ -6,7 +6,7 @@ CHexagon::CHexagon(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfx
 {
 	Center = P1;
 	Radius = P2;
-	HexID = ID;
+	ID = TotalNum;
 
 	Calculate_Vertices();
 

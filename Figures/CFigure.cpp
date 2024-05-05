@@ -1,13 +1,17 @@
 #include "CFigure.h"
 
-int CFigure::ID = 0;
+int CFigure::TotalNum = 0;
 
 CFigure::CFigure(GfxInfo FigureGfxInfo, char T) : Type(T)
 {
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
 	CrntDrawClr = FigGfxInfo.DrawClr;
 	Selected = false;
-	ID++;
+	TotalNum++;
+}
+void CFigure::SetTotalNum(int num)
+{
+	TotalNum = num;
 }
 char CFigure::GetType() const
 {
