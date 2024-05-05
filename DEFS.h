@@ -8,7 +8,7 @@ enum ActionType //The actions supported (you can add more if needed)
 {
 	DRAW_RECT,//Draw Rectangle
 	///TODO: Add the other action types of the two modes
-	//=====================================================//Draw Mode
+	//=====================================================//Draw Mode Items
 	DRAW_SQR, DRAW_TRI, DRAW_HEX, DRAW_CIR,
 	I_BLACK, I_YELLOW, I_ORANGE, I_RED, I_GREEN, I_BLUE,
 	SELECT, BORDER, FILL, COPY, CUT, PASTE,
