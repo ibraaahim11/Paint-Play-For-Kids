@@ -49,10 +49,10 @@ bool CSquare::isPointinside(int x, int y)
 }
 void CSquare::Save(ofstream& OutFile)
 {
-	OutFile << "S1" << " " << SquareID << " " << Center.x << " " << Center.y << " " << Radius.x;
-	OutFile << " " << Radius.y;
+	OutFile << Type << " " << SquareID << " " << Center.x << " " << Center.y << " "
+		<< Radius.x << " " << Radius.y;  //writing the figure parameters
 
-	if (FigGfxInfo.DrawClr == BLACK)
+	if (FigGfxInfo.DrawClr == BLACK) //changing from color class to string to be able to store it in txt file
 		DrawColor = "BLACK";
 	if (FigGfxInfo.DrawClr == YELLOW)
 		DrawColor = "YELLOW";
@@ -64,8 +64,7 @@ void CSquare::Save(ofstream& OutFile)
 		DrawColor = "GREEN";
 	if (FigGfxInfo.DrawClr == BLUE)
 		DrawColor = "BLUE";
-	
-	if (FigGfxInfo.DrawClr == MAGENTA)
+	if (FigGfxInfo.DrawClr == MAGENTA) //if figure is highlighted then we should save the original color not magenta
 	{
 		if (CrntDrawClr == BLACK)
 			DrawColor = "BLACK";
@@ -85,8 +84,8 @@ void CSquare::Save(ofstream& OutFile)
 		if (CrntDrawClr == BLUE)
 			DrawColor = "BLUE";
 	}
-	
-	if (!FigGfxInfo.isFilled)
+
+	if (!FigGfxInfo.isFilled)//check if figure is filled
 		FillColor = "NO_COLOR";
 	else {
 		if (FigGfxInfo.FillClr == BLACK)
@@ -113,15 +112,17 @@ void CSquare::Save(ofstream& OutFile)
 void CSquare::Load(ifstream& Infile)
 {
 
+	if (IsSelected())
+		SetSelected(false); //deselect so it can be selected when loaded
 	Infile >> SquareID >> Center.x >> Center.y >> Radius.x >> Radius.y
-		>> DrawColor >> FillColor;
+		>> DrawColor >> FillColor; //reading figure parameters from file
 
-	if (DrawColor == "GREEN")
+	if (DrawColor == "GREEN")  //converting color strings to color to draw figure with specific color
 		FigGfxInfo.DrawClr = GREEN;
-	else if (DrawColor == "YELLOW")
-		FigGfxInfo.DrawClr = YELLOW;
 	else if (DrawColor == "BLACK")
 		FigGfxInfo.DrawClr = BLACK;
+	else if (DrawColor == "YELLOW")
+		FigGfxInfo.DrawClr = YELLOW;
 	else if (DrawColor == "RED")
 		FigGfxInfo.DrawClr = RED;
 	else if (DrawColor == "ORANGE")
@@ -129,7 +130,7 @@ void CSquare::Load(ifstream& Infile)
 	else if (DrawColor == "BLUE")
 		FigGfxInfo.DrawClr = BLUE;
 
-	if (FillColor == "NO_COLOR") 
+	if (FillColor == "NO_COLOR") //check if figure is filled
 		FigGfxInfo.isFilled = false;
 
 	else
@@ -149,4 +150,5 @@ void CSquare::Load(ifstream& Infile)
 		else if (FillColor == "BLUE")
 			FigGfxInfo.FillClr = BLUE;
 	}
+	;
 }

@@ -7,6 +7,7 @@
 #include "SelectAction.h"
 #include "Actions\SaveAction.h"
 #include "Actions\LoadAction.h"
+#include "Actions\CopyAction.h"
 #include <fstream>
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -74,6 +75,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case LOAD:
 		pAct = new LoadAction(this);
+
+		break;
+	case COPY:
+		pAct = new CopyAction(this);
 
 		break;
 	case EXIT:
@@ -146,6 +151,15 @@ CFigure* ApplicationManager::GetSelectedFig() const
 void ApplicationManager::SetSelectedFig(CFigure* c)
 {
 	SelectedFig = c;
+}
+CFigure* ApplicationManager::GetClipboard() const
+{
+	return Clipboard;
+}
+
+void ApplicationManager::SetClipboard(CFigure* CF)
+{
+	Clipboard = CF;
 }
 //==================================================================================//
 //							Interface Management Functions							//

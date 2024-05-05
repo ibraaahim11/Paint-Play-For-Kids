@@ -12,21 +12,20 @@ void SaveAction::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 
 	pOut->PrintMessage("Save Drawing, Type the Name of The File and add .txt at the end: ");
-	FileName = pIn->GetSrting(pOut);
+	FileName = pIn->GetSrting(pOut); //get file name from user
 	pOut->ClearStatusBar();
 }
 void SaveAction::Execute()
 {
 	Output* pOut = pManager->GetOutput();
-	Input* pIn = pManager->GetInput();
 
 	ReadActionParameters();
-	color DrawClr, FillClr;
+	color DrawClr, FillClr; //colors user will use after loading
 
 	DrawClr = pOut->getCrntDrawColor();
 	FillClr = pOut->getCrntFillColor();
 
-	string DrawColor, FillColor;
+	string DrawColor, FillColor; //the figure colors
 
 	if (DrawClr == BLACK)
 		DrawColor = "BLACK";
@@ -64,6 +63,6 @@ void SaveAction::Execute()
 	ofstream OpenFile(FileName, ios::out);
 	OpenFile << DrawColor << "   " << FillColor << endl << pManager->GetFigCount() << endl;
 
-	pManager->SaveAll(OpenFile);
-	OpenFile.close();
+	pManager->SaveAll(OpenFile); //calls save option for all figures
+	OpenFile.close(); //close the opened file
 }
