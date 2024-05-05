@@ -10,17 +10,20 @@ ClearAllAction::ClearAllAction(ApplicationManager* pApp) :Action(pApp)
 
 void ClearAllAction::ReadActionParameters()
 {
-	//Get a Pointer to the Input / Output Interfaces
 }
 
 //Execute the action
 void ClearAllAction::Execute()
 {
+	// Go through the entire figure list. Delete its content and set all pointers to NULL.
 	for (int i = 0; i < pManager->GetFigCount(); i++)
 	{
-		delete pManager->GetFigure_index(i);
-		pManager->GetFigure_index(i) = NULL;
+		
+		CFigure*& CurrentFig = pManager->GetFigure_index(i);
+		delete CurrentFig;
+		CurrentFig= NULL;
 	}
+	// Clear Window and reset all values.
 	Output* pOut = pManager->GetOutput();
 	pOut->ClearDrawArea();
 	pOut->ClearStatusBar();
