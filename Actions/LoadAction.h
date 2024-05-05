@@ -5,7 +5,7 @@ class LoadAction : public Action
 {
 protected:
 	string FileName;
-	Point p1, p2;
+	Point p1, p2, p3;
 	GfxInfo FigGfxInfo;
 public:
 	LoadAction(ApplicationManager* pApp);

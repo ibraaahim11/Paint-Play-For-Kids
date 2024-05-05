@@ -76,7 +76,7 @@ void CRectangle::Save(ofstream& OutFile) // omar
 
 
 	if (!FigGfxInfo.isFilled)
-		FillColor = "NO COLOR";
+		FillColor = "NO_COLOR";
 	else {
 		if (FigGfxInfo.FillClr == BLACK)
 			FillColor = "BLACK";
@@ -101,7 +101,7 @@ void CRectangle::Save(ofstream& OutFile) // omar
 }
 void CRectangle::Load(ifstream& Infile)
 {
-	string FigureType, DrawColor, FillColor;
+	string DrawColor, FillColor;
 	Infile >> RectID >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y
 		>> DrawColor >> FillColor;
 
@@ -118,7 +118,7 @@ void CRectangle::Load(ifstream& Infile)
 	else if (DrawColor == "BLUE")
 		FigGfxInfo.DrawClr = BLUE;
 
-	if (FillColor == "NO COLOR") {
+	if (FillColor == "NO_COLOR") {
 		FigGfxInfo.isFilled = false;
 		FigGfxInfo.FillClr = LIGHTGOLDENRODYELLOW;
 	}

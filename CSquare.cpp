@@ -7,7 +7,7 @@ CSquare::CSquare(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxIn
 {
 	Center = P1;
 	Radius = P2;
-	SquareID = ID;\
+	SquareID = ID;
 
 
 	// Initalizing Corner 1 and Corner 2
@@ -70,7 +70,7 @@ void CSquare::Save(ofstream& OutFile)
 
 
 	if (!FigGfxInfo.isFilled)
-		FillColor = "NO COLOR";
+		FillColor = "NO_COLOR";
 	else {
 		if (FigGfxInfo.FillClr == BLACK)
 			FillColor = "BLACK";
@@ -95,14 +95,14 @@ void CSquare::Save(ofstream& OutFile)
 }
 void CSquare::Load(ifstream& Infile)
 {
-	string FigureType, DrawColor, FillColor;
-	Infile >> FigureType >> SquareID >> Center.x >> Center.y >> Radius.x >> Radius.y
+	string DrawColor, FillColor;
+	Infile >> SquareID >> Center.x >> Center.y >> Radius.x >> Radius.y
 		>> DrawColor >> FillColor;
 
 	if (DrawColor == "GREEN")
 		FigGfxInfo.DrawClr = GREEN;
-	else if (DrawColor == "BLACK")
-		FigGfxInfo.DrawClr = BLACK;
+	else if (DrawColor == "YELLOW")
+		FigGfxInfo.DrawClr = YELLOW;
 	else if (DrawColor == "BLACK")
 		FigGfxInfo.DrawClr = BLACK;
 	else if (DrawColor == "RED")
@@ -112,16 +112,18 @@ void CSquare::Load(ifstream& Infile)
 	else if (DrawColor == "BLUE")
 		FigGfxInfo.DrawClr = BLUE;
 
-	if (FillColor == "NO COLOR")
+	if (FillColor == "NO_COLOR") {
 		FigGfxInfo.isFilled = false;
+		FigGfxInfo.FillClr = LIGHTGOLDENRODYELLOW;
+	}
 	else
 	{
 		FigGfxInfo.isFilled = true;
 
 		if (FillColor == "GREEN")
 			FigGfxInfo.FillClr = GREEN;
-		else if (FillColor == "BLACK")
-			FigGfxInfo.FillClr = BLACK;
+		else if (FillColor == "YELLOW")
+			FigGfxInfo.FillClr = YELLOW;
 		else if (FillColor == "BLACK")
 			FigGfxInfo.FillClr = BLACK;
 		else if (FillColor == "RED")

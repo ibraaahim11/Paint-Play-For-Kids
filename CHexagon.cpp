@@ -111,7 +111,7 @@ void CHexagon::Save(ofstream& OutFile)
 
 
 	if (!FigGfxInfo.isFilled)
-		FillColor = "NO COLOR";
+		FillColor = "NO_COLOR";
 	else {
 		if (FigGfxInfo.FillClr == BLACK)
 			FillColor = "BLACK";
@@ -136,14 +136,14 @@ void CHexagon::Save(ofstream& OutFile)
 }
 void CHexagon::Load(ifstream& Infile)
 {
-	string FigureType, DrawColor, FillColor;
-	Infile >> FigureType >> HexID >> Center.x >> Center.y >> Radius.x >> Radius.y
+	string DrawColor, FillColor;
+	Infile >> HexID >> Center.x >> Center.y >> Radius.x >> Radius.y
 		>> DrawColor >> FillColor;
 
 	if (DrawColor == "GREEN")
 		FigGfxInfo.DrawClr = GREEN;
-	else if (DrawColor == "BLACK")
-		FigGfxInfo.DrawClr = BLACK;
+	else if (DrawColor == "YELLOW")
+		FigGfxInfo.DrawClr = YELLOW;
 	else if (DrawColor == "BLACK")
 		FigGfxInfo.DrawClr = BLACK;
 	else if (DrawColor == "RED")
@@ -153,16 +153,18 @@ void CHexagon::Load(ifstream& Infile)
 	else if (DrawColor == "BLUE")
 		FigGfxInfo.DrawClr = BLUE;
 
-	if (FillColor == "NO COLOR")
+	if (FillColor == "NO_COLOR") {
 		FigGfxInfo.isFilled = false;
+		FigGfxInfo.FillClr = LIGHTGOLDENRODYELLOW;
+	}
 	else
 	{
 		FigGfxInfo.isFilled = true;
 
 		if (FillColor == "GREEN")
 			FigGfxInfo.FillClr = GREEN;
-		else if (FillColor == "BLACK")
-			FigGfxInfo.FillClr = BLACK;
+		else if (FillColor == "YELLOW")
+			FigGfxInfo.FillClr = YELLOW;
 		else if (FillColor == "BLACK")
 			FigGfxInfo.FillClr = BLACK;
 		else if (FillColor == "RED")
