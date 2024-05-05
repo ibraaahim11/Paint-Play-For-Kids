@@ -1,7 +1,8 @@
 #include "CTriangle.h"
 #include <fstream>
 
-
+#include <iostream>
+using namespace std;
 
 CTriangle::CTriangle(Point P1, Point P2, Point P3, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo, 'T')
 {
@@ -17,6 +18,11 @@ void CTriangle::Draw(Output* pOut) const
 	pOut->DrawTriangle(Vertix1, Vertix2, Vertix3, FigGfxInfo, Selected);
 }
 
+void CTriangle::PrintInfo(Output* pOut) const
+{
+	auto s_ID = std::to_string(ID);
+	pOut->PrintMessage("Triangle Selected: ID " + s_ID);
+}
 
 bool CTriangle::isPointinside(int x, int y)
 {
@@ -30,8 +36,6 @@ bool CTriangle::isPointinside(int x, int y)
 	double u = factor_u / det;
 	double v = factor_v / det;
 	double w = 1.0 - u - v;
-
-
 
 	if (w >= 0 && w <= 1 && v >= 0 && v <= 1 && u >= 0 && u <= 1)
 		return true;
@@ -85,7 +89,7 @@ void CTriangle::Load(ifstream& Infile)
 	string DrawColor, FillColor;
 	Infile >> TriID >> Vertix1.x >> Vertix1.y >> Vertix2.x >> Vertix2.y
 		>> Vertix3.x >> Vertix3.y >> DrawColor >> FillColor;
-	
+
 	if (DrawColor == "GREEN")
 		FigGfxInfo.DrawClr = GREEN;
 	else if (DrawColor == "BLACK")
@@ -120,5 +124,4 @@ void CTriangle::Load(ifstream& Infile)
 		else if (FillColor == "BLUE")
 			FigGfxInfo.FillClr = BLUE;
 	}
-
 }

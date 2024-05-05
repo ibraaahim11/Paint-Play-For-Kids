@@ -3,7 +3,7 @@
 #define CCIRCLE_H
 
 #include "Figures\CFigure.h"
-#include <cmath> 
+#include <cmath>
 
 class CCircle : public CFigure
 {
@@ -11,6 +11,9 @@ private:
 	Point Center;
 	Point Radius;
 	int CirID; //omar
+
+	double Radius_length;
+
 public:
 	CCircle(Point, Point, GfxInfo FigureGfxInfo);
 	virtual bool isPointinside(int x, int y);

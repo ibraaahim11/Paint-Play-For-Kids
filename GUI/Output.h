@@ -3,7 +3,6 @@
 #include "Input.h"
 #include <cmath> // Include the <cmath> header for trigonometric functions
 
-
 // Define PI constant
 const double PI = 3.14159265358979323846; // youssef
 

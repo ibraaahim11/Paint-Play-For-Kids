@@ -9,7 +9,8 @@ private:
 	Point Corner1;
 	Point Corner2;
 	int RectID;
-
+	int Height;
+	int Width;
 
 public:
 	CRectangle(Point, Point, GfxInfo FigureGfxInfo);

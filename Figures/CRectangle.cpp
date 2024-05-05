@@ -1,20 +1,28 @@
 #include "CRectangle.h"
 #include <fstream>
 
-
-
-
 CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo, 'R')
 {
 	Corner1 = P1;
 	Corner2 = P2;
 	RectID = ID;
+	Height = abs(P1.y - P2.y);
+	Width = abs(P1.x - P2.x);
 }
 
 void CRectangle::Draw(Output* pOut) const
 {
 	//Call Output::DrawRect to draw a rectangle on the screen
 	pOut->DrawRect(Corner1, Corner2, FigGfxInfo, Selected);
+}
+
+void CRectangle::PrintInfo(Output* pOut) const
+{
+	auto s_ID = std::to_string(ID);
+	auto s_Height = std::to_string(Height);
+	auto s_Width = std::to_string(Width);
+
+	pOut->PrintMessage("Rectangle Selected: ID " + s_ID + ", Height " + s_Height + ", Width " + s_Width + ".");
 }
 
 bool CRectangle::isPointinside(int x, int y)
@@ -33,7 +41,6 @@ bool CRectangle::isPointinside(int x, int y)
 			if (x >= Corner1.x && x <= Corner2.x && y >= Corner1.y && y <= Corner2.y) return true;
 			else return false;
 		}
-
 	}
 	else
 	{
@@ -47,16 +54,9 @@ bool CRectangle::isPointinside(int x, int y)
 			if (x >= Corner2.x && x <= Corner1.x && y >= Corner1.y && y <= Corner2.y) return true;
 			else return false;
 		}
-
-
 	}
-
-
-
-
-
-
 }
+
 void CRectangle::Save(ofstream& OutFile) // omar
 {
 	OutFile << "R1" << " " << RectID << " " << Corner1.x << " " << Corner1.y << " " << Corner2.x << " " << Corner2.y;
@@ -73,7 +73,6 @@ void CRectangle::Save(ofstream& OutFile) // omar
 		DrawColor = "GREEN";
 	if (FigGfxInfo.DrawClr == BLUE)
 		DrawColor = "BLUE";
-
 
 	if (!FigGfxInfo.isFilled)
 		FillColor = "NO_COLOR";
@@ -139,5 +138,5 @@ void CRectangle::Load(ifstream& Infile)
 		else if (FillColor == "BLUE")
 			FigGfxInfo.FillClr = BLUE;
 	}
-;
+	;
 }

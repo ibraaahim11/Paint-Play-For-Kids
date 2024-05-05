@@ -2,7 +2,7 @@
 
 int CFigure::ID = 0;
 
-CFigure::CFigure(GfxInfo FigureGfxInfo, char T): Type(T)
+CFigure::CFigure(GfxInfo FigureGfxInfo, char T) : Type(T)
 {
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
 	Selected = false;

@@ -1,6 +1,5 @@
 #include "Output.h"
 
-
 Output::Output()
 {
 	//Initialize user interface parameters
