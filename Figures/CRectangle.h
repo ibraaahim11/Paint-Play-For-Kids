@@ -16,6 +16,8 @@ public:
 	virtual bool isPointinside(int x, int y);
 	virtual void Draw(Output* pOut) const;
 	virtual void Save(ofstream& OutFile); //omar
+	virtual void Load(ifstream& Infile);
+
 	virtual void PrintInfo(Output* pOut) const;
 };
 

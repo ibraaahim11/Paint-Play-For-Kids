@@ -31,8 +31,8 @@ bool CCircle::isPointinside(int x, int y)
 }
 void CCircle::Save(ofstream& OutFile)
 {
-	OutFile << "CIRCLE " << "  " << CirID << "  " << Center.x << "  " << Center.y << "  " << Radius.x;
-	OutFile << "  " << Radius.y;
+	OutFile << "C1" << " " << CirID << " " << Center.x << " " << Center.y << " " << Radius.x;
+	OutFile << " " << Radius.y;
 	string DrawColor, FillColor;
 	if (FigGfxInfo.DrawClr == BLACK)
 		DrawColor = "BLACK";
@@ -49,7 +49,7 @@ void CCircle::Save(ofstream& OutFile)
 
 
 	if (!FigGfxInfo.isFilled)
-		FillColor = "NO COLOR";
+		FillColor = "NO_COLOR";
 	else {
 		if (FigGfxInfo.FillClr == BLACK)
 			FillColor = "BLACK";
@@ -70,5 +70,47 @@ void CCircle::Save(ofstream& OutFile)
 			FillColor = "BLUE";
 	}
 
-	OutFile << "  " << DrawColor << "  " << FillColor << endl;
+	OutFile << " " << DrawColor << " " << FillColor << endl;
+}
+void CCircle::Load(ifstream& Infile)
+{
+	string DrawColor, FillColor;
+	Infile >> CirID >> Center.x >> Center.y >> Radius.x >> Radius.y
+		>> DrawColor >> FillColor;
+
+	if (DrawColor == "GREEN")
+		FigGfxInfo.DrawClr = GREEN;
+	else if (DrawColor == "YELLOW")
+		FigGfxInfo.DrawClr = YELLOW;
+	else if (DrawColor == "BLACK")
+		FigGfxInfo.DrawClr = BLACK;
+	else if (DrawColor == "RED")
+		FigGfxInfo.DrawClr = RED;
+	else if (DrawColor == "ORANGE")
+		FigGfxInfo.DrawClr = ORANGE;
+	else if (DrawColor == "BLUE")
+		FigGfxInfo.DrawClr = BLUE;
+
+	if (FillColor == "NO_COLOR") {
+		FigGfxInfo.isFilled = false;
+		FigGfxInfo.FillClr = LIGHTGOLDENRODYELLOW;
+	}
+	else
+	{
+		FigGfxInfo.isFilled = true;
+
+		if (FillColor == "GREEN")
+			FigGfxInfo.FillClr = GREEN;
+		else if (FillColor == "YELLOW")
+			FigGfxInfo.FillClr = YELLOW;
+		else if (FillColor == "BLACK")
+			FigGfxInfo.FillClr = BLACK;
+		else if (FillColor == "RED")
+			FigGfxInfo.FillClr = RED;
+		else if (FillColor == "ORANGE")
+			FigGfxInfo.FillClr = ORANGE;
+		else if (FillColor == "BLUE")
+			FigGfxInfo.FillClr = BLUE;
+	}
+
 }

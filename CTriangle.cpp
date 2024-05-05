@@ -41,8 +41,8 @@ bool CTriangle::isPointinside(int x, int y)
 
 void CTriangle::Save(ofstream& OutFile)
 {
-	OutFile << "TRIANGLE " << "  " << TriID << "  " << Vertix1.x << "  " << Vertix1.y << "  " << Vertix2.x << "  ";
-	OutFile << Vertix2.y << "  " << Vertix3.x << "  " << Vertix3.y;
+	OutFile << "T1" << " " << TriID << " " << Vertix1.x << " " << Vertix1.y << " " << Vertix2.x << " ";
+	OutFile << Vertix2.y << " " << Vertix3.x << " " << Vertix3.y;
 	string DrawColor, FillColor;
 	if (FigGfxInfo.DrawClr == BLACK)
 		DrawColor = "BLACK";
@@ -58,7 +58,7 @@ void CTriangle::Save(ofstream& OutFile)
 		DrawColor = "BLUE";
 
 	if (!FigGfxInfo.isFilled)
-		FillColor = "NO COLOR";
+		FillColor = "NO_COLOR";
 	else {
 		if (FigGfxInfo.FillClr == BLACK)
 			FillColor = "BLACK";
@@ -78,5 +78,47 @@ void CTriangle::Save(ofstream& OutFile)
 		else if (FigGfxInfo.FillClr == BLUE)
 			FillColor = "BLUE";
 	}
-	OutFile << "  " << DrawColor << "  " << FillColor << endl;
+	OutFile << " " << DrawColor << " " << FillColor << endl;
+}
+void CTriangle::Load(ifstream& Infile)
+{
+	string DrawColor, FillColor;
+	Infile >> TriID >> Vertix1.x >> Vertix1.y >> Vertix2.x >> Vertix2.y
+		>> Vertix3.x >> Vertix3.y >> DrawColor >> FillColor;
+	
+	if (DrawColor == "GREEN")
+		FigGfxInfo.DrawClr = GREEN;
+	else if (DrawColor == "BLACK")
+		FigGfxInfo.DrawClr = BLACK;
+	else if (DrawColor == "YELLOW")
+		FigGfxInfo.DrawClr = YELLOW;
+	else if (DrawColor == "RED")
+		FigGfxInfo.DrawClr = RED;
+	else if (DrawColor == "ORANGE")
+		FigGfxInfo.DrawClr = ORANGE;
+	else if (DrawColor == "BLUE")
+		FigGfxInfo.DrawClr = BLUE;
+
+	if (FillColor == "NO_COLOR") {
+		FigGfxInfo.isFilled = false;
+		FigGfxInfo.FillClr = LIGHTGOLDENRODYELLOW;
+	}
+	else
+	{
+		FigGfxInfo.isFilled = true;
+
+		if (FillColor == "GREEN")
+			FigGfxInfo.FillClr = GREEN;
+		else if (FillColor == "YELLOW")
+			FigGfxInfo.FillClr = YELLOW;
+		else if (FillColor == "BLACK")
+			FigGfxInfo.FillClr = BLACK;
+		else if (FillColor == "RED")
+			FigGfxInfo.FillClr = RED;
+		else if (FillColor == "ORANGE")
+			FigGfxInfo.FillClr = ORANGE;
+		else if (FillColor == "BLUE")
+			FigGfxInfo.FillClr = BLUE;
+	}
+
 }
