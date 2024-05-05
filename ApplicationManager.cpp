@@ -6,6 +6,7 @@
 #include "AddCircleAction.h"
 #include "SelectAction.h"
 #include "ClearAllAction.h"
+#include "DeleteAction.h"
 #include "Actions\SaveAction.h"
 #include "Actions\LoadAction.h"
 #include <fstream>
@@ -81,6 +82,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case CLEAR:
 		pAct = new ClearAllAction(this);
 		break;
+	case I_DELETE:
+		pAct = new DeleteAction(this);
+		break;
+
 	case EXIT:
 		///create ExitAction here
 

@@ -42,7 +42,7 @@ public:
 	CFigure*& GetClipboard();	// Gets clipboard
 
 	int	GetFigCount() const; // Return figure count
-	void SetFigCount(int);
+	void SetFigCount(int); // Sets figure count
 
 	// -- Interface Management Functions
 	Input* GetInput() const; //Return pointer to the input
