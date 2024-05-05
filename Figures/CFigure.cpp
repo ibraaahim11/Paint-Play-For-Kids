@@ -5,6 +5,7 @@ int CFigure::TotalNum = 0;
 CFigure::CFigure(GfxInfo FigureGfxInfo, char T) : Type(T)
 {
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
+	CrntDrawClr = FigGfxInfo.DrawClr;
 	Selected = false;
 	TotalNum++;
 }
@@ -28,6 +29,7 @@ bool CFigure::IsSelected() const
 
 void CFigure::ChngDrawClr(color Dclr)
 {
+	CrntDrawClr = FigGfxInfo.DrawClr; //get color before changed after selection
 	FigGfxInfo.DrawClr = Dclr;
 }
 

@@ -38,7 +38,7 @@ void CCircle::Save(ofstream& OutFile)
 {
 	OutFile << "C1" << " " << CirID << " " << Center.x << " " << Center.y << " " << Radius.x;
 	OutFile << " " << Radius.y;
-	string DrawColor, FillColor;
+
 	if (FigGfxInfo.DrawClr == BLACK)
 		DrawColor = "BLACK";
 	if (FigGfxInfo.DrawClr == YELLOW)
@@ -51,7 +51,28 @@ void CCircle::Save(ofstream& OutFile)
 		DrawColor = "GREEN";
 	if (FigGfxInfo.DrawClr == BLUE)
 		DrawColor = "BLUE";
+	
+	if (FigGfxInfo.DrawClr == MAGENTA)
+	{
+		if (CrntDrawClr == BLACK)
+			DrawColor = "BLACK";
 
+		if (CrntDrawClr == YELLOW)
+			DrawColor = "YELLOW";
+
+		if (CrntDrawClr == RED)
+			DrawColor = "RED";
+
+		if (CrntDrawClr == ORANGE)
+			DrawColor = "ORANGE";
+
+		if (CrntDrawClr == GREEN)
+			DrawColor = "GREEN";
+
+		if (CrntDrawClr == BLUE)
+			DrawColor = "BLUE";
+	}
+	
 	if (!FigGfxInfo.isFilled)
 		FillColor = "NO_COLOR";
 	else {
@@ -78,7 +99,7 @@ void CCircle::Save(ofstream& OutFile)
 }
 void CCircle::Load(ifstream& Infile)
 {
-	string DrawColor, FillColor;
+
 	Infile >> CirID >> Center.x >> Center.y >> Radius.x >> Radius.y
 		>> DrawColor >> FillColor;
 
@@ -95,10 +116,9 @@ void CCircle::Load(ifstream& Infile)
 	else if (DrawColor == "BLUE")
 		FigGfxInfo.DrawClr = BLUE;
 
-	if (FillColor == "NO_COLOR") {
+	if (FillColor == "NO_COLOR") 
 		FigGfxInfo.isFilled = false;
-		FigGfxInfo.FillClr = LIGHTGOLDENRODYELLOW;
-	}
+
 	else
 	{
 		FigGfxInfo.isFilled = true;

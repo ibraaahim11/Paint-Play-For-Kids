@@ -15,9 +15,10 @@ protected:
 	static int TotalNum;		// Total number of figures
 	int ID; // Each figure has an ID
 
+	color CrntDrawClr; //to get color of figure before selected
 	const char Type; // Each figure has a char Type which represents which figure it is
 	// R, S, C, T, H.
-
+	string DrawColor, FillColor; // colors of figures in strings for reading and writing to files
 	/// Add more parameters if needed.
 
 public:

@@ -47,7 +47,7 @@ void CTriangle::Save(ofstream& OutFile)
 {
 	OutFile << "T1" << " " << TriID << " " << Vertix1.x << " " << Vertix1.y << " " << Vertix2.x << " ";
 	OutFile << Vertix2.y << " " << Vertix3.x << " " << Vertix3.y;
-	string DrawColor, FillColor;
+
 	if (FigGfxInfo.DrawClr == BLACK)
 		DrawColor = "BLACK";
 	if (FigGfxInfo.DrawClr == YELLOW)
@@ -60,7 +60,27 @@ void CTriangle::Save(ofstream& OutFile)
 		DrawColor = "GREEN";
 	if (FigGfxInfo.DrawClr == BLUE)
 		DrawColor = "BLUE";
+	
+	if (FigGfxInfo.DrawClr == MAGENTA)
+	{
+		if (CrntDrawClr == BLACK)
+			DrawColor = "BLACK";
 
+		if (CrntDrawClr == YELLOW)
+			DrawColor = "YELLOW";
+
+		if (CrntDrawClr == RED)
+			DrawColor = "RED";
+
+		if (CrntDrawClr == ORANGE)
+			DrawColor = "ORANGE";
+
+		if (CrntDrawClr == GREEN)
+			DrawColor = "GREEN";
+
+		if (CrntDrawClr == BLUE)
+			DrawColor = "BLUE";
+	}
 	if (!FigGfxInfo.isFilled)
 		FillColor = "NO_COLOR";
 	else {
@@ -86,7 +106,7 @@ void CTriangle::Save(ofstream& OutFile)
 }
 void CTriangle::Load(ifstream& Infile)
 {
-	string DrawColor, FillColor;
+
 	Infile >> TriID >> Vertix1.x >> Vertix1.y >> Vertix2.x >> Vertix2.y
 		>> Vertix3.x >> Vertix3.y >> DrawColor >> FillColor;
 
@@ -103,10 +123,8 @@ void CTriangle::Load(ifstream& Infile)
 	else if (DrawColor == "BLUE")
 		FigGfxInfo.DrawClr = BLUE;
 
-	if (FillColor == "NO_COLOR") {
+	if (FillColor == "NO_COLOR") 
 		FigGfxInfo.isFilled = false;
-		FigGfxInfo.FillClr = LIGHTGOLDENRODYELLOW;
-	}
 	else
 	{
 		FigGfxInfo.isFilled = true;
