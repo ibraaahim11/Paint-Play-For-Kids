@@ -1,20 +1,28 @@
 #include "CRectangle.h"
 #include <fstream>
 
-
-
-
 CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo, 'R')
 {
 	Corner1 = P1;
 	Corner2 = P2;
 	RectID = ID;
+	Height = abs(P1.y - P2.y);
+	Width = abs(P1.x - P2.x);
 }
 
 void CRectangle::Draw(Output* pOut) const
 {
 	//Call Output::DrawRect to draw a rectangle on the screen
 	pOut->DrawRect(Corner1, Corner2, FigGfxInfo, Selected);
+}
+
+void CRectangle::PrintInfo(Output* pOut) const
+{
+	auto s_ID = std::to_string(ID);
+	auto s_Height = std::to_string(Height);
+	auto s_Width = std::to_string(Width);
+
+	pOut->PrintMessage("Rectangle Selected: ID " + s_ID + ", Height " + s_Height + ", Width " + s_Width + ".");
 }
 
 bool CRectangle::isPointinside(int x, int y)
@@ -33,7 +41,6 @@ bool CRectangle::isPointinside(int x, int y)
 			if (x >= Corner1.x && x <= Corner2.x && y >= Corner1.y && y <= Corner2.y) return true;
 			else return false;
 		}
-
 	}
 	else
 	{
@@ -47,20 +54,14 @@ bool CRectangle::isPointinside(int x, int y)
 			if (x >= Corner2.x && x <= Corner1.x && y >= Corner1.y && y <= Corner2.y) return true;
 			else return false;
 		}
-
-
 	}
-
-
-
-
-
-
 }
-void CRectangle::Save(ofstream& OutFile) // omar
+
+void CRectangle::Save(ofstream& OutFile)
 {
-	OutFile << "RECTANGLE " << "  " << RectID << "  " << Corner1.x << "  " << Corner1.y << "  " << Corner2.x << "  " << Corner2.y;
-	string DrawColor, FillColor;
+	OutFile << "R1" << " " << RectID << " " << Corner1.x << " " << Corner1.y << " "
+		<< Corner2.x << " " << Corner2.y;
+
 	if (FigGfxInfo.DrawClr == BLACK)
 		DrawColor = "BLACK";
 	if (FigGfxInfo.DrawClr == YELLOW)
@@ -73,10 +74,29 @@ void CRectangle::Save(ofstream& OutFile) // omar
 		DrawColor = "GREEN";
 	if (FigGfxInfo.DrawClr == BLUE)
 		DrawColor = "BLUE";
-
+	if (FigGfxInfo.DrawClr == MAGENTA)
+	{
+		if (CrntDrawClr == BLACK)
+			DrawColor = "BLACK";
+		
+		if (CrntDrawClr == YELLOW)
+			DrawColor = "YELLOW";
+		
+		if (CrntDrawClr == RED)
+			DrawColor = "RED";
+		
+		if (CrntDrawClr == ORANGE)
+			DrawColor = "ORANGE";
+		
+		if (CrntDrawClr == GREEN)
+			DrawColor = "GREEN";
+		
+		if (CrntDrawClr == BLUE)
+			DrawColor = "BLUE";
+	}
 
 	if (!FigGfxInfo.isFilled)
-		FillColor = "NO COLOR";
+		FillColor = "NO_COLOR";
 	else {
 		if (FigGfxInfo.FillClr == BLACK)
 			FillColor = "BLACK";
@@ -97,5 +117,48 @@ void CRectangle::Save(ofstream& OutFile) // omar
 			FillColor = "BLUE";
 	}
 
-	OutFile << "  " << DrawColor << "  " << FillColor << endl;
+	OutFile << " " << DrawColor << " " << FillColor << endl;
+}
+void CRectangle::Load(ifstream& Infile)
+{
+
+	if (IsSelected())
+		SetSelected(false);
+	Infile >> RectID >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y
+		>> DrawColor >> FillColor;
+
+	if (DrawColor == "GREEN")
+		FigGfxInfo.DrawClr = GREEN;
+	else if (DrawColor == "BLACK")
+		FigGfxInfo.DrawClr = BLACK;
+	else if (DrawColor == "YELLOW")
+		FigGfxInfo.DrawClr = YELLOW;
+	else if (DrawColor == "RED")
+		FigGfxInfo.DrawClr = RED;
+	else if (DrawColor == "ORANGE")
+		FigGfxInfo.DrawClr = ORANGE;
+	else if (DrawColor == "BLUE")
+		FigGfxInfo.DrawClr = BLUE;
+
+	if (FillColor == "NO_COLOR") 
+		FigGfxInfo.isFilled = false;
+
+	else
+	{
+		FigGfxInfo.isFilled = true;
+
+		if (FillColor == "GREEN")
+			FigGfxInfo.FillClr = GREEN;
+		else if (FillColor == "YELLOW")
+			FigGfxInfo.FillClr = YELLOW;
+		else if (FillColor == "BLACK")
+			FigGfxInfo.FillClr = BLACK;
+		else if (FillColor == "RED")
+			FigGfxInfo.FillClr = RED;
+		else if (FillColor == "ORANGE")
+			FigGfxInfo.FillClr = ORANGE;
+		else if (FillColor == "BLUE")
+			FigGfxInfo.FillClr = BLUE;
+	}
+	;
 }

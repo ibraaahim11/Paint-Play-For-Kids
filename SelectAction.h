@@ -8,16 +8,17 @@ class SelectAction : public Action
 {
 private:
 	Point P1; //Point clicked
-	CFigure* SelectedFig;
+	CFigure* ClickedFig; //Figure Clicked on
 
-	// number of each shape currently selected
+	// Number of each shape currently selected
 	int Num_RectangleSelected;
 	int Num_SquareSelected;
 	int Num_TriangleSelected;
 	int Num_CircleSelected;
 	int Num_HexagonSelected;
 
-
+	Output* pOut; //Output pointer to print msgs
+	Input* pIn; //Input pointer to read user clicks
 
 public:
 	SelectAction(ApplicationManager* pApp);

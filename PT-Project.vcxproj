@@ -188,7 +188,6 @@
     <ClCompile Include="SelectAction.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Actions\Pick&amp;hide.h" />
     <ClInclude Include="Actions\SaveAction.h" />
     <ClInclude Include="Actions\Switchtodraw.h" />
     <ClInclude Include="Actions\Switchtoplay.h" />

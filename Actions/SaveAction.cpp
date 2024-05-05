@@ -8,7 +8,6 @@ SaveAction::SaveAction(ApplicationManager* pApp) : Action(pApp)
 { }
 void SaveAction::ReadActionParameters()
 {
-
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
@@ -42,7 +41,6 @@ void SaveAction::Execute()
 	if (DrawClr == BLUE)
 		DrawColor = "BLUE";
 
-
 	if (FillClr == BLACK)
 		FillColor = "BLACK";
 
@@ -63,10 +61,8 @@ void SaveAction::Execute()
 	else
 		FillColor = "NO_COLOR";
 
-
 	ofstream OpenFile(FileName, ios::out);
 	OpenFile << DrawColor << "   " << FillColor << endl << pManager->GetFigCount() << endl;
-
 
 	pManager->SaveAll(OpenFile);
 	OpenFile.close();

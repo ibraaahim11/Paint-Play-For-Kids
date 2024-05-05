@@ -185,6 +185,10 @@
     <ClCompile Include="Actions\Pick&amp;hide.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
+    <ClCompile Include="SelectAction.cpp" />
+    <ClCompile Include="Actions\LoadAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -297,16 +301,6 @@
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\SaveAction.h">
-      <Filter>Action Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="SelectAction.h" />
-    <ClInclude Include="Actions\Switchtoplay.h">
-      <Filter>Action Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\Switchtodraw.h">
-      <Filter>Action Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions\Pick&amp;hide.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
   </ItemGroup>

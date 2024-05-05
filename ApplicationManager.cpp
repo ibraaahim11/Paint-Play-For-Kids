@@ -6,6 +6,7 @@
 #include "AddCircleAction.h"
 #include "SelectAction.h"
 #include "Actions\SaveAction.h"
+#include "Actions\LoadAction.h"
 #include "Actions\Switchtoplay.h"
 #include <fstream>
 //Constructor
@@ -17,13 +18,11 @@ ApplicationManager::ApplicationManager()
 
 	FigCount = 0;
 
-
 	//Create an array of figure pointers and set them to NULL
 	for (int i = 0; i < MaxFigCount; i++)
 		FigList[i] = NULL;
 
-
-	SelectedFig= NULL;
+	SelectedFig = NULL;
 }
 
 //==================================================================================//
@@ -72,8 +71,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 	case SAVE:
 		pAct = new SaveAction(this);
-		break;
 
+		break;
+	case LOAD:
+		pAct = new LoadAction(this);
+
+		break;
 	case EXIT:
 		///create ExitAction here
 
@@ -115,7 +118,6 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure* ApplicationManager::GetFigure(int x, int y) const
 {
-
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
 	for (int i = FigCount - 1; i >= 0; i--)
@@ -124,7 +126,6 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 		{
 			return FigList[i];
 		}
-
 	}
 
 	//Add your code here to search for a figure given a point x,y
@@ -143,6 +144,14 @@ int ApplicationManager::GetFigCount() const
 	// Return figure count
 	return FigCount;
 }
+CFigure* ApplicationManager::GetSelectedFig() const
+{
+	return SelectedFig;
+}
+void ApplicationManager::SetSelectedFig(CFigure* c)
+{
+	SelectedFig = c;
+}
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
@@ -150,19 +159,13 @@ int ApplicationManager::GetFigCount() const
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {
-
 	for (int i = 0; i < FigCount; i++)
 
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 
-
 	// Drawing bars again to avoid shapes from overlapping.
-	if(TO_DRAW){
-		pOut->ClearToolBar();
-		pOut->CreateDrawToolBar();
-	if (TO_PLAY)
-		pOut->ClearToolBar();
-		pOut->CreatePlayToolBar();
+	pOut->CreateDrawToolBar();
+
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
