@@ -84,7 +84,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 	case TO_PLAY :
 		pAct = new Switchtoplay(this);
-	
+
 	}
 
 	//Execute the created action
@@ -157,12 +157,16 @@ void ApplicationManager::UpdateInterface() const
 
 
 	// Drawing bars again to avoid shapes from overlapping.
-	pOut->CreateDrawToolBar();
-
+	if(TO_DRAW){
+		pOut->ClearToolBar();
+		pOut->CreateDrawToolBar();
+	if (TO_PLAY)
+		pOut->ClearToolBar();
+		pOut->CreatePlayToolBar();
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
-Input* ApplicationManager::GetInput() const
+	Input* ApplicationManager::GetInput() const
 {
 	return pIn;
 }
