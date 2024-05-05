@@ -14,6 +14,7 @@ private:
 	Point Corner1;
 	Point Corner2;
 
+	int halfSide;
 
 	int SquareID;
 public:
@@ -22,6 +23,7 @@ public:
 	virtual void Draw(Output* pOut) const;
 	virtual void Save(ofstream& OutFile);
 	virtual void Load(ifstream& Infile);
+	virtual void PrintInfo(Output* pOut) const;
 };
 
 #endif

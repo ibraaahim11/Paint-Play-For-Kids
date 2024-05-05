@@ -13,6 +13,8 @@ private:
 	int Vertices_x[6];
 	int Vertices_y[6];
 
+	int Height;
+	int Width;
 
 	int HexID;
 public:
@@ -21,8 +23,8 @@ public:
 	virtual bool isPointinside(int x, int y);
 	virtual void Draw(Output* pOut) const;
 	virtual void Save(ofstream& OutFile);
+	virtual void PrintInfo(Output* pOut) const;
 	virtual void Load(ifstream& Infile);
-
 };
 
 #endif

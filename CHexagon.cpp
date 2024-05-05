@@ -2,18 +2,21 @@
 
 #include <fstream>
 
-
-
-
-
 CHexagon::CHexagon(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo, 'H')
 {
 	Center = P1;
 	Radius = P2;
 	HexID = ID;
+
+	Calculate_Vertices();
+
+	Height = Vertices_y[0] - Vertices_y[5];
+
+	Width = Vertices_x[0] - Vertices_x[3];
 }
 void CHexagon::Calculate_Vertices()
 {
+	// Calculating Eeach vertix in the hexagon and storing its x value in Vertices_x and y value in Vertices_y
 	int z = (1 / (sqrt(3))) * (abs(Radius.y - Center.y));
 
 	if (Radius.x < Center.x)
@@ -48,11 +51,17 @@ void CHexagon::Draw(Output* pOut) const
 	//Call Output::DrawHexagon to draw a Hexagonon the screen
 	pOut->DrawHex(Center, Radius, FigGfxInfo, Selected);
 }
+void CHexagon::PrintInfo(Output* pOut) const
+{
+	auto s_ID = std::to_string(ID);
+	auto s_Height = std::to_string(Height);
+	auto s_Width = std::to_string(Width);
+
+	pOut->PrintMessage("Hexagon Selected: ID " + s_ID + ", Height " + s_Height + ", Width " + s_Width + ".");
+}
 
 bool CHexagon::isPointinside(int x, int y)
 {
-	Calculate_Vertices();
-
 	// Splitting the hexagon into 6 triangle and using the Barycentric Coordinates method
 	// Each triangle has 3 vertices, one of them being the center
 	Point Vertix1, Vertix2, Vertix3;
@@ -60,14 +69,12 @@ bool CHexagon::isPointinside(int x, int y)
 
 	for (int i = 0; i < 6; i++)
 	{
-
-
 		Vertix1.x = Vertices_x[i];
 		Vertix1.y = Vertices_y[i];
 		if (i == 5)
 		{
 			// Array consisits of 6 vertices only. So, in the final loop the second vertix of the triangle will be the very first vertix.
-			Vertix2.x = Vertices_x[0]; 
+			Vertix2.x = Vertices_x[0];
 			Vertix2.y = Vertices_y[0];
 		}
 		else
@@ -83,8 +90,6 @@ bool CHexagon::isPointinside(int x, int y)
 		double v = factor_v / det;
 		double w = 1.0 - u - v;
 
-
-
 		if (w >= 0 && w <= 1 && v >= 0 && v <= 1 && u >= 0 && u <= 1)
 			return true;
 	}
@@ -95,7 +100,7 @@ void CHexagon::Save(ofstream& OutFile)
 {
 	OutFile << "H1" << " " << HexID << " " << Center.x << " " << Center.y << " " << Radius.x;
 	OutFile << " " << Radius.y;
-	string DrawColor, FillColor;
+
 	if (FigGfxInfo.DrawClr == BLACK)
 		DrawColor = "BLACK";
 	if (FigGfxInfo.DrawClr == YELLOW)
@@ -108,8 +113,28 @@ void CHexagon::Save(ofstream& OutFile)
 		DrawColor = "GREEN";
 	if (FigGfxInfo.DrawClr == BLUE)
 		DrawColor = "BLUE";
+	
+	if (FigGfxInfo.DrawClr == MAGENTA)
+	{
+		if (CrntDrawClr == BLACK)
+			DrawColor = "BLACK";
 
+		if (CrntDrawClr == YELLOW)
+			DrawColor = "YELLOW";
 
+		if (CrntDrawClr == RED)
+			DrawColor = "RED";
+
+		if (CrntDrawClr == ORANGE)
+			DrawColor = "ORANGE";
+
+		if (CrntDrawClr == GREEN)
+			DrawColor = "GREEN";
+
+		if (CrntDrawClr == BLUE)
+			DrawColor = "BLUE";
+	}
+	
 	if (!FigGfxInfo.isFilled)
 		FillColor = "NO_COLOR";
 	else {
@@ -136,7 +161,7 @@ void CHexagon::Save(ofstream& OutFile)
 }
 void CHexagon::Load(ifstream& Infile)
 {
-	string DrawColor, FillColor;
+
 	Infile >> HexID >> Center.x >> Center.y >> Radius.x >> Radius.y
 		>> DrawColor >> FillColor;
 
@@ -153,10 +178,9 @@ void CHexagon::Load(ifstream& Infile)
 	else if (DrawColor == "BLUE")
 		FigGfxInfo.DrawClr = BLUE;
 
-	if (FillColor == "NO_COLOR") {
+	if (FillColor == "NO_COLOR") 
 		FigGfxInfo.isFilled = false;
-		FigGfxInfo.FillClr = LIGHTGOLDENRODYELLOW;
-	}
+
 	else
 	{
 		FigGfxInfo.isFilled = true;
@@ -174,5 +198,4 @@ void CHexagon::Load(ifstream& Infile)
 		else if (FillColor == "BLUE")
 			FigGfxInfo.FillClr = BLUE;
 	}
-
 }

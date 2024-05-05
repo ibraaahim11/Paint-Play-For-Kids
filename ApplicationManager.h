@@ -37,9 +37,10 @@ public:
 	void AddFigure(CFigure* pFig);          //Adds a new figure to the FigList
 	CFigure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
 	CFigure* GetFigure(int index) const; //Search for a figure using its index
+	void SetSelectedFig(CFigure* c);	// Sets the selected figure
+	CFigure* GetSelectedFig() const;	// Gets selected fig
 
 	int	GetFigCount() const; // Return figure count
-
 
 	// -- Interface Management Functions
 	Input* GetInput() const; //Return pointer to the input

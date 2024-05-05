@@ -1,7 +1,8 @@
 #include "CTriangle.h"
 #include <fstream>
 
-
+#include <iostream>
+using namespace std;
 
 CTriangle::CTriangle(Point P1, Point P2, Point P3, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo, 'T')
 {
@@ -17,6 +18,11 @@ void CTriangle::Draw(Output* pOut) const
 	pOut->DrawTriangle(Vertix1, Vertix2, Vertix3, FigGfxInfo, Selected);
 }
 
+void CTriangle::PrintInfo(Output* pOut) const
+{
+	auto s_ID = std::to_string(ID);
+	pOut->PrintMessage("Triangle Selected: ID " + s_ID);
+}
 
 bool CTriangle::isPointinside(int x, int y)
 {
@@ -31,8 +37,6 @@ bool CTriangle::isPointinside(int x, int y)
 	double v = factor_v / det;
 	double w = 1.0 - u - v;
 
-
-
 	if (w >= 0 && w <= 1 && v >= 0 && v <= 1 && u >= 0 && u <= 1)
 		return true;
 	else
@@ -43,7 +47,7 @@ void CTriangle::Save(ofstream& OutFile)
 {
 	OutFile << "T1" << " " << TriID << " " << Vertix1.x << " " << Vertix1.y << " " << Vertix2.x << " ";
 	OutFile << Vertix2.y << " " << Vertix3.x << " " << Vertix3.y;
-	string DrawColor, FillColor;
+
 	if (FigGfxInfo.DrawClr == BLACK)
 		DrawColor = "BLACK";
 	if (FigGfxInfo.DrawClr == YELLOW)
@@ -56,7 +60,27 @@ void CTriangle::Save(ofstream& OutFile)
 		DrawColor = "GREEN";
 	if (FigGfxInfo.DrawClr == BLUE)
 		DrawColor = "BLUE";
+	
+	if (FigGfxInfo.DrawClr == MAGENTA)
+	{
+		if (CrntDrawClr == BLACK)
+			DrawColor = "BLACK";
 
+		if (CrntDrawClr == YELLOW)
+			DrawColor = "YELLOW";
+
+		if (CrntDrawClr == RED)
+			DrawColor = "RED";
+
+		if (CrntDrawClr == ORANGE)
+			DrawColor = "ORANGE";
+
+		if (CrntDrawClr == GREEN)
+			DrawColor = "GREEN";
+
+		if (CrntDrawClr == BLUE)
+			DrawColor = "BLUE";
+	}
 	if (!FigGfxInfo.isFilled)
 		FillColor = "NO_COLOR";
 	else {
@@ -82,10 +106,10 @@ void CTriangle::Save(ofstream& OutFile)
 }
 void CTriangle::Load(ifstream& Infile)
 {
-	string DrawColor, FillColor;
+
 	Infile >> TriID >> Vertix1.x >> Vertix1.y >> Vertix2.x >> Vertix2.y
 		>> Vertix3.x >> Vertix3.y >> DrawColor >> FillColor;
-	
+
 	if (DrawColor == "GREEN")
 		FigGfxInfo.DrawClr = GREEN;
 	else if (DrawColor == "BLACK")
@@ -99,10 +123,8 @@ void CTriangle::Load(ifstream& Infile)
 	else if (DrawColor == "BLUE")
 		FigGfxInfo.DrawClr = BLUE;
 
-	if (FillColor == "NO_COLOR") {
+	if (FillColor == "NO_COLOR") 
 		FigGfxInfo.isFilled = false;
-		FigGfxInfo.FillClr = LIGHTGOLDENRODYELLOW;
-	}
 	else
 	{
 		FigGfxInfo.isFilled = true;
@@ -120,5 +142,4 @@ void CTriangle::Load(ifstream& Infile)
 		else if (FillColor == "BLUE")
 			FigGfxInfo.FillClr = BLUE;
 	}
-
 }

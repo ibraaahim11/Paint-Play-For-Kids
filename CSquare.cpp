@@ -1,17 +1,13 @@
 #include "CSquare.h"
 #include <fstream>
 
-
-
 CSquare::CSquare(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo, 'S')
 {
 	Center = P1;
 	Radius = P2;
 	SquareID = ID;
 
-
-	// Initalizing Corner 1 and Corner 2
-	int halfSide;
+	// Initalizing Corner 1 and Corner 2 of square to be used in other functions.
 
 	if (abs(Center.x - Radius.x) >= abs(Center.y - Radius.y))
 	{
@@ -27,10 +23,15 @@ CSquare::CSquare(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxIn
 
 	Corner1.y = Center.y - halfSide;
 	Corner2.y = Center.y + halfSide;
-
 }
 
+void CSquare::PrintInfo(Output* pOut) const
+{
+	auto s_ID = std::to_string(ID);
+	auto s_Side = std::to_string(halfSide * 2);
 
+	pOut->PrintMessage("Square Selected: ID " + s_ID + ", Side " + s_Side + ".");
+}
 void CSquare::Draw(Output* pOut) const
 {
 	//Call Output::DrawSquare to draw a square on the screen
@@ -39,22 +40,18 @@ void CSquare::Draw(Output* pOut) const
 
 bool CSquare::isPointinside(int x, int y)
 {
-
 	// Checking if point is inside the square
 
 	if (x >= Corner1.x && x <= Corner2.x && y >= Corner1.y && y <= Corner2.y)
 		return true;
 	else
 		return false;
-
-
 }
 void CSquare::Save(ofstream& OutFile)
 {
-	
 	OutFile << "S1" << " " << SquareID << " " << Center.x << " " << Center.y << " " << Radius.x;
 	OutFile << " " << Radius.y;
-	string DrawColor, FillColor;
+
 	if (FigGfxInfo.DrawClr == BLACK)
 		DrawColor = "BLACK";
 	if (FigGfxInfo.DrawClr == YELLOW)
@@ -67,8 +64,28 @@ void CSquare::Save(ofstream& OutFile)
 		DrawColor = "GREEN";
 	if (FigGfxInfo.DrawClr == BLUE)
 		DrawColor = "BLUE";
+	
+	if (FigGfxInfo.DrawClr == MAGENTA)
+	{
+		if (CrntDrawClr == BLACK)
+			DrawColor = "BLACK";
 
+		if (CrntDrawClr == YELLOW)
+			DrawColor = "YELLOW";
 
+		if (CrntDrawClr == RED)
+			DrawColor = "RED";
+
+		if (CrntDrawClr == ORANGE)
+			DrawColor = "ORANGE";
+
+		if (CrntDrawClr == GREEN)
+			DrawColor = "GREEN";
+
+		if (CrntDrawClr == BLUE)
+			DrawColor = "BLUE";
+	}
+	
 	if (!FigGfxInfo.isFilled)
 		FillColor = "NO_COLOR";
 	else {
@@ -95,7 +112,7 @@ void CSquare::Save(ofstream& OutFile)
 }
 void CSquare::Load(ifstream& Infile)
 {
-	string DrawColor, FillColor;
+
 	Infile >> SquareID >> Center.x >> Center.y >> Radius.x >> Radius.y
 		>> DrawColor >> FillColor;
 
@@ -112,10 +129,9 @@ void CSquare::Load(ifstream& Infile)
 	else if (DrawColor == "BLUE")
 		FigGfxInfo.DrawClr = BLUE;
 
-	if (FillColor == "NO_COLOR") {
+	if (FillColor == "NO_COLOR") 
 		FigGfxInfo.isFilled = false;
-		FigGfxInfo.FillClr = LIGHTGOLDENRODYELLOW;
-	}
+
 	else
 	{
 		FigGfxInfo.isFilled = true;
@@ -133,5 +149,4 @@ void CSquare::Load(ifstream& Infile)
 		else if (FillColor == "BLUE")
 			FigGfxInfo.FillClr = BLUE;
 	}
-
 }

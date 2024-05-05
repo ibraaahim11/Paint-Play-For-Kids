@@ -65,7 +65,6 @@ void LoadAction::Execute()
 				C->Load(InFile);
 				pManager->AddFigure(C);
 			}
-
 		}
 		InFile.close(); //close file
 	}
