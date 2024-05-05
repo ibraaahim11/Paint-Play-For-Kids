@@ -9,9 +9,16 @@ class CHexagon : public CFigure
 private:
 	Point Center;
 	Point Radius;
+
+	int Vertices_x[6];
+	int Vertices_y[6];
+
+
 	int HexID;
 public:
 	CHexagon(Point, Point, GfxInfo FigureGfxInfo);
+	void Calculate_Vertices();
+	virtual bool isPointinside(int x, int y);
 	virtual void Draw(Output* pOut) const;
 	virtual void Save(ofstream& OutFile);
 	virtual void Load(ifstream& Infile);

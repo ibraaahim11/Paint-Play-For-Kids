@@ -4,6 +4,7 @@
 #include "AddTriangleAction.h"
 #include "AddHexagonAction.h"
 #include "AddCircleAction.h"
+#include "SelectAction.h"
 #include "Actions\SaveAction.h"
 #include "Actions\LoadAction.h"
 #include <fstream>
@@ -16,13 +17,13 @@ ApplicationManager::ApplicationManager()
 
 	FigCount = 0;
 
+
 	//Create an array of figure pointers and set them to NULL
 	for (int i = 0; i < MaxFigCount; i++)
 		FigList[i] = NULL;
 
-	//Create an array of selected figure pointers and set them to NULL
-	for (int i = 0; i < MaxFigCount; i++)
-		SelectedFigList[i] = NULL;
+
+	SelectedFig= NULL;
 }
 
 //==================================================================================//
@@ -64,6 +65,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new AddCircleAction(this);
 
 		break;
+
+	case SELECT:
+		pAct = new SelectAction(this);
+		break;
+
 	case SAVE:
 		pAct = new SaveAction(this);
 		
@@ -109,16 +115,32 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure* ApplicationManager::GetFigure(int x, int y) const
 {
+
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
+	for (int i = FigCount - 1; i >= 0; i--)
+	{
+		if (FigList[i]->isPointinside(x, y))
+		{
+			return FigList[i];
+		}
+
+	}
 
 	//Add your code here to search for a figure given a point x,y
 	//Remember that ApplicationManager only calls functions do NOT implement it.
 
 	return NULL;
 }
-int ApplicationManager::GetFigCount() //omar
+
+CFigure* ApplicationManager::GetFigure(int index) const
 {
+	//Return pointer to figure using its index in the figlist
+	return FigList[index];
+}
+int ApplicationManager::GetFigCount() const
+{
+	// Return figure count
 	return FigCount;
 }
 //==================================================================================//
@@ -128,13 +150,15 @@ int ApplicationManager::GetFigCount() //omar
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {
+
 	for (int i = 0; i < FigCount; i++)
+
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 
 
 	// Drawing bars again to avoid shapes from overlapping.
 	pOut->CreateDrawToolBar();
-	pOut->CreateStatusBar();
+
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input

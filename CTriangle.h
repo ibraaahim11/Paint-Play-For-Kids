@@ -13,6 +13,7 @@ private:
 	int TriID;
 public:
 	CTriangle(Point, Point, Point, GfxInfo FigureGfxInfo);
+	virtual bool isPointinside(int x, int y);
 	virtual void Draw(Output* pOut) const;
 	virtual void Save(ofstream& OutFile);
 	virtual void Load(ifstream& Infile);

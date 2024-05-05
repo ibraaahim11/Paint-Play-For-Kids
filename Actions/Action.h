@@ -1,5 +1,6 @@
 #ifndef ACTION_H
 #define ACTION_H
+#pragma once
 
 #include "..\DefS.h"
 
