@@ -9,7 +9,7 @@ CTriangle::CTriangle(Point P1, Point P2, Point P3, GfxInfo FigureGfxInfo) :CFigu
 	Vertix1 = P1;
 	Vertix2 = P2;
 	Vertix3 = P3;
-	TriID = ID;
+	ID = TotalNum;
 }
 
 void CTriangle::Draw(Output* pOut) const

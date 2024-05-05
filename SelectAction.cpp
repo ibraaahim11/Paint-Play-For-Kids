@@ -35,7 +35,7 @@ void SelectAction::ReadActionParameters()
 		for (int i = 0; i < pManager->GetFigCount(); i++)
 		{
 			// We take each figure in the figure list
-			CFigure* CurrentFig = pManager->GetFigure(i);
+			CFigure* CurrentFig = pManager->GetFigure_index(i);
 
 			// If only one figure is selected it becomes the "SelectedFig" in Application Manager
 			// If more than one figure is selected, the "SelectedFig" in Application Manager is not important
@@ -85,8 +85,8 @@ void SelectAction::Execute()
 		// User click not inside any shape. Deselect all figures. Revert all figure colors.
 		for (int i = 0; i < pManager->GetFigCount(); i++)
 		{
-			(pManager->GetFigure(i))->SetSelected(false);
-			(pManager->GetFigure(i))->ChngDrawClr(BLUE);
+			(pManager->GetFigure_index(i))->SetSelected(false);
+			(pManager->GetFigure_index(i))->ChngDrawClr(BLUE);
 		}
 	}
 

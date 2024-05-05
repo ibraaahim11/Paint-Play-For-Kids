@@ -138,6 +138,7 @@
     <ClCompile Include="AddTriangleAction.cpp" />
     <ClCompile Include="CCircle.cpp" />
     <ClCompile Include="CHexagon.cpp" />
+    <ClCompile Include="ClearAllAction.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
     <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
     <ClCompile Include="CMUgraphicsLib\colors.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="AddTriangleAction.h" />
     <ClInclude Include="CCircle.h" />
     <ClInclude Include="CHexagon.h" />
+    <ClInclude Include="ClearAllAction.h" />
     <ClInclude Include="CMUgraphicsLib\auxil.h" />
     <ClInclude Include="CMUgraphicsLib\CMUgraphics.h" />
     <ClInclude Include="CMUgraphicsLib\colors.h" />

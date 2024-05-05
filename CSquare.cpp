@@ -5,7 +5,7 @@ CSquare::CSquare(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxIn
 {
 	Center = P1;
 	Radius = P2;
-	SquareID = ID;
+	ID = TotalNum;
 
 	// Initalizing Corner 1 and Corner 2 of square to be used in other functions.
 

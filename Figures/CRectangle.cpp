@@ -5,7 +5,7 @@ CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(Figur
 {
 	Corner1 = P1;
 	Corner2 = P2;
-	RectID = ID;
+	ID = TotalNum;
 	Height = abs(P1.y - P2.y);
 	Width = abs(P1.x - P2.x);
 }

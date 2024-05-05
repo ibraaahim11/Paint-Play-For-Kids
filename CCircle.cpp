@@ -5,7 +5,7 @@ CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxIn
 {
 	Center = P1;
 	Radius = P2;
-	CirID = ID;
+	ID = TotalNum;
 
 	Radius_length = sqrt(pow((Radius.x - Center.x), 2) + pow((Radius.y - Center.y), 2));
 }
