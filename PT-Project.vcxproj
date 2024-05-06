@@ -138,6 +138,7 @@
     <ClCompile Include="AddHexagonAction.cpp" />
     <ClCompile Include="AddSquareAction.cpp" />
     <ClCompile Include="AddTriangleAction.cpp" />
+    <ClCompile Include="BorderAction.cpp" />
     <ClCompile Include="CCircle.cpp" />
     <ClCompile Include="CHexagon.cpp" />
     <ClCompile Include="ClearAllAction.cpp" />
@@ -183,6 +184,7 @@
     <ClCompile Include="Figures\CFigure.cpp" />
     <ClCompile Include="Figures\CRectangle.cpp" />
     <ClCompile Include="Actions\AddRectAction.cpp" />
+    <ClCompile Include="FillAction.cpp" />
     <ClCompile Include="GUI\Input.cpp" />
     <ClCompile Include="GUI\Output.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
@@ -198,6 +200,7 @@
     <ClInclude Include="AddHexagonAction.h" />
     <ClInclude Include="AddSquareAction.h" />
     <ClInclude Include="AddTriangleAction.h" />
+    <ClInclude Include="BorderAction.h" />
     <ClInclude Include="CCircle.h" />
     <ClInclude Include="CHexagon.h" />
     <ClInclude Include="ClearAllAction.h" />
@@ -228,6 +231,7 @@
     <ClInclude Include="Figures\CRectangle.h" />
     <ClInclude Include="Actions\Action.h" />
     <ClInclude Include="Actions\AddRectAction.h" />
+    <ClInclude Include="FillAction.h" />
     <ClInclude Include="GUI\Input.h" />
     <ClInclude Include="GUI\Output.h" />
     <ClInclude Include="GUI\UI_Info.h" />

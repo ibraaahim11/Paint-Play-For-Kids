@@ -3,11 +3,18 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 #include "..\Figures\CRectangle.h"
+#include "..\CTriangle.h"
+#include "..\CCircle.h"
+#include "..\CHexagon.h"
+#include "..\CSquare.h"
 
 CopyAction::CopyAction(ApplicationManager* pApp) : Action(pApp)
 {
 	CountOfSelectedFig = 0;
 }
+
+
+
 
 void CopyAction::ReadActionParameters()
 {
@@ -55,8 +62,62 @@ void CopyAction::Execute()
 		if(FigGfxInfo.isFilled)
 			 FigGfxInfo.FillClr = Cptr->GetGfxInfo().FillClr;
 		
-		Cptr->SetGfxInfo(FigGfxInfo);  //setting the GfxInfo of the figure to be copied before any changes
+		Type = Cptr->GetType();
 
-		pManager->SetClipboard(Cptr); //adding figure to clipboard
+		switch (Type) //See which figure i will copy
+		{
+		case 'R':
+		{
+			Point p1, p2;
+			p1 = ((CRectangle*)Cptr)->GetCorner1();
+			p2 = ((CRectangle*)Cptr)->GetCorner2();
+			CRectangle* R = new CRectangle(p1, p2, FigGfxInfo);  //making a copy of the selected figure
+			CFigure* CFptr = R;
+			pManager->SetClipboard(CFptr); //adding figure to clipboard
+			break;
+		}
+		case 'T':
+		{
+			Point p1, p2, p3;
+			p1 = ((CTriangle*)Cptr)->GetVertix1();
+			p2 = ((CTriangle*)Cptr)->GetVertix2();
+			p3 = ((CTriangle*)Cptr)->GetVertix3();
+			CTriangle* T = new CTriangle(p1, p2, p3, FigGfxInfo);
+			CFigure* CFptr = T;
+			pManager->SetClipboard(CFptr); //adding figure to clipboard
+			break;
+		}
+		case 'C':
+		{
+			Point p1, p2;
+			p1 = ((CCircle*)Cptr)->GetCenter();
+			p2 = ((CCircle*)Cptr)->GetRadius();
+			CCircle* C = new CCircle(p1, p2, FigGfxInfo);
+			CFigure* CFptr = C;
+			pManager->SetClipboard(CFptr); //adding figure to clipboard
+			break;
+		}
+		case 'H':
+		{
+			Point p1, p2;
+			p1 = ((CHexagon*)Cptr)->GetCenter();
+			p2 = ((CHexagon*)Cptr)->GetRadius();
+			CHexagon* H = new CHexagon(p1, p2, FigGfxInfo);
+			CFigure* CFptr = H;
+			pManager->SetClipboard(CFptr); //adding figure to clipboard
+			break;
+		}
+		case 'S':
+		{
+			Point p1, p2;
+			p1 = ((CSquare*)Cptr)->GetCenter();
+			p2 = ((CSquare*)Cptr)->GetRadius();
+			CSquare* S = new CSquare(p1, p2, FigGfxInfo);
+			CFigure* CFptr = S;
+			pManager->SetClipboard(CFptr); //adding figure to clipboard
+			break;
+		}
+		}
+
 	}
 }

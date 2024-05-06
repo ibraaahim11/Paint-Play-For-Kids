@@ -185,6 +185,13 @@
     <ClCompile Include="DeleteAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\CopyAction.cpp" />
+    <ClCompile Include="BorderAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="FillAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -307,6 +314,13 @@
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="DeleteAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\CopyAction.h" />
+    <ClInclude Include="BorderAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="FillAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
   </ItemGroup>

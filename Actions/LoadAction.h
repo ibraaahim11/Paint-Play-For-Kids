@@ -9,9 +9,9 @@ protected:
 	GfxInfo FigGfxInfo; //GfxInfo of created figure
 	Action* pAct; // to clear all figures after load
 public:
-	LoadAction(ApplicationManager* pApp); 
+	LoadAction(ApplicationManager* pApp);
 	//Reads File name we will open
 	virtual void ReadActionParameters();
-	//calls save function for each figure and creates it 
+	//calls save function for each figure and creates it
 	virtual void Execute();
 };

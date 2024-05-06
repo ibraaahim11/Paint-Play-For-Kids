@@ -21,6 +21,8 @@ public:
 	virtual void Load(ifstream& Infile);
 	virtual Point GetCenter();
 	virtual void PrintInfo(Output* pOut) const;
+	Point GetCorner1();
+	Point GetCorner2();
 	int GetHeight(); // usefull for paste
 	int GetWidth(); // usefull for paste
 };

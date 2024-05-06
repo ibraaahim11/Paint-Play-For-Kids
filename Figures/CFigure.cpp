@@ -8,6 +8,8 @@ CFigure::CFigure(GfxInfo FigureGfxInfo, char T) : Type(T)
 	CrntDrawClr = FigGfxInfo.DrawClr;
 	Selected = false;
 	TotalNum++;
+	UpdateDrwClrString();
+	UpdateFillClrString();
 }
 void CFigure::SetTotalNum(int num)
 {
@@ -31,10 +33,57 @@ bool CFigure::IsSelected() const
 	return Selected;
 }
 
+void CFigure::UpdateFillClrString()
+{
+	if (!FigGfxInfo.isFilled) //check if figure is filled
+		FillColor = "NO_COLOR";
+	else {
+		if (FigGfxInfo.FillClr == BLACK)
+			FillColor = "BLACK";
+
+		else if (FigGfxInfo.FillClr == YELLOW)
+			FillColor = "YELLOW";
+
+		else if (FigGfxInfo.FillClr == RED)
+			FillColor = "RED";
+
+		else if (FigGfxInfo.FillClr == ORANGE)
+			FillColor = "ORANGE";
+
+		else if (FigGfxInfo.FillClr == GREEN)
+			FillColor = "GREEN";
+
+		else if (FigGfxInfo.FillClr == BLUE)
+			FillColor = "BLUE";
+	}
+}
+
+void CFigure::UpdateDrwClrString()
+{
+	if (CrntDrawClr == BLACK)
+		DrawColor = "BLACK";
+
+	else if (CrntDrawClr == YELLOW)
+		DrawColor = "YELLOW";
+
+	else if (CrntDrawClr == RED)
+		DrawColor = "RED";
+
+	else if (CrntDrawClr == ORANGE)
+		DrawColor = "ORANGE";
+
+	else if (CrntDrawClr == GREEN)
+		DrawColor = "GREEN";
+
+	else if (CrntDrawClr == BLUE)
+		DrawColor = "BLUE";
+}
+
 void CFigure::ChngDrawClr(color Dclr)
 {
-	CrntDrawClr = FigGfxInfo.DrawClr; //get color before changed after selection
+
 	FigGfxInfo.DrawClr = Dclr;
+	UpdateDrwClrString();
 }
 
 void CFigure::ChngFillClr(color Fclr)
@@ -53,4 +102,9 @@ color CFigure::GetCrntDrawClr() const
 void CFigure::SetGfxInfo(GfxInfo FigGfxInfo)
 {
 	this->FigGfxInfo = FigGfxInfo;
+}
+
+void CFigure::SetCrntDrawClr(color crnt)
+{
+	CrntDrawClr = crnt;
 }

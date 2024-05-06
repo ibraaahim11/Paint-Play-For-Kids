@@ -12,9 +12,6 @@ private:
 	Point Vertix3;
 	Point Center;
 	int TriID;
-	int DistXV1, DistYV1;
-	int DistXV2, DistYV2;
-	int DistXV3, DistYV3;
 public:
 	CTriangle(Point, Point, Point, GfxInfo FigureGfxInfo);
 	virtual bool isPointinside(int x, int y);
