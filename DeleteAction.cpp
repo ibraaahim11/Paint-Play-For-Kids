@@ -1,6 +1,5 @@
 #include "DeleteAction.h"
 
-
 #include "ApplicationManager.h"
 
 #include "GUI\input.h"
@@ -29,9 +28,7 @@ void DeleteAction::Execute()
 			delete CurrentFig;
 			CurrentFig = NULL;
 			SelectedCount++;
-
 		}
-
 	}
 
 	// Fix order of the figure list.
@@ -56,7 +53,6 @@ void DeleteAction::Execute()
 			}
 		}
 		else {
-			
 		}
 	}
 	Output* pOut = pManager->GetOutput();
@@ -74,5 +70,4 @@ void DeleteAction::Execute()
 	// Print a message if a figure has been deleted
 	if (SelectedCount != 0)
 		pOut->PrintMessage("Selected Figure(s) have been deleted.");
-
 }

@@ -8,9 +8,9 @@ protected:
 	Point p1, p2, p3; // points of loaded figure
 	GfxInfo FigGfxInfo; //GfxInfo of created figure
 public:
-	LoadAction(ApplicationManager* pApp); 
+	LoadAction(ApplicationManager* pApp);
 	//Reads File name we will open
 	virtual void ReadActionParameters();
-	//calls save function for each figure and creates it 
+	//calls save function for each figure and creates it
 	virtual void Execute();
 };

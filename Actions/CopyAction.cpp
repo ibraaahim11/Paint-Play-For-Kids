@@ -48,5 +48,5 @@
 //	ReadActionParameters();
 //	if (!(Cptr == NULL))
 //		pManager->SetClipboard(Cptr);
-//		
+//
 //}

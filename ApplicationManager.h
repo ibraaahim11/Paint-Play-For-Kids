@@ -16,6 +16,7 @@ private:
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
 
 	CFigure* SelectedFig; //Pointer to the selected figure
+	int SelectedCount;
 
 	//Pointers to Input and Output classes
 	Input* pIn;
@@ -41,6 +42,7 @@ public:
 	CFigure*& GetSelectedFig();	// Gets selected fig
 	CFigure*& GetClipboard();	// Gets clipboard
 
+	int CalculateSelectedCount();
 	int	GetFigCount() const; // Return figure count
 	void SetFigCount(int); // Sets figure count
 

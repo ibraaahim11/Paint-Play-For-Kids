@@ -39,7 +39,7 @@ void LoadAction::Execute()
 		InFile >> CrntDrawClr >> CrntFillClr >> Count; //reading first two lines from file
 		for (int i = 0; i < Count; i++) //creating pointers to figures according to the figure type
 		{
-			InFile >> FigType; 
+			InFile >> FigType;
 			if (FigType == "R")
 			{
 				CRectangle* R = new CRectangle(p1, p2, FigGfxInfo);
@@ -75,5 +75,4 @@ void LoadAction::Execute()
 	}
 	else
 		pOut->PrintMessage("ERROR! File not found");
-
 }

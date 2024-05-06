@@ -7,6 +7,8 @@
 #include "SelectAction.h"
 #include "ClearAllAction.h"
 #include "DeleteAction.h"
+#include "BorderAction.h"
+#include "FillAction.h"
 #include "Actions\SaveAction.h"
 #include "Actions\LoadAction.h"
 #include "Actions\CopyAction.h"
@@ -19,6 +21,7 @@ ApplicationManager::ApplicationManager()
 	pIn = pOut->CreateInput();
 
 	FigCount = 0;
+	SelectedCount = 0;
 
 	//Create an array of figure pointers and set them to NULL
 	for (int i = 0; i < MaxFigCount; i++)
@@ -70,6 +73,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 	case SELECT:
 		pAct = new SelectAction(this);
+		break;
+	case BORDER:
+		pAct = new BorderAction(this);
+		break;
+	case FILL:
+		pAct = new FillAction(this);
 		break;
 
 	case SAVE:
@@ -152,19 +161,33 @@ int ApplicationManager::GetFigCount() const
 }
 void ApplicationManager::SetFigCount(int num)
 {
+	// Sets figure count
 	FigCount = num;
 }
 CFigure*& ApplicationManager::GetSelectedFig()
 {
+	// Returns currently selected figure by reference
 	return SelectedFig;
 }
 void ApplicationManager::SetSelectedFig(CFigure* c)
 {
+	// Sets the currently selected figure
 	SelectedFig = c;
 }
 CFigure*& ApplicationManager::GetClipboard()
 {
 	return Clipboard;
+}
+int ApplicationManager::CalculateSelectedCount()
+{
+	// Calculates and returns the number of selected figures
+	SelectedCount = 0;
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+			SelectedCount++;
+	}
+	return SelectedCount;
 }
 //==================================================================================//
 //							Interface Management Functions							//
@@ -173,6 +196,7 @@ CFigure*& ApplicationManager::GetClipboard()
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {
+	pOut->ClearDrawArea();
 	for (int i = 0; i < FigCount; i++)
 
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)

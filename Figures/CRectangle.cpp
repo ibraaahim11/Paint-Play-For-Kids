@@ -22,7 +22,7 @@ void CRectangle::PrintInfo(Output* pOut) const
 	auto s_Height = std::to_string(Height);
 	auto s_Width = std::to_string(Width);
 
-	pOut->PrintMessage("Rectangle Selected: ID " + s_ID + ", Height " + s_Height + ", Width " + s_Width + ".");
+	pOut->PrintMessage("Rectangle Selected: ID " + s_ID + ", Fill Color " + FillColor + ", Height " + s_Height + ", Width " + s_Width + ".");
 }
 
 bool CRectangle::isPointinside(int x, int y)
@@ -59,72 +59,18 @@ bool CRectangle::isPointinside(int x, int y)
 
 void CRectangle::Save(ofstream& OutFile)
 {
-	OutFile << Type << " " << RectID << " " << Corner1.x << " " << Corner1.y << " "
+	OutFile << Type << " " << ID << " " << Corner1.x << " " << Corner1.y << " "
 		<< Corner2.x << " " << Corner2.y;  //writing the figure parameters
-
-	if (FigGfxInfo.DrawClr == BLACK) //changing from color class to string to be able to store it in txt file
-		DrawColor = "BLACK";
-	if (FigGfxInfo.DrawClr == YELLOW)
-		DrawColor = "YELLOW";
-	if (FigGfxInfo.DrawClr == RED)
-		DrawColor = "RED";
-	if (FigGfxInfo.DrawClr == ORANGE)
-		DrawColor = "ORANGE";
-	if (FigGfxInfo.DrawClr == GREEN)
-		DrawColor = "GREEN";
-	if (FigGfxInfo.DrawClr == BLUE)
-		DrawColor = "BLUE";
-	if (FigGfxInfo.DrawClr == MAGENTA) //if figure is highlighted then we should save the original color not magenta
-	{
-		if (CrntDrawClr == BLACK)
-			DrawColor = "BLACK";
-		
-		if (CrntDrawClr == YELLOW)
-			DrawColor = "YELLOW";
-		
-		if (CrntDrawClr == RED)
-			DrawColor = "RED";
-		
-		if (CrntDrawClr == ORANGE)
-			DrawColor = "ORANGE";
-		
-		if (CrntDrawClr == GREEN)
-			DrawColor = "GREEN";
-		
-		if (CrntDrawClr == BLUE)
-			DrawColor = "BLUE";
-	}
-
-	if (!FigGfxInfo.isFilled)//check if figure is filled
-		FillColor = "NO_COLOR";
-	else {
-		if (FigGfxInfo.FillClr == BLACK)
-			FillColor = "BLACK";
-
-		else if (FigGfxInfo.FillClr == YELLOW)
-			FillColor = "YELLOW";
-
-		else if (FigGfxInfo.FillClr == RED)
-			FillColor = "RED";
-
-		else if (FigGfxInfo.FillClr == ORANGE)
-			FillColor = "ORANGE";
-
-		else if (FigGfxInfo.FillClr == GREEN)
-			FillColor = "GREEN";
-
-		else if (FigGfxInfo.FillClr == BLUE)
-			FillColor = "BLUE";
-	}
+	UpdateDrwClrString();
+	UpdateFillClrString();
 
 	OutFile << " " << DrawColor << " " << FillColor << endl;
 }
 void CRectangle::Load(ifstream& Infile)
 {
-
-	if (IsSelected())  
+	if (IsSelected())
 		SetSelected(false); //deselect so it can be selected when loaded
-	Infile >> RectID >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y
+	Infile >> ID >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y
 		>> DrawColor >> FillColor; //reading figure parameters from file
 
 	if (DrawColor == "GREEN")  //converting color strings to color to draw figure with specific color
