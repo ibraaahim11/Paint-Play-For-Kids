@@ -10,6 +10,8 @@
 #include "Actions\SaveAction.h"
 #include "Actions\LoadAction.h"
 #include "Actions\CopyAction.h"
+#include "Actions\PasteAction.h"
+
 #include <fstream>
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -80,11 +82,18 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new LoadAction(this);
 
 		break;
+	case COPY:
+		pAct = new CopyAction(this);
+
+		break;
 	case CLEAR:
 		pAct = new ClearAllAction(this);
 		break;
 	case I_DELETE:
 		pAct = new DeleteAction(this);
+		break;
+	case PASTE:
+		pAct = new PasteAction(this);
 		break;
 
 	case EXIT:
@@ -165,6 +174,10 @@ void ApplicationManager::SetSelectedFig(CFigure* c)
 CFigure*& ApplicationManager::GetClipboard()
 {
 	return Clipboard;
+}
+void ApplicationManager::SetClipboard(CFigure* CF)
+{
+	Clipboard = CF;
 }
 //==================================================================================//
 //							Interface Management Functions							//

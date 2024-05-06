@@ -15,16 +15,16 @@ void CopyAction::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	CFigure* SelectedFig;
 
-	for (int i = 0; i < pManager->GetFigCount(); i++)
+	for (int i = 0; i < pManager->GetFigCount(); i++)   //get amount of selected figure count and the selected fig
 	{
-		if (pManager->GetFigure(i)->IsSelected())
+		if (pManager->GetFigure_index(i)->IsSelected())
 		{
 			CountOfSelectedFig++;
-			SelectedFig = pManager->GetFigure(i);
+			SelectedFig = pManager->GetFigure_index(i);
 		}
 	}
 
-	switch (CountOfSelectedFig)
+	switch (CountOfSelectedFig) //anything but 1 selected figure will display error
 	{
 
 	case 1:
@@ -46,7 +46,17 @@ void CopyAction::ReadActionParameters()
 void CopyAction::Execute()
 {
 	ReadActionParameters();
-	if (!(Cptr == NULL))
-		pManager->SetClipboard(Cptr);
+	if (!(Cptr == NULL)) {
 		
+		FigGfxInfo.DrawClr = Cptr->GetCrntDrawClr();      //getting GfxInfo Before making changes to them
+		FigGfxInfo.isFilled = Cptr->GetGfxInfo().isFilled;
+		FigGfxInfo.BorderWdth = Cptr->GetGfxInfo().BorderWdth;
+		
+		if(FigGfxInfo.isFilled)
+			 FigGfxInfo.FillClr = Cptr->GetGfxInfo().FillClr;
+		
+		Cptr->SetGfxInfo(FigGfxInfo);  //setting the GfxInfo of the figure to be copied before any changes
+		
+		pManager->SetClipboard(Cptr); //adding figure to clipboard
+	}
 }

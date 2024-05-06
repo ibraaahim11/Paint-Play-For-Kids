@@ -24,6 +24,8 @@ public:
 	virtual void Save(ofstream& OutFile);
 	virtual void Load(ifstream& Infile);
 	virtual void PrintInfo(Output* pOut) const;
+	virtual Point GetCenter();
+	Point GetCorner1() const;
 };
 
 #endif

@@ -38,3 +38,15 @@ void CFigure::ChngFillClr(color Fclr)
 	FigGfxInfo.isFilled = true;
 	FigGfxInfo.FillClr = Fclr;
 }
+GfxInfo CFigure::GetGfxInfo() const 
+{
+	return FigGfxInfo;
+}
+color CFigure::GetCrntDrawClr() const
+{
+	return CrntDrawClr;
+}
+void CFigure::SetGfxInfo(GfxInfo FigGfxInfo)
+{
+	this->FigGfxInfo = FigGfxInfo;
+}

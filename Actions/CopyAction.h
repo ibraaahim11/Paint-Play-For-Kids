@@ -3,14 +3,15 @@
 
 class CopyAction : public Action
 {
-	int CountOfSelectedFig;
-	CFigure* Cptr;
+	int CountOfSelectedFig; // if more than one displays error
+	CFigure* Cptr;        //to get clipboard figure
+	GfxInfo FigGfxInfo;  //GfxInfo of Fig before making changes to it
 
 public:
 	CopyAction(ApplicationManager* pApp);
-	
+	// Reads Copy Parameters
 	virtual void ReadActionParameters();
-	 
+	//Add Copy to the ApplicationManager
 	virtual void Execute();
 
 };

@@ -98,7 +98,7 @@ bool CHexagon::isPointinside(int x, int y)
 }
 void CHexagon::Save(ofstream& OutFile)
 {
-	OutFile << Type << " " << HexID << " " << Center.x << " " << Center.y << " " << Radius.x;
+	OutFile << "H1" << " " << HexID << " " << Center.x << " " << Center.y << " " << Radius.x;
 	OutFile << " " << Radius.y;//writing the figure parameters
 
 	if (FigGfxInfo.DrawClr == BLACK)//changing from color class to string to be able to store it in txt file
@@ -199,4 +199,12 @@ void CHexagon::Load(ifstream& Infile)
 		else if (FillColor == "BLUE")
 			FigGfxInfo.FillClr = BLUE;
 	}
+}
+Point CHexagon::GetCenter()
+{
+	return Center;
+}
+int CHexagon::GetXVertix1()
+{
+	return Vertices_x[0];
 }

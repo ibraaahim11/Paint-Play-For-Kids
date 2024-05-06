@@ -27,13 +27,13 @@ public:
 	void SetSelected(bool s);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
 	char GetType() const;		// REsturns type of figure in char form
-
+	GfxInfo GetGfxInfo() const;
 	virtual void Draw(Output* pOut) const = 0;		//Draw the figure
-
+	color GetCrntDrawClr() const; //Draw Color before any changes made to it
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
 	static void SetTotalNum(int num);
-
+	void SetGfxInfo(GfxInfo);
 	virtual void PrintInfo(Output* pOut) const = 0; // Virtual function to print information of figure.
 
 	///The following functions should be supported by the figure class
@@ -43,6 +43,8 @@ public:
 	virtual bool isPointinside(int x, int y) = 0;
 	virtual void Save(ofstream& OutFile) = 0;	//Save the figure parameters to the file
 	virtual void Load(ifstream& Infile) = 0;	//Load the figure parameters to the file
+	virtual Point GetCenter() = 0; // return center for each figure
+
 };
 
 #endif

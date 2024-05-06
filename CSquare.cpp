@@ -49,7 +49,7 @@ bool CSquare::isPointinside(int x, int y)
 }
 void CSquare::Save(ofstream& OutFile)
 {
-	OutFile << Type << " " << SquareID << " " << Center.x << " " << Center.y << " "
+	OutFile << "S1" << " " << SquareID << " " << Center.x << " " << Center.y << " "
 		<< Radius.x << " " << Radius.y;  //writing the figure parameters
 
 	if (FigGfxInfo.DrawClr == BLACK) //changing from color class to string to be able to store it in txt file
@@ -151,4 +151,12 @@ void CSquare::Load(ifstream& Infile)
 			FigGfxInfo.FillClr = BLUE;
 	}
 	;
+}
+Point CSquare::GetCenter()
+{
+	return Center;
+}
+Point CSquare::GetCorner1() const
+{
+	return Corner1;
 }

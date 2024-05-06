@@ -7,6 +7,7 @@ protected:
 	string FileName; //name of file to read from
 	Point p1, p2, p3; // points of loaded figure
 	GfxInfo FigGfxInfo; //GfxInfo of created figure
+	Action* pAct; // to clear all figures after load
 public:
 	LoadAction(ApplicationManager* pApp); 
 	//Reads File name we will open

@@ -36,7 +36,7 @@ bool CCircle::isPointinside(int x, int y)
 }
 void CCircle::Save(ofstream& OutFile)
 {
-	OutFile << Type << " " << CirID << " " << Center.x << " " << Center.y << " " << Radius.x;
+	OutFile << "C1" << " " << CirID << " " << Center.x << " " << Center.y << " " << Radius.x;
 	OutFile << " " << Radius.y; //writing the figure parameters
 
 	if (FigGfxInfo.DrawClr == BLACK)//changing from color class to string to be able to store it in txt file
@@ -137,4 +137,12 @@ void CCircle::Load(ifstream& Infile)
 		else if (FillColor == "BLUE")
 			FigGfxInfo.FillClr = BLUE;
 	}
+}
+Point CCircle::GetCenter()
+{
+	return Center;
+}
+Point CCircle::GetRadius()
+{
+	return Radius;
 }

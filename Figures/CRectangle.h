@@ -8,6 +8,7 @@ class CRectangle : public CFigure
 private:
 	Point Corner1;
 	Point Corner2;
+	Point Center;
 	int RectID;
 	int Height;
 	int Width;
@@ -18,8 +19,10 @@ public:
 	virtual void Draw(Output* pOut) const;
 	virtual void Save(ofstream& OutFile); //omar
 	virtual void Load(ifstream& Infile);
-
+	virtual Point GetCenter();
 	virtual void PrintInfo(Output* pOut) const;
+	int GetHeight(); // usefull for paste
+	int GetWidth(); // usefull for paste
 };
 
 #endif

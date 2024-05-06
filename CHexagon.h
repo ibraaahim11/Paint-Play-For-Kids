@@ -25,6 +25,8 @@ public:
 	virtual void Save(ofstream& OutFile);
 	virtual void PrintInfo(Output* pOut) const;
 	virtual void Load(ifstream& Infile);
+	virtual Point GetCenter();
+	int GetXVertix1();// get x coordinates of the right vertix
 };
 
 #endif

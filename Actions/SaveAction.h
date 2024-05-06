@@ -3,7 +3,7 @@
 class SaveAction : public Action
 {
 protected:
-	string FileName;
+	string FileName; //opened file name
 
 public:
 

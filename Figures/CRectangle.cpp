@@ -59,7 +59,7 @@ bool CRectangle::isPointinside(int x, int y)
 
 void CRectangle::Save(ofstream& OutFile)
 {
-	OutFile << Type << " " << RectID << " " << Corner1.x << " " << Corner1.y << " "
+	OutFile << "R1" << " " << RectID << " " << Corner1.x << " " << Corner1.y << " "
 		<< Corner2.x << " " << Corner2.y;  //writing the figure parameters
 
 	if (FigGfxInfo.DrawClr == BLACK) //changing from color class to string to be able to store it in txt file
@@ -161,4 +161,25 @@ void CRectangle::Load(ifstream& Infile)
 			FigGfxInfo.FillClr = BLUE;
 	}
 	;
+}
+Point CRectangle::GetCenter()
+{
+	if (Corner1.x < Corner2.x)
+		Center.x = Width / 2 + Corner1.x;
+	else
+		Center.x = Width / 2 + Corner2.x;
+	
+	if (Corner1.y < Corner2.y)
+		Center.y = Height / 2 + Corner1.y;
+	else
+		Center.x = Height / 2 + Corner2.y;
+	return Center;
+}
+int CRectangle::GetHeight()
+{
+	return Height;
+}
+int CRectangle::GetWidth()
+{
+	return Width;
 }
