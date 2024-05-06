@@ -2,7 +2,7 @@
 #include "..\ApplicationManager.h"
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
-
+#include "..\Figures\CRectangle.h"
 
 CopyAction::CopyAction(ApplicationManager* pApp) : Action(pApp)
 {
@@ -56,7 +56,7 @@ void CopyAction::Execute()
 			 FigGfxInfo.FillClr = Cptr->GetGfxInfo().FillClr;
 		
 		Cptr->SetGfxInfo(FigGfxInfo);  //setting the GfxInfo of the figure to be copied before any changes
-		
+
 		pManager->SetClipboard(Cptr); //adding figure to clipboard
 	}
 }

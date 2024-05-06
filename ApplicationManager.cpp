@@ -175,7 +175,7 @@ CFigure*& ApplicationManager::GetClipboard()
 {
 	return Clipboard;
 }
-void ApplicationManager::SetClipboard(CFigure* CF)
+void ApplicationManager::SetClipboard(CFigure*& CF)
 {
 	Clipboard = CF;
 }

@@ -10,7 +10,7 @@ class CCircle : public CFigure
 private:
 	Point Center;
 	Point Radius;
-	int CirID; //omar
+	int CirID; 
 
 	double Radius_length;
 
