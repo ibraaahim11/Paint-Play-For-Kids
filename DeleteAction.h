@@ -8,8 +8,7 @@
 class DeleteAction : public Action
 {
 private:
-
-	int SelectedCount;
+	int SelectedCount; // Number of figures selected
 	
 public:
 	DeleteAction(ApplicationManager* pApp);

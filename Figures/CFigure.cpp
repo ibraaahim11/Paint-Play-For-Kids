@@ -13,6 +13,10 @@ void CFigure::SetTotalNum(int num)
 {
 	TotalNum = num;
 }
+void CFigure::SetID(int id)
+{
+	ID = id;
+}
 char CFigure::GetType() const
 {
 	return Type;

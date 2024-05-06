@@ -27,6 +27,8 @@ public:
 	void SetSelected(bool s);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
 	char GetType() const;		// REsturns type of figure in char form
+	void SetID(int id);
+
 	GfxInfo GetGfxInfo() const;
 	virtual void Draw(Output* pOut) const = 0;		//Draw the figure
 	color GetCrntDrawClr() const; //Draw Color before any changes made to it
