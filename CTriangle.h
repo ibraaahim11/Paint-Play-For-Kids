@@ -12,6 +12,7 @@ private:
 	Point Vertix3;
 	int TriID;
 public:
+	CTriangle();
 	CTriangle(Point, Point, Point, GfxInfo FigureGfxInfo);
 	virtual bool isPointinside(int x, int y);
 	virtual void Draw(Output* pOut) const;

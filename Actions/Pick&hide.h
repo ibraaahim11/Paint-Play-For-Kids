@@ -9,6 +9,6 @@ protected:
 
 public:
 	Pickandhide(ApplicationManager* pApp);
-	void Generate();
+	void Generate(PlayMenuItem);
 
 };

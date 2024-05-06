@@ -8,6 +8,7 @@
 #include "Actions\SaveAction.h"
 #include "Actions\LoadAction.h"
 #include "Actions\Switchtoplay.h"
+#include "Actions\Switchtodraw.h"
 #include <fstream>
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -87,7 +88,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 	case TO_PLAY :
 		pAct = new Switchtoplay(this);
-
+		break;
+	case TO_DRAW:
+		pAct = new Switchtodraw(this);
+		break;
 	}
 
 	//Execute the created action
@@ -164,7 +168,7 @@ void ApplicationManager::UpdateInterface() const
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 
 	// Drawing bars again to avoid shapes from overlapping.
-	pOut->CreateDrawToolBar();
+	//pOut->CreateDrawToolBar();
 
 }
 ////////////////////////////////////////////////////////////////////////////////////
