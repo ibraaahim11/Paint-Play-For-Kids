@@ -5,7 +5,7 @@ CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxIn
 {
 	Center = P1;
 	Radius = P2;
-	CirID = ID;
+	ID = TotalNum;
 
 	Radius_length = sqrt(pow((Radius.x - Center.x), 2) + pow((Radius.y - Center.y), 2));
 }
@@ -36,10 +36,10 @@ bool CCircle::isPointinside(int x, int y)
 }
 void CCircle::Save(ofstream& OutFile)
 {
-	OutFile << "C1" << " " << CirID << " " << Center.x << " " << Center.y << " " << Radius.x;
-	OutFile << " " << Radius.y;
+	OutFile << Type << " " << CirID << " " << Center.x << " " << Center.y << " " << Radius.x;
+	OutFile << " " << Radius.y; //writing the figure parameters
 
-	if (FigGfxInfo.DrawClr == BLACK)
+	if (FigGfxInfo.DrawClr == BLACK)//changing from color class to string to be able to store it in txt file
 		DrawColor = "BLACK";
 	if (FigGfxInfo.DrawClr == YELLOW)
 		DrawColor = "YELLOW";
@@ -52,7 +52,7 @@ void CCircle::Save(ofstream& OutFile)
 	if (FigGfxInfo.DrawClr == BLUE)
 		DrawColor = "BLUE";
 	
-	if (FigGfxInfo.DrawClr == MAGENTA)
+	if (FigGfxInfo.DrawClr == MAGENTA)//if figure is highlighted then we should save the original color not magenta
 	{
 		if (CrntDrawClr == BLACK)
 			DrawColor = "BLACK";
@@ -73,7 +73,7 @@ void CCircle::Save(ofstream& OutFile)
 			DrawColor = "BLUE";
 	}
 	
-	if (!FigGfxInfo.isFilled)
+	if (!FigGfxInfo.isFilled)//check if figure is filled
 		FillColor = "NO_COLOR";
 	else {
 		if (FigGfxInfo.FillClr == BLACK)
@@ -99,9 +99,10 @@ void CCircle::Save(ofstream& OutFile)
 }
 void CCircle::Load(ifstream& Infile)
 {
-
+	if (IsSelected())
+		SetSelected(false); //deselect so it can be selected when loaded
 	Infile >> CirID >> Center.x >> Center.y >> Radius.x >> Radius.y
-		>> DrawColor >> FillColor;
+		>> DrawColor >> FillColor;//reading figure parameters from file
 
 	if (DrawColor == "GREEN")
 		FigGfxInfo.DrawClr = GREEN;
@@ -116,7 +117,7 @@ void CCircle::Load(ifstream& Infile)
 	else if (DrawColor == "BLUE")
 		FigGfxInfo.DrawClr = BLUE;
 
-	if (FillColor == "NO_COLOR") 
+	if (FillColor == "NO_COLOR") //check if figure is filled
 		FigGfxInfo.isFilled = false;
 
 	else

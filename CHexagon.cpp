@@ -6,7 +6,7 @@ CHexagon::CHexagon(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfx
 {
 	Center = P1;
 	Radius = P2;
-	HexID = ID;
+	ID = TotalNum;
 
 	Calculate_Vertices();
 
@@ -98,10 +98,10 @@ bool CHexagon::isPointinside(int x, int y)
 }
 void CHexagon::Save(ofstream& OutFile)
 {
-	OutFile << "H1" << " " << HexID << " " << Center.x << " " << Center.y << " " << Radius.x;
-	OutFile << " " << Radius.y;
+	OutFile << Type << " " << HexID << " " << Center.x << " " << Center.y << " " << Radius.x;
+	OutFile << " " << Radius.y;//writing the figure parameters
 
-	if (FigGfxInfo.DrawClr == BLACK)
+	if (FigGfxInfo.DrawClr == BLACK)//changing from color class to string to be able to store it in txt file
 		DrawColor = "BLACK";
 	if (FigGfxInfo.DrawClr == YELLOW)
 		DrawColor = "YELLOW";
@@ -114,7 +114,7 @@ void CHexagon::Save(ofstream& OutFile)
 	if (FigGfxInfo.DrawClr == BLUE)
 		DrawColor = "BLUE";
 	
-	if (FigGfxInfo.DrawClr == MAGENTA)
+	if (FigGfxInfo.DrawClr == MAGENTA)//if figure is highlighted then we should save the original color not magenta
 	{
 		if (CrntDrawClr == BLACK)
 			DrawColor = "BLACK";
@@ -134,7 +134,7 @@ void CHexagon::Save(ofstream& OutFile)
 		if (CrntDrawClr == BLUE)
 			DrawColor = "BLUE";
 	}
-	
+	//check if figure is filled
 	if (!FigGfxInfo.isFilled)
 		FillColor = "NO_COLOR";
 	else {
@@ -161,9 +161,10 @@ void CHexagon::Save(ofstream& OutFile)
 }
 void CHexagon::Load(ifstream& Infile)
 {
-
+	if (IsSelected())
+		SetSelected(false); //deselect so it can be selected when loaded
 	Infile >> HexID >> Center.x >> Center.y >> Radius.x >> Radius.y
-		>> DrawColor >> FillColor;
+		>> DrawColor >> FillColor;//reading figure parameters from file
 
 	if (DrawColor == "GREEN")
 		FigGfxInfo.DrawClr = GREEN;
@@ -178,7 +179,7 @@ void CHexagon::Load(ifstream& Infile)
 	else if (DrawColor == "BLUE")
 		FigGfxInfo.DrawClr = BLUE;
 
-	if (FillColor == "NO_COLOR") 
+	if (FillColor == "NO_COLOR") //check if figure is filled
 		FigGfxInfo.isFilled = false;
 
 	else

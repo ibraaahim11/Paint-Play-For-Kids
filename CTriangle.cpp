@@ -9,7 +9,7 @@ CTriangle::CTriangle(Point P1, Point P2, Point P3, GfxInfo FigureGfxInfo) :CFigu
 	Vertix1 = P1;
 	Vertix2 = P2;
 	Vertix3 = P3;
-	TriID = ID;
+	ID = TotalNum;
 }
 
 void CTriangle::Draw(Output* pOut) const
@@ -45,10 +45,10 @@ bool CTriangle::isPointinside(int x, int y)
 
 void CTriangle::Save(ofstream& OutFile)
 {
-	OutFile << "T1" << " " << TriID << " " << Vertix1.x << " " << Vertix1.y << " " << Vertix2.x << " ";
-	OutFile << Vertix2.y << " " << Vertix3.x << " " << Vertix3.y;
+	OutFile << Type << " " << TriID << " " << Vertix1.x << " " << Vertix1.y << " " << Vertix2.x << " "
+		<< Vertix2.y << " " << Vertix3.x << " " << Vertix3.y; //writing the figure parameters
 
-	if (FigGfxInfo.DrawClr == BLACK)
+	if (FigGfxInfo.DrawClr == BLACK)//changing from color class to string to be able to store it in txt file
 		DrawColor = "BLACK";
 	if (FigGfxInfo.DrawClr == YELLOW)
 		DrawColor = "YELLOW";
@@ -61,7 +61,7 @@ void CTriangle::Save(ofstream& OutFile)
 	if (FigGfxInfo.DrawClr == BLUE)
 		DrawColor = "BLUE";
 	
-	if (FigGfxInfo.DrawClr == MAGENTA)
+	if (FigGfxInfo.DrawClr == MAGENTA)//if figure is highlighted then we should save the original color not magenta
 	{
 		if (CrntDrawClr == BLACK)
 			DrawColor = "BLACK";
@@ -81,7 +81,7 @@ void CTriangle::Save(ofstream& OutFile)
 		if (CrntDrawClr == BLUE)
 			DrawColor = "BLUE";
 	}
-	if (!FigGfxInfo.isFilled)
+	if (!FigGfxInfo.isFilled)//check if figure is filled
 		FillColor = "NO_COLOR";
 	else {
 		if (FigGfxInfo.FillClr == BLACK)
@@ -106,9 +106,10 @@ void CTriangle::Save(ofstream& OutFile)
 }
 void CTriangle::Load(ifstream& Infile)
 {
-
+	if (IsSelected())
+		SetSelected(false); //deselect so it can be selected when loaded
 	Infile >> TriID >> Vertix1.x >> Vertix1.y >> Vertix2.x >> Vertix2.y
-		>> Vertix3.x >> Vertix3.y >> DrawColor >> FillColor;
+		>> Vertix3.x >> Vertix3.y >> DrawColor >> FillColor;//reading figure parameters from file
 
 	if (DrawColor == "GREEN")
 		FigGfxInfo.DrawClr = GREEN;
@@ -123,7 +124,7 @@ void CTriangle::Load(ifstream& Infile)
 	else if (DrawColor == "BLUE")
 		FigGfxInfo.DrawClr = BLUE;
 
-	if (FillColor == "NO_COLOR") 
+	if (FillColor == "NO_COLOR") //check if figure is filled
 		FigGfxInfo.isFilled = false;
 	else
 	{

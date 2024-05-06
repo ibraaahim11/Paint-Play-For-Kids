@@ -31,16 +31,18 @@ public:
 	//Reads the input command from the user and returns the corresponding action type
 	ActionType GetUserAction() const;
 	void ExecuteAction(ActionType); //Creates an action and executes it
-	void SaveAll(ofstream& OpenFile); //omar
+	void SaveAll(ofstream& OpenFile); //calls save function for all figures
 
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig);          //Adds a new figure to the FigList
 	CFigure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
-	CFigure* GetFigure(int index) const; //Search for a figure using its index
+	CFigure*& GetFigure_index(int index); //Search for a figure using its index
 	void SetSelectedFig(CFigure* c);	// Sets the selected figure
-	CFigure* GetSelectedFig() const;	// Gets selected fig
+	CFigure*& GetSelectedFig();	// Gets selected fig
+	CFigure*& GetClipboard();	// Gets clipboard
 
 	int	GetFigCount() const; // Return figure count
+	void SetFigCount(int); // Sets figure count
 
 	// -- Interface Management Functions
 	Input* GetInput() const; //Return pointer to the input

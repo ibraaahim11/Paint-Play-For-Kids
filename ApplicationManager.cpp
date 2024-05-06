@@ -5,10 +5,13 @@
 #include "AddHexagonAction.h"
 #include "AddCircleAction.h"
 #include "SelectAction.h"
+#include "ClearAllAction.h"
+#include "DeleteAction.h"
 #include "Actions\SaveAction.h"
 #include "Actions\LoadAction.h"
 #include "Actions\Switchtoplay.h"
 #include "Actions\Switchtodraw.h"
+#include "Actions\CopyAction.h"
 #include <fstream>
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -24,6 +27,7 @@ ApplicationManager::ApplicationManager()
 		FigList[i] = NULL;
 
 	SelectedFig = NULL;
+	Clipboard = NULL;
 }
 
 //==================================================================================//
@@ -78,6 +82,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new LoadAction(this);
 
 		break;
+	case CLEAR:
+		pAct = new ClearAllAction(this);
+		break;
+	case I_DELETE:
+		pAct = new DeleteAction(this);
+		break;
+
 	case EXIT:
 		///create ExitAction here
 
@@ -138,7 +149,7 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 	return NULL;
 }
 
-CFigure* ApplicationManager::GetFigure(int index) const
+CFigure*& ApplicationManager::GetFigure_index(int index)
 {
 	//Return pointer to figure using its index in the figlist
 	return FigList[index];
@@ -148,13 +159,21 @@ int ApplicationManager::GetFigCount() const
 	// Return figure count
 	return FigCount;
 }
-CFigure* ApplicationManager::GetSelectedFig() const
+void ApplicationManager::SetFigCount(int num)
+{
+	FigCount = num;
+}
+CFigure*& ApplicationManager::GetSelectedFig()
 {
 	return SelectedFig;
 }
 void ApplicationManager::SetSelectedFig(CFigure* c)
 {
 	SelectedFig = c;
+}
+CFigure*& ApplicationManager::GetClipboard()
+{
+	return Clipboard;
 }
 //==================================================================================//
 //							Interface Management Functions							//

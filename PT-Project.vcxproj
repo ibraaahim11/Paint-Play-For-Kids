@@ -131,6 +131,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actions\Pick&amp;hide.cpp" />
+    <ClCompile Include="Actions\CopyAction.cpp" />
+    <ClCompile Include="Actions\LoadAction.cpp" />
     <ClCompile Include="Actions\SaveAction.cpp" />
     <ClCompile Include="Actions\Switchtodraw.cpp" />
     <ClCompile Include="Actions\Switchtoplay.cpp" />
@@ -140,6 +142,7 @@
     <ClCompile Include="AddTriangleAction.cpp" />
     <ClCompile Include="CCircle.cpp" />
     <ClCompile Include="CHexagon.cpp" />
+    <ClCompile Include="ClearAllAction.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
     <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
     <ClCompile Include="CMUgraphicsLib\colors.cpp" />
@@ -178,6 +181,7 @@
     <ClCompile Include="CMUgraphicsLib\jpeg\jutils.c" />
     <ClCompile Include="CSquare.cpp" />
     <ClCompile Include="CTriangle.cpp" />
+    <ClCompile Include="DeleteAction.cpp" />
     <ClCompile Include="Figures\CFigure.cpp" />
     <ClCompile Include="Figures\CRectangle.cpp" />
     <ClCompile Include="Actions\AddRectAction.cpp" />
@@ -188,6 +192,7 @@
     <ClCompile Include="SelectAction.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actions\LoadAction.h" />
     <ClInclude Include="Actions\SaveAction.h" />
     <ClInclude Include="Actions\Switchtodraw.h" />
     <ClInclude Include="Actions\Switchtoplay.h" />
@@ -197,6 +202,7 @@
     <ClInclude Include="AddTriangleAction.h" />
     <ClInclude Include="CCircle.h" />
     <ClInclude Include="CHexagon.h" />
+    <ClInclude Include="ClearAllAction.h" />
     <ClInclude Include="CMUgraphicsLib\auxil.h" />
     <ClInclude Include="CMUgraphicsLib\CMUgraphics.h" />
     <ClInclude Include="CMUgraphicsLib\colors.h" />
@@ -219,6 +225,7 @@
     <ClInclude Include="CMUgraphicsLib\jpeg\jversion.h" />
     <ClInclude Include="CSquare.h" />
     <ClInclude Include="CTriangle.h" />
+    <ClInclude Include="DeleteAction.h" />
     <ClInclude Include="Figures\CFigure.h" />
     <ClInclude Include="Figures\CRectangle.h" />
     <ClInclude Include="Actions\Action.h" />

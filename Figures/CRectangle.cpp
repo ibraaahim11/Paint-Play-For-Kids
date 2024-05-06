@@ -5,7 +5,7 @@ CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(Figur
 {
 	Corner1 = P1;
 	Corner2 = P2;
-	RectID = ID;
+	ID = TotalNum;
 	Height = abs(P1.y - P2.y);
 	Width = abs(P1.x - P2.x);
 }
@@ -59,10 +59,10 @@ bool CRectangle::isPointinside(int x, int y)
 
 void CRectangle::Save(ofstream& OutFile)
 {
-	OutFile << "R1" << " " << RectID << " " << Corner1.x << " " << Corner1.y << " "
-		<< Corner2.x << " " << Corner2.y;
+	OutFile << Type << " " << RectID << " " << Corner1.x << " " << Corner1.y << " "
+		<< Corner2.x << " " << Corner2.y;  //writing the figure parameters
 
-	if (FigGfxInfo.DrawClr == BLACK)
+	if (FigGfxInfo.DrawClr == BLACK) //changing from color class to string to be able to store it in txt file
 		DrawColor = "BLACK";
 	if (FigGfxInfo.DrawClr == YELLOW)
 		DrawColor = "YELLOW";
@@ -74,7 +74,7 @@ void CRectangle::Save(ofstream& OutFile)
 		DrawColor = "GREEN";
 	if (FigGfxInfo.DrawClr == BLUE)
 		DrawColor = "BLUE";
-	if (FigGfxInfo.DrawClr == MAGENTA)
+	if (FigGfxInfo.DrawClr == MAGENTA) //if figure is highlighted then we should save the original color not magenta
 	{
 		if (CrntDrawClr == BLACK)
 			DrawColor = "BLACK";
@@ -95,7 +95,7 @@ void CRectangle::Save(ofstream& OutFile)
 			DrawColor = "BLUE";
 	}
 
-	if (!FigGfxInfo.isFilled)
+	if (!FigGfxInfo.isFilled)//check if figure is filled
 		FillColor = "NO_COLOR";
 	else {
 		if (FigGfxInfo.FillClr == BLACK)
@@ -122,12 +122,12 @@ void CRectangle::Save(ofstream& OutFile)
 void CRectangle::Load(ifstream& Infile)
 {
 
-	if (IsSelected())
-		SetSelected(false);
+	if (IsSelected())  
+		SetSelected(false); //deselect so it can be selected when loaded
 	Infile >> RectID >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y
-		>> DrawColor >> FillColor;
+		>> DrawColor >> FillColor; //reading figure parameters from file
 
-	if (DrawColor == "GREEN")
+	if (DrawColor == "GREEN")  //converting color strings to color to draw figure with specific color
 		FigGfxInfo.DrawClr = GREEN;
 	else if (DrawColor == "BLACK")
 		FigGfxInfo.DrawClr = BLACK;
@@ -140,7 +140,7 @@ void CRectangle::Load(ifstream& Infile)
 	else if (DrawColor == "BLUE")
 		FigGfxInfo.DrawClr = BLUE;
 
-	if (FillColor == "NO_COLOR") 
+	if (FillColor == "NO_COLOR") //check if figure is filled
 		FigGfxInfo.isFilled = false;
 
 	else
