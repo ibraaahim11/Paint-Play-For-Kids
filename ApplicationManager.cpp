@@ -9,12 +9,13 @@
 #include "DeleteAction.h"
 #include "BorderAction.h"
 #include "FillAction.h"
+#include "SoundAction.h"
 #include "Actions\SaveAction.h"
 #include "Actions\LoadAction.h"
 #include "Actions\CopyAction.h"
 #include <fstream>
 //Constructor
-ApplicationManager::ApplicationManager()
+ApplicationManager::ApplicationManager(): sound(this)
 {
 	//Create Input and output
 	pOut = new Output;
@@ -22,6 +23,7 @@ ApplicationManager::ApplicationManager()
 
 	FigCount = 0;
 	SelectedCount = 0;
+	SoundOn = false;
 
 	//Create an array of figure pointers and set them to NULL
 	for (int i = 0; i < MaxFigCount; i++)
@@ -44,6 +46,7 @@ ActionType ApplicationManager::GetUserAction() const
 void ApplicationManager::ExecuteAction(ActionType ActType)
 {
 	Action* pAct = NULL;
+	this->ActType = ActType;
 
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
@@ -95,6 +98,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case I_DELETE:
 		pAct = new DeleteAction(this);
 		break;
+	case D_SOUND:
+		pAct = new SoundAction(this);
+		break;
 
 	case EXIT:
 		///create ExitAction here
@@ -108,6 +114,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	//Execute the created action
 	if (pAct != NULL)
 	{
+		if (ActType != D_SOUND)
+			sound.Execute();
+
 		pAct->Execute();//Execute
 		delete pAct;	//You may need to change this line depending to your implementation
 		pAct = NULL;
@@ -119,6 +128,18 @@ void ApplicationManager::SaveAll(ofstream& OpenFile) //omar
 	{
 		FigList[i]->Save(OpenFile);
 	}
+}
+ActionType ApplicationManager::GetActType() const
+{
+	return ActType;
+}
+bool ApplicationManager::GetSoundOn() const
+{
+	return SoundOn;
+}
+void ApplicationManager::SetSoundOn(bool s)
+{
+	SoundOn = s;
 }
 //==================================================================================//
 //						Figures Management Functions								//
@@ -188,6 +209,41 @@ int ApplicationManager::CalculateSelectedCount()
 			SelectedCount++;
 	}
 	return SelectedCount;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 //==================================================================================//
 //							Interface Management Functions							//

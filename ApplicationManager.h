@@ -5,6 +5,7 @@
 #include "Figures\CFigure.h"
 #include "GUI\input.h"
 #include "GUI\output.h"
+#include "SoundAction.h"
 
 //Main class that manages everything in the application.
 class ApplicationManager
@@ -23,7 +24,10 @@ private:
 	Output* pOut;
 
 	CFigure* Clipboard;  //Pointer to copied/cut figure
+	bool SoundOn;
 
+	ActionType ActType;
+	SoundAction sound;
 public:
 	ApplicationManager();
 	~ApplicationManager();
@@ -31,8 +35,11 @@ public:
 	// -- Action-Related Functions
 	//Reads the input command from the user and returns the corresponding action type
 	ActionType GetUserAction() const;
+	bool GetSoundOn() const;
+	void SetSoundOn(bool);
 	void ExecuteAction(ActionType); //Creates an action and executes it
 	void SaveAll(ofstream& OpenFile); //calls save function for all figures
+	ActionType GetActType() const;
 
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig);          //Adds a new figure to the FigList

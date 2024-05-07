@@ -189,6 +189,7 @@
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SelectAction.cpp" />
+    <ClCompile Include="SoundAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\CopyAction.h" />
@@ -236,6 +237,7 @@
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="DEFS.h" />
     <ClInclude Include="SelectAction.h" />
+    <ClInclude Include="SoundAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
