@@ -14,7 +14,7 @@ void SoundAction::ReadActionParameters()
 	SoundOn = pManager->GetSoundOn();
 	action = pManager->GetActType();
 
-	if (action == D_SOUND)
+	if (action == D_SOUND || action == P_SOUND)
 	{
 		SoundOn = !SoundOn;
 		pManager->SetSoundOn(SoundOn);
@@ -55,20 +55,63 @@ void SoundAction::ReadActionParameters()
 		case(CUT):
 			file = "cut.wav";
 			break;
+		case(CLEAR):
+			file = "clear all.wav";
+			break;
 		case(PASTE):
 			file = "paste.wav";
 			break;
 		case(I_DELETE):
 			file = "delete.wav";
 			break;
+
+		case(R14):
+		case(R12):
+		case(R2):
+		case(R4):
+			file = "resize.wav";
+			break;
+		case(FORWARD):
+			file = "bring to front.wav";
+			break;
+		case(BACKWARD):
+			file = "send to back.wav";
+			break;
+		case(SAVE):
+			file = "save file.wav";
+			break;
+		case(LOAD):
+			file = "load file.wav";
+			break;
+		case(TO_PLAY):
+			file = "switch to play mode.wav";
+			break;
+		case(TO_DRAW):
+			file = "switch to draw mode.wav";
+			break;
+		case(FIG_TYPE):
+			file = "play with figures.wav";
+			break;
+		case(FIG_COLOR):
+			file = "play with colors.wav";
+			break;
+		case(BOTH):
+			file = "play with colored figures.wav";
+			break;
+
+
 		case(D_SOUND):
+			file = "sound on.wav";
+			break;
+		case(P_SOUND):
 			file = "sound on.wav";
 			break;
 
 
+
 		}
 	}
-	else if(action == D_SOUND)
+	else if(action == D_SOUND || action == P_SOUND)
 		file = "sound off.wav";
 
 
@@ -85,5 +128,6 @@ void SoundAction::Execute()
 	ReadActionParameters();
 
 	PlaySound(TEXT(file), NULL, SND_ASYNC);
+	file = "";
 
 }

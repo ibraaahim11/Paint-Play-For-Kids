@@ -107,6 +107,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case D_SOUND:
 		pAct = new SoundAction(this);
 		break;
+	case P_SOUND:
+		pAct = new SoundAction(this);
+		break;
 	case PASTE:
 		pAct = new PasteAction(this);
 		break;
@@ -123,7 +126,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	//Execute the created action
 	if (pAct != NULL)
 	{
-		if (ActType != D_SOUND)
+		if (ActType != D_SOUND && ActType != P_SOUND)
 			sound.Execute();
 
 		pAct->Execute();//Execute
