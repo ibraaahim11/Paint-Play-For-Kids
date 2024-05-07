@@ -147,3 +147,15 @@ void CHexagon::Load(ifstream& Infile)
 			FigGfxInfo.FillClr = BLUE;
 	}
 }
+Point CHexagon::GetCenter()
+{
+	return Center;
+}
+int CHexagon::GetXVertix1()
+{
+	return Vertices_x[0];
+}
+Point CHexagon::GetRadius()
+{
+	return Radius;
+}

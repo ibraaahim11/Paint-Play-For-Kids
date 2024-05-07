@@ -29,6 +29,8 @@ public:
 	char GetType() const;		// REsturns type of figure in char form
 	void SetID(int id);
 
+	void SetGfxInfo(GfxInfo FigGfxInfo);
+	GfxInfo GetGfxInfo() const;
 	virtual void Draw(Output* pOut) const = 0;		//Draw the figure
 
 	void UpdateFillClrString(); // Updates the DrawColor string in case it has changed
@@ -49,6 +51,8 @@ public:
 	virtual bool isPointinside(int x, int y) = 0;
 	virtual void Save(ofstream& OutFile) = 0;	//Save the figure parameters to the file
 	virtual void Load(ifstream& Infile) = 0;	//Load the figure parameters to the file
+	virtual Point GetCenter() = 0; // return center for each figure
+	
 };
 
 #endif

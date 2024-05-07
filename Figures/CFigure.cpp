@@ -81,6 +81,7 @@ void CFigure::UpdateDrwClrString()
 
 void CFigure::ChngDrawClr(color Dclr)
 {
+
 	FigGfxInfo.DrawClr = Dclr;
 	UpdateDrwClrString();
 }
@@ -89,12 +90,18 @@ void CFigure::ChngFillClr(color Fclr)
 {
 	FigGfxInfo.isFilled = true;
 	FigGfxInfo.FillClr = Fclr;
-	UpdateFillClrString();
 }
-
+GfxInfo CFigure::GetGfxInfo() const 
+{
+	return FigGfxInfo;
+}
 color CFigure::GetCrntDrawClr() const
 {
 	return CrntDrawClr;
+}
+void CFigure::SetGfxInfo(GfxInfo FigGfxInfo)
+{
+	this->FigGfxInfo = FigGfxInfo;
 }
 
 void CFigure::SetCrntDrawClr(color crnt)

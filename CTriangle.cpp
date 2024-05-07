@@ -93,3 +93,21 @@ void CTriangle::Load(ifstream& Infile)
 			FigGfxInfo.FillClr = BLUE;
 	}
 }
+Point CTriangle::GetCenter()
+{
+	Center.x = (Vertix1.x + Vertix2.x + Vertix3.x) / 3;
+	Center.y = (Vertix1.y + Vertix2.y + Vertix3.y) / 3;
+	return Center;
+}
+Point CTriangle::GetVertix1()
+{
+	return Vertix1;
+}
+Point CTriangle::GetVertix2()
+{
+	return Vertix2;
+}
+Point CTriangle::GetVertix3()
+{
+	return Vertix3;
+}

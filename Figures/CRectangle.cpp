@@ -108,3 +108,32 @@ void CRectangle::Load(ifstream& Infile)
 	}
 	;
 }
+Point CRectangle::GetCenter()
+{
+	if (Corner1.x < Corner2.x)
+		Center.x = Width / 2 + Corner1.x;
+	else
+		Center.x = Width / 2 + Corner2.x;
+	
+	if (Corner1.y < Corner2.y)
+		Center.y = Height / 2 + Corner1.y;
+	else
+		Center.x = Height / 2 + Corner2.y;
+	return Center;
+}
+int CRectangle::GetHeight()
+{
+	return Height;
+}
+int CRectangle::GetWidth()
+{
+	return Width;
+}
+Point CRectangle::GetCorner1()
+{
+	return Corner1;
+}
+Point CRectangle::GetCorner2()
+{
+	return Corner2;
+}

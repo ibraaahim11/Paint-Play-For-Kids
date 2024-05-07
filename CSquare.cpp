@@ -1,11 +1,10 @@
 #include "CSquare.h"
 #include <fstream>
-
 CSquare::CSquare(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo, 'S')
 {
 	Center = P1;
 	Radius = P2;
-	ID = TotalNum;
+	ID = TotalNum; 
 
 	// Initalizing Corner 1 and Corner 2 of square to be used in other functions.
 
@@ -64,6 +63,7 @@ void CSquare::Load(ifstream& Infile)
 	Infile >> ID >> Center.x >> Center.y >> Radius.x >> Radius.y
 		>> DrawColor >> FillColor; //reading figure parameters from file
 
+
 	if (DrawColor == "GREEN")  //converting color strings to color to draw figure with specific color
 		FigGfxInfo.DrawClr = GREEN;
 	else if (DrawColor == "BLACK")
@@ -97,5 +97,19 @@ void CSquare::Load(ifstream& Infile)
 		else if (FillColor == "BLUE")
 			FigGfxInfo.FillClr = BLUE;
 	}
-	;
+	
+
+
+}
+Point CSquare::GetCenter()
+{
+	return Center;
+}
+Point CSquare::GetCorner1() const
+{
+	return Corner1;
+}
+Point CSquare::GetRadius()
+{
+	return Radius;
 }

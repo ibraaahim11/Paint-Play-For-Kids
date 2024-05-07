@@ -20,48 +20,10 @@ void SaveAction::Execute()
 	Output* pOut = pManager->GetOutput();
 
 	ReadActionParameters();
-	color DrawClr, FillClr; //colors user will use after loading
-
-	DrawClr = pOut->getCrntDrawColor();
-	FillClr = pOut->getCrntFillColor();
-
-	string DrawColor, FillColor; //the figure colors
-
-	if (DrawClr == BLACK)
-		DrawColor = "BLACK";
-	if (DrawClr == YELLOW)
-		DrawColor = "YELLOW";
-	if (DrawClr == RED)
-		DrawColor = "RED";
-	if (DrawClr == ORANGE)
-		DrawColor = "ORANGE";
-	if (DrawClr == GREEN)
-		DrawColor = "GREEN";
-	if (DrawClr == BLUE)
-		DrawColor = "BLUE";
-
-	if (FillClr == BLACK)
-		FillColor = "BLACK";
-
-	else if (FillClr == YELLOW)
-		FillColor = "YELLOW";
-
-	else if (FillClr == RED)
-		FillColor = "RED";
-
-	else if (FillClr == ORANGE)
-		FillColor = "ORANGE";
-
-	else if (FillClr == GREEN)
-		FillColor = "GREEN";
-
-	else if (FillClr == BLUE)
-		FillColor = "BLUE";
-	else
-		FillColor = "NO_COLOR";
+;
 
 	ofstream OpenFile(FileName, ios::out);
-	OpenFile << DrawColor << "   " << FillColor << endl << pManager->GetFigCount() << endl;
+	OpenFile << "BLUE" << "   " << "NO_COLOR" << endl << pManager->GetFigCount() << endl; 
 
 	pManager->SaveAll(OpenFile); //calls save option for all figures
 	OpenFile.close(); //close the opened file

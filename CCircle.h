@@ -10,7 +10,7 @@ class CCircle : public CFigure
 private:
 	Point Center;
 	Point Radius;
-	int CirID; //omar
+	int CirID; 
 
 	double Radius_length;
 
@@ -21,6 +21,8 @@ public:
 	virtual void Save(ofstream& OutFile);
 	virtual void Load(ifstream& Infile);
 	virtual void PrintInfo(Output* pOut) const;
+	virtual Point GetCenter();
+	Point GetRadius();
 };
 
 #endif

@@ -48,6 +48,7 @@ public:
 	void SetSelectedFig(CFigure* c);	// Sets the selected figure
 	CFigure*& GetSelectedFig();	// Gets selected fig
 	CFigure*& GetClipboard();	// Gets clipboard
+	void SetClipboard(CFigure*& CF); //Sets the Clipboard
 
 	int CalculateSelectedCount();
 	int	GetFigCount() const; // Return figure count

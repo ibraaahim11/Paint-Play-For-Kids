@@ -85,3 +85,11 @@ void CCircle::Load(ifstream& Infile)
 			FigGfxInfo.FillClr = BLUE;
 	}
 }
+Point CCircle::GetCenter()
+{
+	return Center;
+}
+Point CCircle::GetRadius()
+{
+	return Radius;
+}
