@@ -24,22 +24,24 @@ private:
 	Output* pOut;
 
 	CFigure* Clipboard;  //Pointer to copied/cut figure
-	bool SoundOn;
+	bool SoundOn; // boolean if sound is on
 
-	ActionType ActType;
-	SoundAction sound;
+	ActionType ActType; // Action currently being performed 
+
+	//	NOTE: This line must always be in the end of the "private" section
+	SoundAction sound; // sound object used to play sounds throughout program's lifetime (composition)
 public:
 	ApplicationManager();
 	~ApplicationManager();
 
 	// -- Action-Related Functions
 	//Reads the input command from the user and returns the corresponding action type
-	ActionType GetUserAction() const;
-	bool GetSoundOn() const;
-	void SetSoundOn(bool);
+	ActionType GetUserAction() const; 
+	bool GetSoundOn() const; // returns if sound is on
+	void SetSoundOn(bool); // sets sound on value
 	void ExecuteAction(ActionType); //Creates an action and executes it
 	void SaveAll(ofstream& OpenFile); //calls save function for all figures
-	ActionType GetActType() const;
+	ActionType GetActType() const; // returns the type of action currently being performed
 
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig);          //Adds a new figure to the FigList
@@ -50,7 +52,7 @@ public:
 	CFigure*& GetClipboard();	// Gets clipboard
 	void SetClipboard(CFigure*& CF); //Sets the Clipboard
 
-	int CalculateSelectedCount();
+	int CalculateSelectedCount(); // returns number of figures currently selected
 	int	GetFigCount() const; // Return figure count
 	void SetFigCount(int); // Sets figure count
 

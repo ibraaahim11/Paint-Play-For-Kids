@@ -126,6 +126,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	//Execute the created action
 	if (pAct != NULL)
 	{
+		// so that sound is only played once
 		if (ActType != D_SOUND && ActType != P_SOUND)
 			sound.Execute();
 

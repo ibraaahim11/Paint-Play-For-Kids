@@ -1,5 +1,6 @@
 #include "SoundAction.h"
 #include "ApplicationManager.h"
+// needed for playing .wav files
 #include <windows.h>
 #include <string>
 
@@ -11,9 +12,11 @@ SoundAction::SoundAction(ApplicationManager* pApp) : Action(pApp)
 
 void SoundAction::ReadActionParameters()
 {
+	// Checks if sound on and the action that will be played
 	SoundOn = pManager->GetSoundOn();
 	action = pManager->GetActType();
 
+	// If sound button clicked then switch SoundOn status
 	if (action == D_SOUND || action == P_SOUND)
 	{
 		SoundOn = !SoundOn;
@@ -21,6 +24,7 @@ void SoundAction::ReadActionParameters()
 
 	}
 
+	// if sound on play the action's file.
 	if (SoundOn)
 	{
 		switch (action)
@@ -111,6 +115,7 @@ void SoundAction::ReadActionParameters()
 
 		}
 	}
+	// if sound was turned off then play the sound off file
 	else if(action == D_SOUND || action == P_SOUND)
 		file = "sound off.wav";
 
@@ -127,7 +132,9 @@ void SoundAction::Execute()
 	//This action needs to read some parameters first
 	ReadActionParameters();
 
+	// play the sound file
 	PlaySound(TEXT(file), NULL, SND_ASYNC);
+	// there is no file to be played now. this line is in case an action was pressed that has no sound file.
 	file = "";
 
 }
