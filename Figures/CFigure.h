@@ -29,6 +29,8 @@ public:
 	char GetType() const;		// REsturns type of figure in char form
 	void SetID(int id);
 
+	string GetFillColor()const; //Return fill color
+
 	virtual void Draw(Output* pOut) const = 0;		//Draw the figure
 
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color

@@ -42,3 +42,7 @@ void CFigure::ChngFillClr(color Fclr)
 	FigGfxInfo.isFilled = true;
 	FigGfxInfo.FillClr = Fclr;
 }
+
+string CFigure::GetFillColor()const {
+	return FillColor;
+}

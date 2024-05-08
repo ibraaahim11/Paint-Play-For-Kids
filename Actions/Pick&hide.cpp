@@ -2,38 +2,59 @@
 #include "..\GUI\Output.h"
 #include "..\GUI\Input.h"
 #include "..\ApplicationManager.h"
-#include "..\CTriangle.h"
-#include "..\CCircle.h"
-#include "..\CSquare.h"
-#include "..\CHexagon.h"
+#include "..\DeleteAction.h"
+#include "..\SelectAction.h"
+#include "..\Figures\CFigure.h"
+#include "Action.h"
 Pickandhide::Pickandhide(ApplicationManager* pApp) : Action(pApp) {}
 
-void Pickandhide::Generate(PlayMenuItem(Playmenu)) {
+void Pickandhide::Execute() {
 	Point P1;
 	Output* pOut = pManager->GetOutput();
 	CFigure* ClickedFig;
-	pOut->PrintMessage("Pick and hide game ");
+	Action* pAct = NULL;
+	DeleteAction* pApp;
+	Switchtoplay STP(pManager);
+	STP.Execute();
 
-	switch(Playmenu){
-	case ITM_FIG_TYPE: {
 
-		for (int i = 0; i < 5; i++) {
+	ReadActionParameters();
+
+	switch (Mode)
+	case FIG_TYPE: {
+
+		for (int i = 0; i < pManager->GetFigCount(); i++) {
 			int numWords = sizeof(figuretype) / sizeof(figuretype[0]);
 			int randomIndex = rand() % numWords;
-			string randomshape = figuretype[randomIndex];
-
-			pOut->PrintMessage("Pick all"); pOut->PrintMessage(randomshape);
+			char randomshape = figuretype[randomIndex];
+			string shape = { randomshape };
+			string a = "pick all ";
+			string b = a + shape;
+			pOut->PrintMessage(b);
 
 			Input* pIn = pManager->GetInput();
 			pIn->GetPointClicked(P1.x, P1.y);
 
 
 			ClickedFig = pManager->GetFigure(P1.x, P1.y);
-			if (ClickedFig == randomshape)
-				count = +1;
-			break;
+			if (ClickedFig != NULL) {
+				if (ClickedFig->GetType() == randomshape) {
+					ClickedFig->SetSelected(true);
+					pAct = new DeleteAction(pManager);
+					pAct->Execute();
+					count = +1;
+
+				}
+				else
+					pOut->PrintMessage("Wrong!");
+			}
+			
+			
+
 		}
-	case ITM_FIG_COLOR: {
+		break;
+
+	case FIG_COLOR: {
 		for (int i = 0; i < 6; i++) {
 			int numWords = sizeof(figurecolor) / sizeof(figurecolor[0]);
 			int randomIndex = rand() % numWords;
@@ -44,9 +65,25 @@ void Pickandhide::Generate(PlayMenuItem(Playmenu)) {
 			Input* pIn = pManager->GetInput();
 			pIn->GetPointClicked(P1.x, P1.y);
 			color CrntDrawClr;
-			if (CrntDrawClr == randomcolor)
+	
+			if (ClickedFig->GetFillColor() == randomcolor) {
+				ClickedFig->SetSelected(true);
+				pAct = new DeleteAction(pManager);
+				pAct->Execute();
 				count = +1;
+			}
 		}
+		
+		//pOut->PrintMessage(count)
 	}
 	}
+	}
+void Pickandhide::ReadActionParameters() {
+	Point P1;
+	Output* pOut;
+	pOut = pManager->GetOutput();
+	pOut->PrintMessage("Choose a mode");
+	Input* pIn;
+	pIn = pManager->GetInput();
+	Mode = pIn->GetUserAction();
 }

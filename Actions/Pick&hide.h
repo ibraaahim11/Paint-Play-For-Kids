@@ -1,14 +1,16 @@
 #pragma once
 #include"Action.h"
+#include "..\Actions\Switchtoplay.h"
 
 class Pickandhide : public Action {
 protected:
-	string figuretype[5] = { "Rectangles","Squares","Circles","Triangles","Hexagons" };
-	string figurecolor[6] = { "Black","Blue","Red","Yellow","Orange","Green" };
+	const char figuretype[5] = { 'R','C','T','H','S'};
+	const string figurecolor[6] = { "Black","Blue","Red","Yellow","Orange","Green" };
 	int count = 0;
-
+	ActionType Mode;
 public:
 	Pickandhide(ApplicationManager* pApp);
-	void Generate(PlayMenuItem);
+	void Execute();
+	virtual void ReadActionParameters();
 
 };

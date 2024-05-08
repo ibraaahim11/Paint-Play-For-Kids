@@ -12,6 +12,7 @@
 #include "Actions\Switchtoplay.h"
 #include "Actions\Switchtodraw.h"
 #include "Actions\CopyAction.h"
+#include "Actions\Pick&hide.h"
 #include <fstream>
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -98,11 +99,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		return;
 
 	case TO_PLAY :
-		pAct = new Switchtoplay(this);
+		pAct = new Pickandhide(this);
+		
 		break;
 	case TO_DRAW:
 		pAct = new Switchtodraw(this);
 		break;
+	
 	}
 
 	//Execute the created action

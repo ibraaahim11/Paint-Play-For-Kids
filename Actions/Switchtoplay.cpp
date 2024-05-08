@@ -7,7 +7,6 @@ Switchtoplay::Switchtoplay(ApplicationManager* pApp) :Action(pApp)
 }
 void Switchtoplay::Execute() {
 	Output* pOut = pManager->GetOutput();
-	pOut->ClearDrawArea();
 	pOut->ClearToolBar();
 	pOut->CreatePlayToolBar();
 }
