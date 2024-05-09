@@ -76,7 +76,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case SAVE:
-		pAct = new SaveAction(this);
+		//pAct = new SaveAction(this);
 
 		break;
 	case LOAD:

@@ -4,6 +4,7 @@
 #define SWITCH_TO_PLAY_H
 
 #include"Action.h"
+#include "SaveAction.h"
 
 class Switchtoplay :public Action
 {

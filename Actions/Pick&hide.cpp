@@ -60,12 +60,15 @@ void Pickandhide::Execute() {
 			int randomIndex = rand() % numWords;
 			string randomcolor = figurecolor[randomIndex];
 
-			pOut->PrintMessage("Pick all"); pOut->PrintMessage(randomcolor); pOut->PrintMessage("Shapes");
+			string a = "pick all ";
+			string b = a + randomcolor;
+			pOut->PrintMessage(b);
 
 			Input* pIn = pManager->GetInput();
 			pIn->GetPointClicked(P1.x, P1.y);
 			color CrntDrawClr;
 	
+			CFigure* ClickedFig;
 			if (ClickedFig->GetFillColor() == randomcolor) {
 				ClickedFig->SetSelected(true);
 				pAct = new DeleteAction(pManager);
@@ -75,6 +78,8 @@ void Pickandhide::Execute() {
 		}
 		
 		//pOut->PrintMessage(count)
+		break;
+
 	}
 	}
 	}
