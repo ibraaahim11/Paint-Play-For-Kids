@@ -108,7 +108,7 @@ void CFigure::SetCrntDrawClr(color crnt)
 {
 	CrntDrawClr = crnt;
 }
-}
+
 
 string CFigure::GetFillColor()const {
 	return FillColor;

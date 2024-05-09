@@ -6,6 +6,7 @@
 #include "..\SelectAction.h"
 #include "..\Figures\CFigure.h"
 #include "Action.h"
+#include <ctime>
 Pickandhide::Pickandhide(ApplicationManager* pApp) : Action(pApp) {}
 
 void Pickandhide::Execute() {
@@ -20,13 +21,13 @@ void Pickandhide::Execute() {
 
 	ReadActionParameters();
 
-	switch (Mode)
+	switch (Mode) {
 	case FIG_TYPE: {
 
 		for (int i = 0; i < pManager->GetFigCount(); i++) {
-			int numWords = sizeof(figuretype) / sizeof(figuretype[0]);
-			int randomIndex = rand() % numWords;
-			char randomshape = figuretype[randomIndex];
+		
+			srand(time(NULL));
+			char randomshape = figuretype[rand() % pManager->GetFigCount()];
 			string shape = { randomshape };
 			string a = "pick all ";
 			string b = a + shape;
@@ -35,30 +36,28 @@ void Pickandhide::Execute() {
 			Input* pIn = pManager->GetInput();
 			pIn->GetPointClicked(P1.x, P1.y);
 
-
 			ClickedFig = pManager->GetFigure(P1.x, P1.y);
 			if (ClickedFig != NULL) {
 				if (ClickedFig->GetType() == randomshape) {
 					ClickedFig->SetSelected(true);
 					pAct = new DeleteAction(pManager);
 					pAct->Execute();
-					count = +1;
-
+					count++;
 				}
 				else
 					pOut->PrintMessage("Wrong!");
 			}
-			
-			
-
 		}
+		string c = "Number of correct choices: ";
+		string m = c + std::to_string(count);
+		pOut->PrintMessage(m);
 		break;
+	}
 
 	case FIG_COLOR: {
 		for (int i = 0; i < 6; i++) {
-			int numWords = sizeof(figurecolor) / sizeof(figurecolor[0]);
-			int randomIndex = rand() % numWords;
-			string randomcolor = figurecolor[randomIndex];
+			srand(time(NULL));
+			string randomcolor = figurecolor[rand() % 6];
 
 			string a = "pick all ";
 			string b = a + randomcolor;
@@ -66,23 +65,57 @@ void Pickandhide::Execute() {
 
 			Input* pIn = pManager->GetInput();
 			pIn->GetPointClicked(P1.x, P1.y);
-			color CrntDrawClr;
-	
-			CFigure* ClickedFig;
+
+			ClickedFig= pManager->GetFigure(P1.x, P1.y);
 			if (ClickedFig->GetFillColor() == randomcolor) {
 				ClickedFig->SetSelected(true);
 				pAct = new DeleteAction(pManager);
 				pAct->Execute();
-				count = +1;
+				count++;
 			}
+			else
+				pOut->PrintMessage("Wrong!");
 		}
-		
-		//pOut->PrintMessage(count)
+
+		string c = "Number of correct choices: ";
+		string m = c + std::to_string(count);
+		pOut->PrintMessage(m);
 		break;
 
 	}
+	case BOTH:{
+		for (int i = 0; i < pManager->GetFigCount(); i++) {
+			srand(time(NULL));
+			string randomcolor = figurecolor[rand() % 6];
+
+			srand(time(NULL));
+			char randomshape = figuretype[rand() % pManager->GetFigCount()];
+
+			string a = "Pick all";
+			string b = a + randomcolor + randomshape;
+			pOut->PrintMessage(b);
+
+			Input* pIn = pManager->GetInput();
+			pIn->GetPointClicked(P1.x, P1.y);
+
+			ClickedFig = pManager->GetFigure(P1.x, P1.y);
+			if (ClickedFig->GetFillColor() == randomcolor && ClickedFig->GetType() == randomshape) {
+				ClickedFig->SetSelected(true);
+
+				pAct =new DeleteAction(pManager);
+				pAct->Execute();
+				count++;
+			}
+			else
+				pOut->PrintMessage("Wrong!");
+		}
+		string c = "Number of correct choices: ";
+		string m = c + std::to_string(count);
+		pOut->PrintMessage(m);
+		break;
 	}
 	}
+}
 void Pickandhide::ReadActionParameters() {
 	Point P1;
 	Output* pOut;

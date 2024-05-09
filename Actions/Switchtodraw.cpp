@@ -17,4 +17,3 @@ void Switchtodraw::Execute() {
 void Switchtodraw::ReadActionParameters() {
 
 }
-//return graph
