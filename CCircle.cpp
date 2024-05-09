@@ -21,7 +21,7 @@ void CCircle::PrintInfo(Output* pOut) const
 	auto s_ID = std::to_string(ID);
 	auto s_Radius = std::to_string(int(Radius_length));
 
-	pOut->PrintMessage("Circle Selected: ID " + s_ID + ", Radius " + s_Radius + ".");
+	pOut->PrintMessage("Circle Selected: ID " + s_ID + ", Fill Color " + FillColor + ", Radius " + s_Radius + ".");
 }
 
 bool CCircle::isPointinside(int x, int y)
@@ -36,64 +36,11 @@ bool CCircle::isPointinside(int x, int y)
 }
 void CCircle::Save(ofstream& OutFile)
 {
-	OutFile << Type << " " << CirID << " " << Center.x << " " << Center.y << " " << Radius.x;
+	OutFile << Type << " " << ID << " " << Center.x << " " << Center.y << " " << Radius.x;
 	OutFile << " " << Radius.y; //writing the figure parameters
 
-	if (FigGfxInfo.DrawClr == BLACK)//changing from color class to string to be able to store it in txt file
-		DrawColor = "BLACK";
-	if (FigGfxInfo.DrawClr == YELLOW)
-		DrawColor = "YELLOW";
-	if (FigGfxInfo.DrawClr == RED)
-		DrawColor = "RED";
-	if (FigGfxInfo.DrawClr == ORANGE)
-		DrawColor = "ORANGE";
-	if (FigGfxInfo.DrawClr == GREEN)
-		DrawColor = "GREEN";
-	if (FigGfxInfo.DrawClr == BLUE)
-		DrawColor = "BLUE";
-	
-	if (FigGfxInfo.DrawClr == MAGENTA)//if figure is highlighted then we should save the original color not magenta
-	{
-		if (CrntDrawClr == BLACK)
-			DrawColor = "BLACK";
-
-		if (CrntDrawClr == YELLOW)
-			DrawColor = "YELLOW";
-
-		if (CrntDrawClr == RED)
-			DrawColor = "RED";
-
-		if (CrntDrawClr == ORANGE)
-			DrawColor = "ORANGE";
-
-		if (CrntDrawClr == GREEN)
-			DrawColor = "GREEN";
-
-		if (CrntDrawClr == BLUE)
-			DrawColor = "BLUE";
-	}
-	
-	if (!FigGfxInfo.isFilled)//check if figure is filled
-		FillColor = "NO_COLOR";
-	else {
-		if (FigGfxInfo.FillClr == BLACK)
-			FillColor = "BLACK";
-
-		else if (FigGfxInfo.FillClr == YELLOW)
-			FillColor = "YELLOW";
-
-		else if (FigGfxInfo.FillClr == RED)
-			FillColor = "RED";
-
-		else if (FigGfxInfo.FillClr == ORANGE)
-			FillColor = "ORANGE";
-
-		else if (FigGfxInfo.FillClr == GREEN)
-			FillColor = "GREEN";
-
-		else if (FigGfxInfo.FillClr == BLUE)
-			FillColor = "BLUE";
-	}
+	UpdateDrwClrString();
+	UpdateFillClrString();
 
 	OutFile << " " << DrawColor << " " << FillColor << endl;
 }
@@ -101,7 +48,7 @@ void CCircle::Load(ifstream& Infile)
 {
 	if (IsSelected())
 		SetSelected(false); //deselect so it can be selected when loaded
-	Infile >> CirID >> Center.x >> Center.y >> Radius.x >> Radius.y
+	Infile >> ID >> Center.x >> Center.y >> Radius.x >> Radius.y
 		>> DrawColor >> FillColor;//reading figure parameters from file
 
 	if (DrawColor == "GREEN")
@@ -137,4 +84,12 @@ void CCircle::Load(ifstream& Infile)
 		else if (FillColor == "BLUE")
 			FigGfxInfo.FillClr = BLUE;
 	}
+}
+Point CCircle::GetCenter()
+{
+	return Center;
+}
+Point CCircle::GetRadius()
+{
+	return Radius;
 }

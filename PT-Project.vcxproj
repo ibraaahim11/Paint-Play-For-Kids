@@ -133,6 +133,7 @@
     <ClCompile Include="Actions\Pick&amp;hide.cpp" />
     <ClCompile Include="Actions\CopyAction.cpp" />
     <ClCompile Include="Actions\LoadAction.cpp" />
+    <ClCompile Include="Actions\PasteAction.cpp" />
     <ClCompile Include="Actions\SaveAction.cpp" />
     <ClCompile Include="Actions\Switchtodraw.cpp" />
     <ClCompile Include="Actions\Switchtoplay.cpp" />
@@ -140,6 +141,7 @@
     <ClCompile Include="AddHexagonAction.cpp" />
     <ClCompile Include="AddSquareAction.cpp" />
     <ClCompile Include="AddTriangleAction.cpp" />
+    <ClCompile Include="BorderAction.cpp" />
     <ClCompile Include="CCircle.cpp" />
     <ClCompile Include="CHexagon.cpp" />
     <ClCompile Include="ClearAllAction.cpp" />
@@ -185,14 +187,17 @@
     <ClCompile Include="Figures\CFigure.cpp" />
     <ClCompile Include="Figures\CRectangle.cpp" />
     <ClCompile Include="Actions\AddRectAction.cpp" />
+    <ClCompile Include="FillAction.cpp" />
     <ClCompile Include="GUI\Input.cpp" />
     <ClCompile Include="GUI\Output.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SelectAction.cpp" />
+    <ClCompile Include="SoundAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\LoadAction.h" />
+    <ClInclude Include="Actions\PasteAction.h" />
     <ClInclude Include="Actions\SaveAction.h" />
     <ClInclude Include="Actions\Switchtodraw.h" />
     <ClInclude Include="Actions\Switchtoplay.h" />
@@ -200,6 +205,7 @@
     <ClInclude Include="AddHexagonAction.h" />
     <ClInclude Include="AddSquareAction.h" />
     <ClInclude Include="AddTriangleAction.h" />
+    <ClInclude Include="BorderAction.h" />
     <ClInclude Include="CCircle.h" />
     <ClInclude Include="CHexagon.h" />
     <ClInclude Include="ClearAllAction.h" />
@@ -230,12 +236,14 @@
     <ClInclude Include="Figures\CRectangle.h" />
     <ClInclude Include="Actions\Action.h" />
     <ClInclude Include="Actions\AddRectAction.h" />
+    <ClInclude Include="FillAction.h" />
     <ClInclude Include="GUI\Input.h" />
     <ClInclude Include="GUI\Output.h" />
     <ClInclude Include="GUI\UI_Info.h" />
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="DEFS.h" />
     <ClInclude Include="SelectAction.h" />
+    <ClInclude Include="SoundAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

@@ -7,21 +7,28 @@
 #include "SelectAction.h"
 #include "ClearAllAction.h"
 #include "DeleteAction.h"
+#include "BorderAction.h"
+#include "FillAction.h"
+#include "SoundAction.h"
 #include "Actions\SaveAction.h"
 #include "Actions\LoadAction.h"
 #include "Actions\Switchtoplay.h"
 #include "Actions\Switchtodraw.h"
 #include "Actions\CopyAction.h"
+#include "Actions\PasteAction.h"
+
 #include "Actions\Pick&hide.h"
 #include <fstream>
 //Constructor
-ApplicationManager::ApplicationManager()
+ApplicationManager::ApplicationManager(): sound(this)
 {
 	//Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
 
 	FigCount = 0;
+	SelectedCount = 0;
+	SoundOn = false;
 
 	//Create an array of figure pointers and set them to NULL
 	for (int i = 0; i < MaxFigCount; i++)
@@ -44,6 +51,7 @@ ActionType ApplicationManager::GetUserAction() const
 void ApplicationManager::ExecuteAction(ActionType ActType)
 {
 	Action* pAct = NULL;
+	this->ActType = ActType;
 
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
@@ -74,6 +82,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case SELECT:
 		pAct = new SelectAction(this);
 		break;
+	case BORDER:
+		pAct = new BorderAction(this);
+		break;
+	case FILL:
+		pAct = new FillAction(this);
+		break;
 
 	case SAVE:
 		//pAct = new SaveAction(this);
@@ -83,11 +97,24 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new LoadAction(this);
 
 		break;
+	case COPY:
+		pAct = new CopyAction(this);
+
+		break;
 	case CLEAR:
 		pAct = new ClearAllAction(this);
 		break;
 	case I_DELETE:
 		pAct = new DeleteAction(this);
+		break;
+	case D_SOUND:
+		pAct = new SoundAction(this);
+		break;
+	case P_SOUND:
+		pAct = new SoundAction(this);
+		break;
+	case PASTE:
+		pAct = new PasteAction(this);
 		break;
 
 	case EXIT:
@@ -111,6 +138,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	//Execute the created action
 	if (pAct != NULL)
 	{
+		// so that sound is only played once
+		if (ActType != D_SOUND && ActType != P_SOUND)
+			sound.Execute();
+
 		pAct->Execute();//Execute
 		delete pAct;	//You may need to change this line depending to your implementation
 		pAct = NULL;
@@ -122,6 +153,18 @@ void ApplicationManager::SaveAll(ofstream& OpenFile) //omar
 	{
 		FigList[i]->Save(OpenFile);
 	}
+}
+ActionType ApplicationManager::GetActType() const
+{
+	return ActType;
+}
+bool ApplicationManager::GetSoundOn() const
+{
+	return SoundOn;
+}
+void ApplicationManager::SetSoundOn(bool s)
+{
+	SoundOn = s;
 }
 //==================================================================================//
 //						Figures Management Functions								//
@@ -164,19 +207,72 @@ int ApplicationManager::GetFigCount() const
 }
 void ApplicationManager::SetFigCount(int num)
 {
+	// Sets figure count
 	FigCount = num;
 }
 CFigure*& ApplicationManager::GetSelectedFig()
 {
+	// Returns currently selected figure by reference
 	return SelectedFig;
 }
 void ApplicationManager::SetSelectedFig(CFigure* c)
 {
+	// Sets the currently selected figure
 	SelectedFig = c;
 }
 CFigure*& ApplicationManager::GetClipboard()
 {
 	return Clipboard;
+}
+void ApplicationManager::SetClipboard(CFigure*& CF)
+{
+	Clipboard = CF;
+}
+int ApplicationManager::CalculateSelectedCount()
+{
+	// Calculates and returns the number of selected figures
+	SelectedCount = 0;
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+			SelectedCount++;
+	}
+	return SelectedCount;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 //==================================================================================//
 //							Interface Management Functions							//
@@ -185,6 +281,7 @@ CFigure*& ApplicationManager::GetClipboard()
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {
+	pOut->ClearDrawArea();
 	for (int i = 0; i < FigCount; i++)
 
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)

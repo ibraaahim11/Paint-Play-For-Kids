@@ -18,12 +18,16 @@ private:
 
 	int SquareID;
 public:
+
 	CSquare(Point, Point, GfxInfo FigureGfxInfo);
 	virtual bool isPointinside(int x, int y);
 	virtual void Draw(Output* pOut) const;
 	virtual void Save(ofstream& OutFile);
 	virtual void Load(ifstream& Infile);
 	virtual void PrintInfo(Output* pOut) const;
+	virtual Point GetCenter();
+	Point GetRadius();
+	Point GetCorner1() const;
 };
 
 #endif

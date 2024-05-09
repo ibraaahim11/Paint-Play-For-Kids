@@ -15,10 +15,10 @@ protected:
 	static int TotalNum;		// Total number of figures
 	int ID; // Each figure has an ID
 
-	color CrntDrawClr; //to get color of figure before selected
+	color CrntDrawClr; // Border Color of the figure before being selected (selected = Magenta)
 	const char Type; // Each figure has a char Type which represents which figure it is
 	// R, S, C, T, H.
-	string DrawColor, FillColor; // colors of figures in strings for reading and writing to files
+	string DrawColor, FillColor; // colors of figures in strings for info printing, reading and writing to files
 	/// Add more parameters if needed.
 
 public:
@@ -29,13 +29,20 @@ public:
 	char GetType() const;		// REsturns type of figure in char form
 	void SetID(int id);
 
+	void SetGfxInfo(GfxInfo FigGfxInfo);
+	GfxInfo GetGfxInfo() const;
 	string GetFillColor()const; //Return fill color
 
 	virtual void Draw(Output* pOut) const = 0;		//Draw the figure
 
+	void UpdateFillClrString(); // Updates the DrawColor string in case it has changed
+	void UpdateDrwClrString();	// Updates the DrawColor string in case it has changed
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
-	static void SetTotalNum(int num);
+	color GetCrntDrawClr() const;  // Returns the draw color of the figure (Not magenta which is due to select action)
+
+	void SetCrntDrawClr(color); // Sets current draw color (Not magenta which is due to select action)
+	static void SetTotalNum(int num); // Sets totla num of figures
 
 	virtual void PrintInfo(Output* pOut) const = 0; // Virtual function to print information of figure.
 
@@ -46,6 +53,8 @@ public:
 	virtual bool isPointinside(int x, int y) = 0;
 	virtual void Save(ofstream& OutFile) = 0;	//Save the figure parameters to the file
 	virtual void Load(ifstream& Infile) = 0;	//Load the figure parameters to the file
+	virtual Point GetCenter() = 0; // return center for each figure
+	
 };
 
 #endif

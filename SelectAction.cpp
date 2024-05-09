@@ -6,7 +6,7 @@
 
 SelectAction::SelectAction(ApplicationManager* pApp) :Action(pApp)
 {
-	// Initialize all shapes (num of shapes selected read every time SelectAction is clicked)
+	// Initialize all shapes (Num of shapes selected read every time SelectAction is clicked)
 	Num_RectangleSelected = 0; Num_SquareSelected = 0; Num_TriangleSelected = 0;
 	Num_CircleSelected = 0; Num_HexagonSelected = 0;
 }
@@ -77,7 +77,7 @@ void SelectAction::Execute()
 		}
 		else
 		{
-			ClickedFig->ChngDrawClr(BLUE);
+			ClickedFig->ChngDrawClr(ClickedFig->GetCrntDrawClr());
 		}
 	}
 	else
@@ -85,8 +85,9 @@ void SelectAction::Execute()
 		// User click not inside any shape. Deselect all figures. Revert all figure colors.
 		for (int i = 0; i < pManager->GetFigCount(); i++)
 		{
-			(pManager->GetFigure_index(i))->SetSelected(false);
-			(pManager->GetFigure_index(i))->ChngDrawClr(BLUE);
+			CFigure* CurrentFig = pManager->GetFigure_index(i);
+			CurrentFig->SetSelected(false);
+			CurrentFig->ChngDrawClr(CurrentFig->GetCrntDrawClr());
 		}
 	}
 

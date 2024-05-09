@@ -57,7 +57,7 @@ void CHexagon::PrintInfo(Output* pOut) const
 	auto s_Height = std::to_string(Height);
 	auto s_Width = std::to_string(Width);
 
-	pOut->PrintMessage("Hexagon Selected: ID " + s_ID + ", Height " + s_Height + ", Width " + s_Width + ".");
+	pOut->PrintMessage("Hexagon Selected: ID " + s_ID + ", Fill Color " + FillColor + ", Height " + s_Height + ", Width " + s_Width + ".");
 }
 
 bool CHexagon::isPointinside(int x, int y)
@@ -98,64 +98,11 @@ bool CHexagon::isPointinside(int x, int y)
 }
 void CHexagon::Save(ofstream& OutFile)
 {
-	OutFile << Type << " " << HexID << " " << Center.x << " " << Center.y << " " << Radius.x;
+	OutFile << Type << " " << ID << " " << Center.x << " " << Center.y << " " << Radius.x;
 	OutFile << " " << Radius.y;//writing the figure parameters
 
-	if (FigGfxInfo.DrawClr == BLACK)//changing from color class to string to be able to store it in txt file
-		DrawColor = "BLACK";
-	if (FigGfxInfo.DrawClr == YELLOW)
-		DrawColor = "YELLOW";
-	if (FigGfxInfo.DrawClr == RED)
-		DrawColor = "RED";
-	if (FigGfxInfo.DrawClr == ORANGE)
-		DrawColor = "ORANGE";
-	if (FigGfxInfo.DrawClr == GREEN)
-		DrawColor = "GREEN";
-	if (FigGfxInfo.DrawClr == BLUE)
-		DrawColor = "BLUE";
-	
-	if (FigGfxInfo.DrawClr == MAGENTA)//if figure is highlighted then we should save the original color not magenta
-	{
-		if (CrntDrawClr == BLACK)
-			DrawColor = "BLACK";
-
-		if (CrntDrawClr == YELLOW)
-			DrawColor = "YELLOW";
-
-		if (CrntDrawClr == RED)
-			DrawColor = "RED";
-
-		if (CrntDrawClr == ORANGE)
-			DrawColor = "ORANGE";
-
-		if (CrntDrawClr == GREEN)
-			DrawColor = "GREEN";
-
-		if (CrntDrawClr == BLUE)
-			DrawColor = "BLUE";
-	}
-	//check if figure is filled
-	if (!FigGfxInfo.isFilled)
-		FillColor = "NO_COLOR";
-	else {
-		if (FigGfxInfo.FillClr == BLACK)
-			FillColor = "BLACK";
-
-		else if (FigGfxInfo.FillClr == YELLOW)
-			FillColor = "YELLOW";
-
-		else if (FigGfxInfo.FillClr == RED)
-			FillColor = "RED";
-
-		else if (FigGfxInfo.FillClr == ORANGE)
-			FillColor = "ORANGE";
-
-		else if (FigGfxInfo.FillClr == GREEN)
-			FillColor = "GREEN";
-
-		else if (FigGfxInfo.FillClr == BLUE)
-			FillColor = "BLUE";
-	}
+	UpdateDrwClrString();
+	UpdateFillClrString();
 
 	OutFile << " " << DrawColor << " " << FillColor << endl;
 }
@@ -163,7 +110,7 @@ void CHexagon::Load(ifstream& Infile)
 {
 	if (IsSelected())
 		SetSelected(false); //deselect so it can be selected when loaded
-	Infile >> HexID >> Center.x >> Center.y >> Radius.x >> Radius.y
+	Infile >> ID >> Center.x >> Center.y >> Radius.x >> Radius.y
 		>> DrawColor >> FillColor;//reading figure parameters from file
 
 	if (DrawColor == "GREEN")
@@ -199,4 +146,16 @@ void CHexagon::Load(ifstream& Infile)
 		else if (FillColor == "BLUE")
 			FigGfxInfo.FillClr = BLUE;
 	}
+}
+Point CHexagon::GetCenter()
+{
+	return Center;
+}
+int CHexagon::GetXVertix1()
+{
+	return Vertices_x[0];
+}
+Point CHexagon::GetRadius()
+{
+	return Radius;
 }

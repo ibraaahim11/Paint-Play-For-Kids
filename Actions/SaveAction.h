@@ -1,15 +1,15 @@
 #include "Action.h"
 
-//class SaveAction : public Action
-//{
-//protected:
-	//string FileName;
+class SaveAction : public Action
+{
+protected:
+	string FileName;
 
-//public:
+public:
 
-	//SaveAction(ApplicationManager* pApp);
+	SaveAction(ApplicationManager* pApp);
 	//read file name we will create
-	//virtual void ReadActionParameters();
+	virtual void ReadActionParameters();
 	//calls save all function and creates file with all figures parameters
-	//virtual void Execute();
-//};
+	virtual void Execute();
+};
