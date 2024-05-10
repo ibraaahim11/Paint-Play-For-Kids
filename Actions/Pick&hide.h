@@ -4,7 +4,7 @@
 
 class Pickandhide : public Action {
 protected:
-	const char figuretype[5] = { 'R','C','T','H','S'};
+	char figuretype[5]; //= { 'R','C','T','H','S' };
 	const string figurecolor[6] = { "BLACK","BLUE","RED","YELLOW","ORANGE","GREEN" };
 	//const string both[] = { "Black R","" };
 	int count = 0;
