@@ -24,6 +24,7 @@ void Pickandhide::Execute() {
 	switch (Mode) {
 	case FIG_TYPE: {
 
+		// making figure type consist of only the figuress present
 		int figuretype_size = 0;
 		for (int i = 0; i < pManager->GetFigCount(); i++) {
 
@@ -48,6 +49,8 @@ void Pickandhide::Execute() {
 		}
 		char randomshape;
 		srand(time(NULL));
+		// ensuring random shape is a char of a shape present
+		// random shape is decided before user begins clicking
 		do
 		{
 			randomshape = figuretype[rand() % pManager->GetFigCount()];
@@ -71,8 +74,10 @@ void Pickandhide::Execute() {
 					ClickedFig->SetSelected(true);
 					pAct = new DeleteAction(pManager);
 					pAct->Execute();
+					// delete afterwards
 					delete pAct;
 					count++;
+					// update interface to show changes
 					pManager->UpdateInterface();
 				}
 				else
