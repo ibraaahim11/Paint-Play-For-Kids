@@ -192,6 +192,7 @@
     <ClCompile Include="GUI\Output.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="resize.cpp" />
     <ClCompile Include="SelectAction.cpp" />
     <ClCompile Include="SoundAction.cpp" />
   </ItemGroup>
@@ -242,6 +243,7 @@
     <ClInclude Include="GUI\UI_Info.h" />
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="DEFS.h" />
+    <ClInclude Include="resize.h" />
     <ClInclude Include="SelectAction.h" />
     <ClInclude Include="SoundAction.h" />
   </ItemGroup>
