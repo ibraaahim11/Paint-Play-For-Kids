@@ -55,7 +55,7 @@ void Pickandhide::Execute() {
 	}
 
 	case FIG_COLOR: {
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < pManager->GetFigCount(); i++) {
 			srand(time(NULL));
 			string randomcolor = figurecolor[rand() % 6];
 
