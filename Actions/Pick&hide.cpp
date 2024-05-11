@@ -20,9 +20,9 @@ void Pickandhide::Execute() {
 
 
 	ReadActionParameters();
-
 	switch (Mode) {
 	case FIG_TYPE: {
+		
 
 		// making figure type consist of only the figuress present
 		int figuretype_size = 0;

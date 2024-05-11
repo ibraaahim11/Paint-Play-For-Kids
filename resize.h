@@ -4,9 +4,9 @@
 
 
 
-class ResizeFeature {
-public:
-    static void resizeSelectedFigure(CFigure* selectedFigure, double factor);
-};
+//class ResizeFeature {
+//public:
+  //  static void resizeSelectedFigure(CFigure* selectedFigure, double factor);
+//};
 
 #endif 
