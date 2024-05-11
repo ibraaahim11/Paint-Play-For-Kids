@@ -108,10 +108,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new DeleteAction(this);
 		break;
 	case D_SOUND:
-	//	pAct = new SoundAction(this);
+		pAct = new SoundAction(this);
 		break;
 	case P_SOUND:
-	//	pAct = new SoundAction(this);
+		pAct = new SoundAction(this);
 		break;
 	case PASTE:
 		pAct = new PasteAction(this);
