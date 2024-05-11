@@ -206,7 +206,6 @@
       <Filter>Action Classes</Filter>
     </ClCompile>
     <ClCompile Include="Actions\PasteAction.cpp" />
-    <ClCompile Include="resize.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -343,7 +342,6 @@
     <ClInclude Include="Actions\PasteAction.h" />
     <ClInclude Include="Actions\Switchtodraw.h" />
     <ClInclude Include="Actions\Switchtoplay.h" />
-    <ClInclude Include="resize.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

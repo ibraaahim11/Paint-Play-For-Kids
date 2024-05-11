@@ -7,6 +7,7 @@
 #include "..\Figures\CFigure.h"
 #include "Action.h"
 #include <ctime>
+#include <fstream>
 Pickandhide::Pickandhide(ApplicationManager* pApp) : Action(pApp) {}
 
 void Pickandhide::Execute() {
@@ -130,16 +131,19 @@ void Pickandhide::Execute() {
 			pIn->GetPointClicked(P1.x, P1.y);
 
 			ClickedFig= pManager->GetFigure(P1.x, P1.y);
-			if (ClickedFig->GetFillColor() == randomcolor) {
-				ClickedFig->SetSelected(true);
-				pAct = new DeleteAction(pManager);
-				pAct->Execute();
-				delete pAct;
-				count++;
-				pManager->UpdateInterface();
+			if (!(ClickedFig == NULL))
+			{
+				if (ClickedFig->GetFillColor() == randomcolor) {
+					ClickedFig->SetSelected(true);
+					pAct = new DeleteAction(pManager);
+					pAct->Execute();
+					delete pAct;
+					count++;
+					pManager->UpdateInterface();
+				}
+				else
+					pOut->PrintMessage("Wrong!");
 			}
-			else
-				pOut->PrintMessage("Wrong!");
 		}
 
 		string c = "Number of correct choices: ";
