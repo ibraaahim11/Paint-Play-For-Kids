@@ -57,8 +57,7 @@ void Pickandhide::Execute() {
 		} while (randomshape == 'Í');
 
 		for (int i = 0; i < pManager->GetFigCount(); i++) {
-		
-
+			randomshape = figuretype[rand() % pManager->GetFigCount()];
 
 			string shape = { randomshape };
 			string a = "pick all ";
@@ -80,17 +79,45 @@ void Pickandhide::Execute() {
 					// update interface to show changes
 					pManager->UpdateInterface();
 				}
-				else
-					pOut->PrintMessage("Wrong!");
+
 			}
+			else
+				break;
 		}
 		string c = "Number of correct choices: ";
 		string m = c + std::to_string(count);
-		pOut->PrintMessage(m);
+		string x = m + "/";
+		string z = x + std::to_string(pManager->GetFigCount());
+		pOut->PrintMessage(z);
 		break;
 	}
 
 	case FIG_COLOR: {
+
+		int figurecolor_size = 0;
+		for (int i = 0; i < pManager->GetFigCount(); i++) {
+
+			bool present = false;
+
+			string color = pManager->GetFigure_index(i)->GetFillColor();
+
+			for (int j = 0; j < 6; j++)
+			{
+				if (figurecolor[j] == color)
+				{
+					present = true;
+					break;
+				}
+			}
+			if (!present)
+			{
+				figurecolor[figurecolor_size++] = color;
+			}
+
+
+		}
+		
+		
 		for (int i = 0; i < pManager->GetFigCount(); i++) {
 			srand(time(NULL));
 			string randomcolor = figurecolor[rand() % 6];
@@ -109,6 +136,7 @@ void Pickandhide::Execute() {
 				pAct->Execute();
 				delete pAct;
 				count++;
+				pManager->UpdateInterface();
 			}
 			else
 				pOut->PrintMessage("Wrong!");
@@ -143,6 +171,7 @@ void Pickandhide::Execute() {
 				pAct->Execute();
 				delete pAct;
 				count++;
+				pManager->UpdateInterface();
 			}
 			else
 				pOut->PrintMessage("Wrong!");
