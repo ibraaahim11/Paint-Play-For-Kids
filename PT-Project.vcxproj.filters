@@ -176,6 +176,16 @@
       <Filter>Action Classes</Filter>
     </ClCompile>
     <ClCompile Include="SelectAction.cpp" />
+    <ClCompile Include="Actions\Switchtoplay.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\Switchtodraw.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\Pick&amp;hide.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectAction.cpp" />
     <ClCompile Include="Actions\LoadAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
@@ -195,6 +205,8 @@
     <ClCompile Include="SoundAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\PasteAction.cpp" />
+    <ClCompile Include="resize.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -319,7 +331,6 @@
     <ClInclude Include="DeleteAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\CopyAction.h" />
     <ClInclude Include="BorderAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
@@ -329,6 +340,10 @@
     <ClInclude Include="SoundAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
+    <ClInclude Include="Actions\PasteAction.h" />
+    <ClInclude Include="Actions\Switchtodraw.h" />
+    <ClInclude Include="Actions\Switchtoplay.h" />
+    <ClInclude Include="resize.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

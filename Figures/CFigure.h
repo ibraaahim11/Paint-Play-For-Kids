@@ -31,6 +31,8 @@ public:
 
 	void SetGfxInfo(GfxInfo FigGfxInfo);
 	GfxInfo GetGfxInfo() const;
+	string GetFillColor()const; //Return fill color
+
 	virtual void Draw(Output* pOut) const = 0;		//Draw the figure
 
 	void UpdateFillClrString(); // Updates the DrawColor string in case it has changed

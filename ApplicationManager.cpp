@@ -12,9 +12,12 @@
 #include "SoundAction.h"
 #include "Actions\SaveAction.h"
 #include "Actions\LoadAction.h"
+#include "Actions\Switchtoplay.h"
+#include "Actions\Switchtodraw.h"
 #include "Actions\CopyAction.h"
 #include "Actions\PasteAction.h"
 
+#include "Actions\Pick&hide.h"
 #include <fstream>
 //Constructor
 ApplicationManager::ApplicationManager(): sound(this)
@@ -121,6 +124,15 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 	case STATUS:	//a click on the status bar ==> no action
 		return;
+
+	case TO_PLAY :
+		pAct = new Pickandhide(this);
+		
+		break;
+	case TO_DRAW:
+		pAct = new Switchtodraw(this);
+		break;
+	
 	}
 
 	//Execute the created action
@@ -275,11 +287,12 @@ void ApplicationManager::UpdateInterface() const
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 
 	// Drawing bars again to avoid shapes from overlapping.
-	pOut->CreateDrawToolBar();
+	//pOut->CreateDrawToolBar();
+
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
-Input* ApplicationManager::GetInput() const
+	Input* ApplicationManager::GetInput() const
 {
 	return pIn;
 }

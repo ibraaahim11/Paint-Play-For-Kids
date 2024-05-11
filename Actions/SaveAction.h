@@ -1,12 +1,12 @@
 #include "Action.h"
+#pragma once
 
 class SaveAction : public Action
 {
 protected:
-	string FileName; //opened file name
+	string FileName;
 
 public:
-
 	SaveAction(ApplicationManager* pApp);
 	//read file name we will create
 	virtual void ReadActionParameters();

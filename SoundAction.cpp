@@ -10,7 +10,8 @@ SoundAction::SoundAction(ApplicationManager* pApp) : Action(pApp)
 }
 
 void SoundAction::ReadActionParameters()
-{
+{	
+	file = "";
 	// Checks if sound on and the action that will be played
 	SoundOn = pManager->GetSoundOn();
 	action = pManager->GetActType();

@@ -130,10 +130,13 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actions\Pick&amp;hide.cpp" />
     <ClCompile Include="Actions\CopyAction.cpp" />
     <ClCompile Include="Actions\LoadAction.cpp" />
     <ClCompile Include="Actions\PasteAction.cpp" />
     <ClCompile Include="Actions\SaveAction.cpp" />
+    <ClCompile Include="Actions\Switchtodraw.cpp" />
+    <ClCompile Include="Actions\Switchtoplay.cpp" />
     <ClCompile Include="AddCircleAction.cpp" />
     <ClCompile Include="AddHexagonAction.cpp" />
     <ClCompile Include="AddSquareAction.cpp" />
@@ -189,14 +192,16 @@
     <ClCompile Include="GUI\Output.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="resize.cpp" />
     <ClCompile Include="SelectAction.cpp" />
     <ClCompile Include="SoundAction.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Actions\CopyAction.h" />
     <ClInclude Include="Actions\LoadAction.h" />
     <ClInclude Include="Actions\PasteAction.h" />
     <ClInclude Include="Actions\SaveAction.h" />
+    <ClInclude Include="Actions\Switchtodraw.h" />
+    <ClInclude Include="Actions\Switchtoplay.h" />
     <ClInclude Include="AddCircleAction.h" />
     <ClInclude Include="AddHexagonAction.h" />
     <ClInclude Include="AddSquareAction.h" />
@@ -238,6 +243,7 @@
     <ClInclude Include="GUI\UI_Info.h" />
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="DEFS.h" />
+    <ClInclude Include="resize.h" />
     <ClInclude Include="SelectAction.h" />
     <ClInclude Include="SoundAction.h" />
   </ItemGroup>

@@ -21,7 +21,7 @@ enum ActionType //The actions supported (you can add more if needed)
 	DRAWING_AREA,	//A click on the drawing area
 	STATUS,		//A click on the status bar
 	//TO_DRAW,		//Switch interface to Draw mode
-	//TO_PLAY	//Switch interface to Play mode
+	//TO_PLAY,	//Switch interface to Play mode
 };
 
 struct Point	//To be used for figures points

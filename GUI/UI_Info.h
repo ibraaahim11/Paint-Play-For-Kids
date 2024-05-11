@@ -39,6 +39,7 @@ enum PlayMenuItem //The items of the Play menu (you should add more items)
 	ITM_BOTH,
 	ITM_SOUND2,
 	ITM_DRAW,
+	
 
 	PLAY_ITM_COUNT		//no. of menu items ==> This should be the last line in this enum
 };
