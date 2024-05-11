@@ -10,7 +10,8 @@
 #include <fstream>
 Pickandhide::Pickandhide(ApplicationManager* pApp) : Action(pApp) {}
 
-void Pickandhide::Execute() {
+void Pickandhide::Execute() 
+{
 	Point P1;
 	Output* pOut = pManager->GetOutput();
 	CFigure* ClickedFig;
@@ -20,8 +21,20 @@ void Pickandhide::Execute() {
 	STP.Execute();
 
 
+	for (int i = 0; i < pManager->GetFigCount(); i++)
+	{
+		CFigure* cfig = pManager->GetFigure_index(i);
+		cfig->SetSelected(false);
+		cfig->ChngDrawClr(cfig->GetCrntDrawClr());
+		pManager->UpdateInterface();
+
+	}
+
+
 	ReadActionParameters();
-	switch (Mode) {
+
+	switch (Mode)
+	{
 	case FIG_TYPE: {
 		
 
@@ -52,18 +65,25 @@ void Pickandhide::Execute() {
 		srand(time(NULL));
 		// ensuring random shape is a char of a shape present
 		// random shape is decided before user begins clicking
+
+
+
+		int correct_guesses = 0;
+		int incorrect_guesses = 0;
+
 		do
 		{
 			randomshape = figuretype[rand() % pManager->GetFigCount()];
 		} while (randomshape == 'Í');
 
-		for (int i = 0; i < pManager->GetFigCount(); i++) {
-			randomshape = figuretype[rand() % pManager->GetFigCount()];
+		string shape = { randomshape };
+		string a = "pick all ";
+		string b = a + shape;
+		pOut->PrintMessage(b);
+		bool continue_game;
+		do
+		{
 
-			string shape = { randomshape };
-			string a = "pick all ";
-			string b = a + shape;
-			pOut->PrintMessage(b);
 
 			Input* pIn = pManager->GetInput();
 			pIn->GetPointClicked(P1.x, P1.y);
@@ -74,22 +94,33 @@ void Pickandhide::Execute() {
 					ClickedFig->SetSelected(true);
 					pAct = new DeleteAction(pManager);
 					pAct->Execute();
+					pOut->ClearStatusBar();
+					pOut->PrintMessage(b);
 					// delete afterwards
 					delete pAct;
-					count++;
+					correct_guesses++;
 					// update interface to show changes
 					pManager->UpdateInterface();
 				}
+				else
+				{
+					incorrect_guesses++;
+				}
 
 			}
-			else
-				break;
-		}
-		string c = "Number of correct choices: ";
-		string m = c + std::to_string(count);
-		string x = m + "/";
-		string z = x + std::to_string(pManager->GetFigCount());
-		pOut->PrintMessage(z);
+			// if user wants to restart game
+			continue_game = false;
+			for (int i = 0; i < pManager->GetFigCount(); i++)
+			{
+				if (pManager->GetFigure_index(i)->GetType() == randomshape)
+					continue_game = true;
+			}
+		} while (continue_game);
+		string msg = "Number of correct guesses: ";
+		msg += std::to_string(correct_guesses);
+		msg += " / Number of incorrect guesses: ";
+		msg += std::to_string(incorrect_guesses);
+		pOut->PrintMessage(msg);
 		break;
 	}
 
@@ -117,77 +148,149 @@ void Pickandhide::Execute() {
 
 
 		}
-		
-		
-		for (int i = 0; i < pManager->GetFigCount(); i++) {
-			srand(time(NULL));
-			string randomcolor = figurecolor[rand() % 6];
 
-			string a = "pick all ";
-			string b = a + randomcolor;
-			pOut->PrintMessage(b);
+		string randomcolor;
+		srand(time(NULL));
 
-			Input* pIn = pManager->GetInput();
-			pIn->GetPointClicked(P1.x, P1.y);
+		int correct_guesses = 0;
+		int incorrect_guesses = 0;
 
-			ClickedFig= pManager->GetFigure(P1.x, P1.y);
-			if (!(ClickedFig == NULL))
-			{
-				if (ClickedFig->GetFillColor() == randomcolor) {
-					ClickedFig->SetSelected(true);
-					pAct = new DeleteAction(pManager);
-					pAct->Execute();
-					delete pAct;
-					count++;
-					pManager->UpdateInterface();
-				}
-				else
-					pOut->PrintMessage("Wrong!");
-			}
-		}
+		do
+		{
+			randomcolor = figurecolor[rand() % pManager->GetFigCount()];
+		} while (randomcolor == "NO_COLOR" || randomcolor == "");
 
-		string c = "Number of correct choices: ";
-		string m = c + std::to_string(count);
-		pOut->PrintMessage(m);
-		break;
+		string a = "pick all ";
+		string b = a + randomcolor;
+		pOut->PrintMessage(b);
+		bool continue_game;
+		do
+		{
 
-	}
-	case BOTH:{
-		for (int i = 0; i < pManager->GetFigCount(); i++) {
-			srand(time(NULL));
-			string randomcolor = figurecolor[rand() % 6];
-
-			srand(time(NULL));
-			char randomshape = figuretype[rand() % pManager->GetFigCount()];
-
-			string a = "Pick all";
-			string b = a + randomcolor + randomshape;
-			pOut->PrintMessage(b);
 
 			Input* pIn = pManager->GetInput();
 			pIn->GetPointClicked(P1.x, P1.y);
 
 			ClickedFig = pManager->GetFigure(P1.x, P1.y);
-			if (ClickedFig->GetFillColor() == randomcolor && ClickedFig->GetType() == randomshape) {
-				ClickedFig->SetSelected(true);
+			if (ClickedFig != NULL) {
+				if (ClickedFig->GetFillColor() == randomcolor) {
+					ClickedFig->SetSelected(true);
+					pAct = new DeleteAction(pManager);
+					pAct->Execute();
+					pOut->ClearStatusBar();
+					pOut->PrintMessage(b);
+					// delete afterwards
+					delete pAct;
+					correct_guesses++;
+					// update interface to show changes
+					pManager->UpdateInterface();
+				}
+				else
+				{
+					incorrect_guesses++;
+				}
 
-				pAct =new DeleteAction(pManager);
-				pAct->Execute();
-				delete pAct;
-				count++;
-				pManager->UpdateInterface();
 			}
-			else
-				pOut->PrintMessage("Wrong!");
-		}
-		string c = "Number of correct choices: ";
-		string m = c + std::to_string(count);
-		pOut->PrintMessage(m);
+			// if user wants to restart game
+			continue_game = false;
+			for (int i = 0; i < pManager->GetFigCount(); i++)
+			{
+				if (pManager->GetFigure_index(i)->GetFillColor() == randomcolor)
+					continue_game = true;
+			}
+		} while (continue_game);
+		string msg = "Number of correct guesses: ";
+		msg += std::to_string(correct_guesses);
+		msg += " / Number of incorrect guesses: ";
+		msg += std::to_string(incorrect_guesses);
+		pOut->PrintMessage(msg);
+		break;
+
+
+	}
+	case BOTH:
+	{
+
+
+		string randomcolor;
+		srand(time(NULL));
+
+		int correct_guesses = 0;
+		int incorrect_guesses = 0;
+
+		int random_index = rand() % pManager->GetFigCount();
+
+		CFigure* RandomFigure = pManager->GetFigure_index(random_index);
+
+
+
+		string random_color = RandomFigure->GetFillColor();
+		char random_type = RandomFigure->GetType();
+		string a = "pick all ";
+		a += random_color;
+		a += " ";
+		a += random_type;
+
+		pOut->PrintMessage(a);
+		bool continue_game;
+		do
+		{
+
+			Input* pIn = pManager->GetInput();
+			pIn->GetPointClicked(P1.x, P1.y);
+
+			ClickedFig = pManager->GetFigure(P1.x, P1.y);
+			if (ClickedFig != NULL)
+			{
+				if (ClickedFig->GetFillColor() == random_color && ClickedFig->GetType() == random_type)
+				{
+					ClickedFig->SetSelected(true);
+					pAct = new DeleteAction(pManager);
+					pAct->Execute();
+					pOut->ClearStatusBar();
+					pOut->PrintMessage(a);
+					// delete afterwards
+					delete pAct;
+					correct_guesses++;
+					// update interface to show changes
+					pManager->UpdateInterface();
+				}
+				else
+				{
+					incorrect_guesses++;
+				}
+
+			}
+			// if user wants to restart game
+			continue_game = false;
+			for (int i = 0; i < pManager->GetFigCount(); i++)
+			{
+				if (pManager->GetFigure_index(i)->GetFillColor() == random_color && pManager->GetFigure_index(i)->GetType() == random_type)
+				{
+					continue_game = true;
+				}
+			}
+		} while (continue_game);
+		string msg = "Number of correct guesses: ";
+		msg += std::to_string(correct_guesses);
+		msg += " / Number of incorrect guesses: ";
+		msg += std::to_string(incorrect_guesses);
+		pOut->PrintMessage(msg);
 		break;
 	}
 	}
-}
-void Pickandhide::ReadActionParameters() {
+	}
+
+	
+
+
+	
+	
+
+
+
+void Pickandhide::ReadActionParameters() 
+{
 	Point P1;
 	Output* pOut;
 	pOut = pManager->GetOutput();
