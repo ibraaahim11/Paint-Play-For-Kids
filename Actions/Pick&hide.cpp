@@ -7,6 +7,7 @@
 #include "..\Figures\CFigure.h"
 #include "Action.h"
 #include <ctime>
+#include <fstream>
 Pickandhide::Pickandhide(ApplicationManager* pApp) : Action(pApp) {}
 
 void Pickandhide::Execute() 

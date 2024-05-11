@@ -12,7 +12,7 @@ public:
 	Switchtoplay(ApplicationManager* pApp);
 	virtual void Execute();
 	virtual void ReadActionParameters();
-
+	void AutomaticSave(); // save when switch to play is called
 
 
 };

@@ -10,6 +10,7 @@ protected:
 
 	ActionType Mode;
 public:
+
 	Pickandhide(ApplicationManager* pApp);
 	void Execute();
 	virtual void ReadActionParameters();
