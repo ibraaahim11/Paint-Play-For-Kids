@@ -9,6 +9,7 @@ protected:
 	int count = 0;
 	ActionType Mode;
 public:
+
 	Pickandhide(ApplicationManager* pApp);
 	void Execute();
 	virtual void ReadActionParameters();

@@ -17,7 +17,6 @@ void SaveAction::ReadActionParameters()
 }
 void SaveAction::Execute()
 {
-	Output* pOut = pManager->GetOutput();
 
 	ReadActionParameters();
 ;
