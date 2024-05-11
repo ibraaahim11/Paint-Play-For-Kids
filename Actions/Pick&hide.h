@@ -5,9 +5,9 @@
 class Pickandhide : public Action {
 protected:
 	char figuretype[5]; //= { 'R','C','T','H','S' };
-	string figurecolor[6] = { "BLACK","BLUE","RED","YELLOW","ORANGE","GREEN" };
+	string figurecolor[6]; //= { "BLACK","BLUE","RED","YELLOW","ORANGE","GREEN" };
 	//const string both[] = { "Black R","" };
-	int count = 0;
+
 	ActionType Mode;
 public:
 	Pickandhide(ApplicationManager* pApp);
