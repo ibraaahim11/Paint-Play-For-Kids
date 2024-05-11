@@ -105,10 +105,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new DeleteAction(this);
 		break;
 	case D_SOUND:
-		pAct = new SoundAction(this);
+	//	pAct = new SoundAction(this);
 		break;
 	case P_SOUND:
-		pAct = new SoundAction(this);
+	//	pAct = new SoundAction(this);
 		break;
 	case PASTE:
 		pAct = new PasteAction(this);
@@ -128,7 +128,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	{
 		// so that sound is only played once
 		if (ActType != D_SOUND && ActType != P_SOUND)
-			sound.Execute();
+//			sound.Execute();
 
 		pAct->Execute();//Execute
 		delete pAct;	//You may need to change this line depending to your implementation

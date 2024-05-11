@@ -4,7 +4,6 @@
 #include <windows.h>
 #include <string>
 
-
 SoundAction::SoundAction(ApplicationManager* pApp) : Action(pApp)
 {
 	

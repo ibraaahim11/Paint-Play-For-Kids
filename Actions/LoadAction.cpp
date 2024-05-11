@@ -45,7 +45,7 @@ void LoadAction::Execute()
 			{
 				Point p3, p4;
 				CRectangle* R = new CRectangle(p1, p2, FigGfxInfo); //making a dummy Figure
-				R->Load(InFile); //call save of the specific figure
+				R->Load(InFile); //call Load of the specific figure
 				p3 = R->GetCorner1();
 				p4 = R->GetCorner2(); //Getting the points from file 
 				FigGfxInfo = R->GetGfxInfo();
