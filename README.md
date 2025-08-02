@@ -90,16 +90,19 @@ Follow these steps so you can Play & Paint locally.
 #### Draw Toolbar
 
 - Access drawing tools, shape selection, color pickers, and file options.
+
 ![Draw Toolbar](./documents/readme-images/draw-toolbar.png)
 
 #### Play Mode
 
 - Play mini-games to identify shapes and colors.
+
 ![Play Canvas](./documents/readme-images/play.png)
 
 #### Play Toolbar
 
 - Access play mode controls and game options.
+
 ![Play Toolbar](./documents/readme-images/play-toolbar.png)
 
 
